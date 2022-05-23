@@ -121,6 +121,7 @@ change to
 - ```sh /mnt/hgfs/shared/scratch_4```
 
 scratch_4.sh runs:
+
 >```
 >cd drupal-project
 ># Expect this to take a little while, as this is grabbing the entire
@@ -133,8 +134,7 @@ scratch_4.sh runs:
 
 remove everything but (CTL+k)(to yank lines out of the file)
 
-> ```Listen 80
-> ```
+> ```Listen 80```
 
 save the file (CTL+o) then (CTL+x)
 
