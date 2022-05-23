@@ -54,14 +54,16 @@ This build is adapted from this link and it may help to read it or follow along:
 - my path is /mnt/hgfs/shared within the vm, if you use a different path, change it in all commands that use '/mnt/hgfs/shared'
 
 **Begin Build**
+
 These commands should all be executed in sequence:
+
 -```sudo apt-get -y update```
-sudo apt-get -y install apache2 apache2-utils
-sudo a2enmod ssl
-sudo a2enmod rewrite
-sudo h= restart apache2
-sudo usermod -a -G www-data `whoami`
-sudo usermod -a -G `whoami` www-data
+-```sudo apt-get -y install apache2 apache2-utils```
+-```sudo a2enmod ssl```
+-```sudo a2enmod rewrite```
+-```sudo h= restart apache2```
+-```sudo usermod -a -G www-data `whoami` ```
+-```sudo usermod -a -G `whoami` www-data```
 
 #log out of the vm (CTL-D) (this is neccessary for group settings to be applied)
 #log back in
