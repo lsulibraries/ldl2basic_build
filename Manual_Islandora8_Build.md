@@ -19,7 +19,8 @@ This build is adapted from this link and it may help to read it or follow along:
 - https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html
 - LSU has a way to get a liscense: https://software.grok.lsu.edu/Article.aspx?articleId=20512
 - visit LSU box and download shared folder contents these will be your configuration files and others needed for the build add them to your shared folder in the vmware machine
-- https://lsu.box.com/s/z3navs490ha06hd95pstbw8044061gf2
+- https://lsu.box.com/s/o2uy4yx57lrzlu6tbpmuis6n5ocgq1r9
+
 - create a vmware machine 
 - install ubuntu 20.04 Server from an ISO image:
 - https://ubuntu.com/download/server#downloads
