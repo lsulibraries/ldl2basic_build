@@ -138,6 +138,8 @@ remove everything but (CTL+k)(to yank lines out of the file)
 
 save the file (CTL+o) then (CTL+x)
 
+Edit the apache 000-default.conf file
+
 - ```sudo nano /etc/apache2/sites-enabled/000-default.conf```
 
 edit file to contain only the following:
@@ -155,107 +157,116 @@ edit file to contain only the following:
 ></VirtualHost>
 >```
 
-#save (CTL+o) exit(CTL+x)
+save (CTL+o) exit(CTL+x)
 
-#in future when ssl is needed for prod build:
-#https://www.digitalocean.com/community/tutorials/how-to-install-an-ssl-certificate-from-a-commercial-certificate-authority
+in future when ssl is needed for prod build:
+- https://www.digitalocean.com/community/tutorials/how-to-install-an-ssl-certificate-from-a-commercial-certificate-authority
 
-sudo systemctl restart apache2
+- ```sudo systemctl restart apache2```
 
-sudo -u postgres psql
+- ```sudo -u postgres psql```
 
 #from within the postgres cli:
+>```
+>create database drupal9 encoding 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8' TEMPLATE template0;
+>create user drupal with encrypted password 'drupal';
+>grant all privileges on database drupal9 to drupal;
+>#\q to quit
+>\q
+>```
 
-create database drupal9 encoding 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8' TEMPLATE template0;
-create user drupal with encrypted password 'drupal';
-grant all privileges on database drupal9 to drupal;
-#\q to quit
-\q
+install a drupal
 
-#install a drupal
+- ```cd /opt/drupal/web```
+- ```sudo drush -y site-install standard --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal9" --site-name="LDL 2.0" --account-name=islandora --account-pass=islandora```
 
-cd /opt/drupal/web
-sudo drush -y site-install standard --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal9" --site-name="LDL 2.0" --account-name=islandora --account-pass=islandora
+next install tomcat and cantaloupe
 
+- ```sudo apt-get -y install openjdk-11-jdk openjdk-11-jre```
 
-#next install tomcat and cantaloupe
+- ```update-alternatives --list java```
 
-sudo apt-get -y install openjdk-11-jdk openjdk-11-jre
+the above should output something like "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"
 
-update-alternatives --list java
-#should output something like "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"
+note this path for later use as JAVA_HOME
 
-# note this path for later use as JAVA_HOME
-# note it's the path above without /bin/java:
-#"/usr/lib/jvm/java-11-openjdk-amd64"
+note it's the path above without /bin/java:
+ie:
+"/usr/lib/jvm/java-11-openjdk-amd64"
 
-sudo addgroup tomcat
-sudo adduser tomcat --ingroup tomcat --home /opt/tomcat --shell /usr/bin
-#(note: question about /usr/bin/ path...)
+- ```sudo addgroup tomcat```
+- ```sudo adduser tomcat --ingroup tomcat --home /opt/tomcat --shell /usr/bin```
 
-#choose a password
-#password: "tomcat"
-#press enter for all default user prompts
-#type y for yes
+(note: question about /usr/bin/ path...)
 
-
-#find the tar.gz here: https://tomcat.apache.org/download-90.cgi
-#copied link TOMCAT_TARBALL_LINK
-#watch for version change
-#https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.53/bin/apache-tomcat-9.0.53.tar.gz
-#https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
-#ls /opt to find name of TOMCAT_DIRECTORY: apache-tomcat-9.0.54
+choose a password
+ie: password: "tomcat"
+press enter for all default user prompts
+type y for yes
 
 
-sh /mnt/hgfs/shared/scratch_5.sh
-
-#scratch_5.sh
-"
-cd /opt
-#O not 0
-sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
-sudo tar -zxvf tomcat.tar.gz
-#don't miss the star*
-sudo mv /opt/apache-tomcat-9.0.54/* /opt/tomcat
-sudo chown -R tomcat:tomcat /opt/tomcat
-"
-
-sh /mnt/hgfs/shared/scratch_6.sh
-
-#scratch_6 runs:
-"
-sudo cp /mnt/hgfs/shared/setenv.sh /opt/tomcat/bin/
-sudo chmod 755 /opt/tomcat/bin/setenv.sh
-sudo cp /mnt/hgfs/shared/tomcat.service /etc/systemd/system/tomcat.service 
-sudo chmod 755 /etc/systemd/system/tomcat.service
-#check your cantaloupe version 
-sudo wget -O /opt/cantaloupe.zip https://github.com/cantaloupe-project/cantaloupe/releases/download/v5.0.4/cantaloupe-5.0.4.zip
-sudo unzip /opt/cantaloupe.zip
-sudo mkdir /opt/cantaloupe_config
-sudo cp cantaloupe-5.0.4/cantaloupe.properties.sample /opt/cantaloupe_config/cantaloupe.properties
-sudo cp cantaloupe-5.0.4/delegates.rb.sample /opt/cantaloupe_config/delegates.rb
-sudo touch /etc/systemd/system/cantaloupe.service 
-sudo chmod 755 /etc/systemd/system/cantaloupe.service
-sudo cp /mnt/hgfs/shared/cantaloupe.service /etc/systemd/system/cantaloupe.service
-sudo systemctl enable cantaloupe
-sudo systemctl start cantaloupe
-"
-#check that unzip step worked
+find the tar.gz here: https://tomcat.apache.org/download-90.cgi
+copied link TOMCAT_TARBALL_LINK
+watch for version change
+- https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.53/bin/apache-tomcat-9.0.53.tar.gz
+- https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
+- ```ls /opt``` to find name of TOMCAT_DIRECTORY: apache-tomcat-9.0.54
 
 
-#you may need this command if like me you had to edit cantaloupe.service several times: sudo systemctl daemon-reload
+- ```sh /mnt/hgfs/shared/scratch_5.sh```
+
+scratch_5.sh will run the following file:
+>```
+>cd /opt
+>#O not 0
+>sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
+>sudo tar -zxvf tomcat.tar.gz
+>#don't miss the star*
+>sudo mv /opt/apache-tomcat-9.0.54/* /opt/tomcat
+>sudo chown -R tomcat:tomcat /opt/tomcat
+>```
+
+- ```sh /mnt/hgfs/shared/scratch_6.sh```
+
+scratch_6 runs this file:
+
+>```
+>sudo cp /mnt/hgfs/shared/setenv.sh /opt/tomcat/bin/
+>sudo chmod 755 /opt/tomcat/bin/setenv.sh
+>sudo cp /mnt/hgfs/shared/tomcat.service /etc/systemd/system/tomcat.service 
+>sudo chmod 755 /etc/systemd/system/tomcat.service
+>#check your cantaloupe version 
+>sudo wget -O /opt/cantaloupe.zip https://github.com/cantaloupe-project/cantaloupe/releases/download/v5.0.4/cantaloupe-5.0.4.zip
+>sudo unzip /opt/cantaloupe.zip
+>sudo mkdir /opt/cantaloupe_config
+>sudo cp cantaloupe-5.0.4/cantaloupe.properties.sample /opt/cantaloupe_config/cantaloupe.properties
+>sudo cp cantaloupe-5.0.4/delegates.rb.sample /opt/cantaloupe_config/delegates.rb
+>sudo touch /etc/systemd/system/cantaloupe.service 
+>sudo chmod 755 /etc/systemd/system/cantaloupe.service
+>sudo cp /mnt/hgfs/shared/cantaloupe.service /etc/systemd/system/cantaloupe.service
+>sudo systemctl enable cantaloupe
+>sudo systemctl start cantaloupe
+>```
+
+check that unzip step worked ``` ls /opt/cantaloupe``` or something...
+
+note: you may need this command if like me you had to edit cantaloupe.service several times: 
+- ```sudo systemctl daemon-reload```
 
 
-sudo systemctl stop tomcat
-sudo mkdir -p /opt/fcrepo/data/objects
-sudo mkdir /opt/fcrepo/config
-sudo chown -R tomcat:tomcat /opt/fcrepo
+- ```sudo systemctl stop tomcat```
+- ```sudo mkdir -p /opt/fcrepo/data/objects```
+- ```sudo mkdir /opt/fcrepo/config```
+- ```sudo chown -R tomcat:tomcat /opt/fcrepo```
 
-sudo -u postgres psql
-create database fcrepo encoding 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8' TEMPLATE template0;
-create user fedora with encrypted password 'fedora';
-grant all privileges on database fcrepo to fedora;
-\q
+- ```sudo -u postgres psql```
+
+>```
+>create database fcrepo encoding 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8' TEMPLATE template0;
+>create user fedora with encrypted password 'fedora';
+>grant all privileges on database fcrepo to fedora;
+>\q
+>```
 
 #first 
 sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000
