@@ -88,12 +88,12 @@ Edit the postgresql.conf file starting at line 642
 
 change line 642 from 
 >```
->bytea_output 'hex'"
+>bytea_output 'hex'
 >```
 
 change to
 >```
->bytea_output 'escape'"
+>bytea_output 'escape'
 >```
 
 (CTL+o)(to save)(CTL+x to close)
