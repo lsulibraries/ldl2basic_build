@@ -422,12 +422,12 @@ drush -y en search_api_solr
 
 ip addr show
 #note the second ip
-# in my case it was 192.168.12.131
+# in my case it was XXX.XXX.XXX.XXX
 
-#configure in GUI by visiting the ip above 192.168.12.131:80 in browser (firefox)
+#configure in GUI by visiting the ip above XXX.XXX.XXX.XXX:80 in browser (firefox)
 #log in with islandora:islandora
 
-#navigate to : 192.168.12.131:80/admin/config/search/search-api
+#navigate to : XXX.XXX.XXX.XXX:80/admin/config/search/search-api
 #or localhost:80/admin/config/search/search-api
 #click add server
 
@@ -459,7 +459,7 @@ sudo cp ~/solrconfig/* /var/solr/data/islandora8/conf
 sudo systemctl restart solr
 
 #adding an index
-#In gui navigate 192.168.12.131 or localhost:80/admin/config/search/search-api/add-index
+#In gui navigate XXX.XXX.XXX.XXX or localhost:80/admin/config/search/search-api/add-index
 
 "
 Index name: Islandora 8 Index
@@ -860,7 +860,7 @@ sh /mnt/hgfs/shared/islandora_en.sh
 
 #See instructions: https://islandora.github.io/documentation/installation/manual/configuring_drupal/#adding-a-jwt-configuration-to-drupal
 
-#visit http://192.168.12.131/admin/config/system/jwt
+#visit http://XXX.XXX.XXX.XXX/admin/config/system/jwt
 
 
 #follow drupal config https://islandora.github.io/documentation/installation/manual/configuring_drupal/#islandora
@@ -872,17 +872,17 @@ sh /mnt/hgfs/shared/islandora_en.sh
 #this worked for cantaloupe config
 
 #had to unzip cantaloupe missed the unzip for some reason
-http://192.168.12.131:8182/iiif/2
+http://XXX.XXX.XXX.XXX:8182/iiif/2
 
 #Nav to openseadragog
-#http://192.168.12.131:8182/admin/config/media/openseadragon
+#http://XXX.XXX.XXX.XXX:8182/admin/config/media/openseadragon
 
-#add to IIIf Image server location: http://192.168.12.131:8182/iiif/2
+#add to IIIf Image server location: http://XXX.XXX.XXX.XXX:8182/iiif/2
 #select IIIF Manifest from dropdown
 #save
 
 #navigate to flysystem settings
-#http://192.168.12.131:8182/admin/config/media/file-system
+#http://XXX.XXX.XXX.XXX:8182/admin/config/media/file-system
 #choose the flysystem button and save
 
 #give the admin fedoraAdmin role
