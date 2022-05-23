@@ -80,13 +80,16 @@ or try "sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000")
 the above command runs the following script (which is tedious to type, there are some copy paste limitations in vmware when using alt-keyboard layouts):
 - ```sudo apt-get -y install php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-dev php7.4-gd php7.4-imap php7.4-json php7.4-mbstring php7.4-opcache php7.4-xml php7.4-yaml php7.4-zip libapache2-mod-php7.4 php-pgsql php-redis php-xdebug unzip postgresql```
 
-if you don't like nano use a different editor vi/vim/emacs 
+Edit the postgresql.conf file starting at line 642
 
 - ```sudo nano +642 /etc/postgresql/12/main/postgresql.conf```
+
+(if you don't like nano use a different editor vi/vim/emacs )
 
 change line 642 from 
 >```
 >bytea_output 'hex'"
+>```
 
 change to
 >```
