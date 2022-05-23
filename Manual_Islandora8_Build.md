@@ -13,48 +13,49 @@ This build is adapted from this link and it may help to read it or follow along:
 - you should know how to use nano or some other command line editor vi/m emacs
 - you need to have downloaded vmware, and an ubuntu 20.04 server image.
 
-##Pre-BUILD##
+**Pre-BUILD Requirements**
 
-#download vmware
-#https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html
+### download vmware
+- https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html
+- LSU has a way to get a liscense: https://software.grok.lsu.edu/Article.aspx?articleId=20512
 
-#create a vmware machine 
-#install ubuntu 20.04 Server  from an ISO image:
-#20 GB on one file for disk size 
+- create a vmware machine 
+- install ubuntu 20.04 Server from an ISO image:
+- https://ubuntu.com/download/server#downloads
+- 20 GB on one file for disk size 
 
-#make sure the vm is on bridged network setting for installation
-#(right click the vm, go to settings>network adapter, select "Bridged", then save)
+- make sure the vm is on bridged network setting for installation
+- (right click the vm, go to settings>network adapter, select "Bridged", then save)
 
-#go through the os installation process
-#all prompts you don't need to change anything unless you want openssh (for remote acces via ssh)
-#set your username and password
-#allow the OS to install
+- go through the os installation process
+- all prompts you don't need to change anything unless you want openssh (for remote acces via ssh)
+- set your username and password
+- allow the OS to install
 
-#when the installation finishes accept the prompt to reboot the machine
+- when the installation finishes accept the prompt to reboot the machine
 
-#when the vm boots up the os log in with you username and password you set before
+- when the vm boots up the os log in with you username and password you set before
 
-#any command that requires downloading (apt-get, wget, git clone etc) will require you to set the vm in bridged network mode (to get outside data)
+## any command that requires downloading (apt-get, wget, git clone etc) will require you to set the vm in bridged network mode (to get outside data)
 
-# try the "vmware-netcfg" command on the host machine if you have trouble connecting. 
-#i have found swapping between bridged and host-only connections are sometimes required
+- try the "vmware-netcfg" command on the host machine if you have trouble connecting. 
+- I have found swapping between bridged and host-only connections are sometimes required
 
-#check your network with 
+- check your network connection in the command line with 
+- ```ping www.google.com```
 
-ping www.google.com
+- if you get bytes back you're connection is good.
 
-#if you get bytes back you're connection is good.
+## enable shared folders on the vmware instance
+- (toggle "Connected" button)
+- (right click the vm, settings, options, shared folders, select "Always Enabled")
+- (select a path to the files' folder, click save)
+- I keep my path simple and put the files in a folder called 'shared'
+- my path is /mnt/hgfs/shared within the vm, if you use a different path, change it in all commands that use '/mnt/hgfs/shared'
 
-#enable shared folders on the vmware instance
-#(toggle "Connected" button)
-#(right click the vm, settings, options, shared folders, select "Always Enabled")
-#(select a path to the files' folder, click save)
-#I keep my path simple and put the files in a folder called 'shared'
-#my path is /mnt/hgfs/shared within the vm, if you use a different path, change it in all commands that use '/mnt/hgfs/shared'
-
-##Begin Build##
-
-sudo apt-get -y update
+**Begin Build**
+These commands should all be executed in sequence:
+-```sudo apt-get -y update```
 sudo apt-get -y install apache2 apache2-utils
 sudo a2enmod ssl
 sudo a2enmod rewrite
