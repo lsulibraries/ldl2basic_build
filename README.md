@@ -1,5 +1,4 @@
-# islandora8-build-instructions
-
+# build-instructions documents
 
 See Manual_Drupal_Build.md for building a simlple drupal. (todo update drupal versions).
 
