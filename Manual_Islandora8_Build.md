@@ -1,32 +1,17 @@
-#how to read this document:
+# Describes adapted build using shared folders and scripts to manually build islandora.
 
-#comments and instructions start with '#'
+### Notes
 
-#the format
-
-#quote_blocks.file 
-"
-chunks of code separated by double quotes in a block
-indicates the text is part of file contents (typically a script)
-"
-
-#this build is adapted from this link and it may help to read it or follow along:
-#https://islandora.github.io/documentation/installation/manual/introduction/
-
-#some downloads will need new links as new versions come out
-
-#many config files and scripts are included to elimanate a lot of typing within the build. 
-#you'll need to enable shared folders in the vm settings and place the files in the shared folder
-
-#code outside a comment or gui instruction is indended to be executed in the
-#the vmware terminal, ie:
-
-whoami
-
-#you should know the linux command line fairly well
-#you should know how to use nano or some other command line editor vi/m emacs
-#you need to have downloaded vmware, and an ubuntu 20.04 server image.
-
+This build is adapted from this link and it may help to read it or follow along:
+- https://islandora.github.io/documentation/installation/manual/introduction/
+- some downloads will need new links as new versions come out
+- many config files and scripts are included to elimanate a lot of typing within the build. 
+- you'll need to enable shared folders in the vm settings and place the files in the shared folder
+- code outside a comment or gui instruction is indended to be executed in the the vmware terminal, ie:
+- ```whoami```
+- you should know the linux command line fairly well
+- you should know how to use nano or some other command line editor vi/m emacs
+- you need to have downloaded vmware, and an ubuntu 20.04 server image.
 
 ##Pre-BUILD##
 
