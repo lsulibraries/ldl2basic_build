@@ -104,6 +104,7 @@ change to
 
 #scratch_3.sh runs:
 >```
+>#!/bin/bash
 >curl "https://getcomposer.org/installer" > composer-install.php
 >chmod +x composer-install.php
 >php composer-install.php
@@ -217,6 +218,7 @@ watch for version change
 
 scratch_5.sh will run the following file:
 >```
+>#!/bin/bash
 >cd /opt
 >#O not 0
 >sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
@@ -350,7 +352,9 @@ sudo wget -O blazegraph.war https://repo1.maven.org/maven2/com/blazegraph/bigdat
 sudo mv blazegraph.war /opt/tomcat/webapps
 sudo chown tomcat:tomcat /opt/tomcat/webapps/blazegraph.war
 
-sh /mnt/hgfs/shared/blazegraph_conf.sh
+- ```sh /mnt/hgfs/shared/blazegraph_conf.sh```
+
+Typing out config files by hand is not worth the time. this script simplifies the process.
 
 #blazegraph_conf.sh 
 #configure logging
@@ -368,80 +372,83 @@ sudo chown tomcat:tomcat -R /opt/blazegraph/conf
 sudo chmod -R 644 /opt/blazegraph/conf
 "
 
-sudo nano /opt/tomcat/bin/setenv.sh
+- ```sudo nano /opt/tomcat/bin/setenv.sh```
 
-#comment out line 5 uncomment line 6
+comment out line 5 uncomment line 6
+
 #save (CTL+o) quit (CTL+x)
 
-sudo systemctl restart tomcat
+- ```sudo systemctl restart tomcat```
 
 #sudo?
-curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/blazegraph.properties http://localhost:8080/blazegraph/namespace
+- - ```curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/blazegraph.properties http://localhost:8080/blazegraph/namespace```
 
-# If this worked correctly, Blazegraph should respond with "CREATED: islandora"
-# to let us know it created the islandora namespace.
+If this worked correctly, Blazegraph should respond with "CREATED: islandora" to let us know it created the islandora namespace.
 
 #sudo?
-curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/inference.nt http://localhost:8080/blazegraph/namespace/islandora/sparql
+- ```curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/inference.nt http://localhost:8080/blazegraph/namespace/islandora/sparql```
 
-# If this worked correctly, Blazegraph should respond with some XML letting us
-# know it added the 2 entries from inference.nt to the namespace.
+If this worked correctly, Blazegraph should respond with some XML letting us
+know it added the 2 entries from inference.nt to the namespace.
 
 
 
-#solr
-sudo wget https://dlcdn.apache.org/lucene/solr/8.11.0/solr-8.11.0.tgz
-sudo tar -xzvf solr-8.11.0.tgz
-sudo solr-8.11.0/bin/install_solr_service.sh solr-8.11.0.tgz
-#(might not need to be at /opt to start this)
-q #to quit
+solr
+
+- ```sudo wget https://dlcdn.apache.org/lucene/solr/8.11.0/solr-8.11.0.tgz```
+- ```sudo tar -xzvf solr-8.11.0.tgz```
+- ```sudo solr-8.11.0/bin/install_solr_service.sh solr-8.11.0.tgz```
+- ```#(might not need to be at /opt to start this)```
+- ```q #to quit```
 
 #increase filesize optional 
-sudo su
-sudo echo "fs.file-max = 45535" >> /etc/sysctl.conf
-sudo sysctl -p
+- ```sudo su```
+- ```sudo echo "fs.file-max = 45535" >> /etc/sysctl.conf```
+- ```sudo sysctl -p```
 
 #create solr core
-cd /opt/solr
-sudo mkdir -p /var/solr/data/islandora8/conf
-sudo cp -r example/files/conf/* /var/solr/data/islandora8/conf
-sudo chown -R solr:solr /var/solr
-sudo -u solr bin/solr create -c islandora8 -p 8983
+- ```cd /opt/solr```
+```sudo mkdir -p /var/solr/data/islandora8/conf```
+```sudo cp -r example/files/conf/* /var/solr/data/islandora8/conf```
+```sudo chown -R solr:solr /var/solr```
+```sudo -u solr bin/solr create -c islandora8 -p 8983```
 
 
 #warning using _default configset with data driven scheme functionality. NOT RECCOMENDED for production use. To turn off: bin/solr/ config -c islandora8 -p 8983 -action set-user-property -property update.autoCreateFields -value false
 
-#drupal search api
+drupal search api
 
-cd /opt/drupal
-sudo -u www-data composer require drupal/search_api_solr:^4.2
-drush -y en search_api_solr
+- ```cd /opt/drupal```
+- ```sudo -u www-data composer require drupal/search_api_solr:^4.2```
+- ```drush -y en search_api_solr```
 
 #change vm network adapter to Host-Only (right click vm, settings, etc, save)
 #back in the vm 
 
-ip addr show
-#note the second ip
-# in my case it was XXX.XXX.XXX.XXX
+- ```ip addr show```
 
-#configure in GUI by visiting the ip above XXX.XXX.XXX.XXX:80 in browser (firefox)
-#log in with islandora:islandora
+note the second ip
+in my case it was XXX.XXX.XXX.XXX (don't put your ip in github...)
 
-#navigate to : XXX.XXX.XXX.XXX:80/admin/config/search/search-api
-#or localhost:80/admin/config/search/search-api
-#click add server
+configure in GUI by visiting the ip above XXX.XXX.XXX.XXX:80 in browser (firefox)
+log in with islandora:islandora
+
+navigate to : XXX.XXX.XXX.XXX:80/admin/config/search/search-api
+or localhost:80/admin/config/search/search-api
+click add server
 
 
-#these are the options: see documentation for help https://islandora.github.io/documentation/installation/manual/installing_solr/
+these are the options: see documentation for help:
+- https://islandora.github.io/documentation/installation/manual/installing_solr/
 
-"
-Server name: islandora8
-Enabled: X
-backend: Solr 
-Standard X
-solr core :islandora8 
-click advanced config:
-    solr.install.dir: /opt/solr
+>Server name: islandora8
+>Enabled: X
+>backend: Solr 
+>Standard X
+>solr core :islandora8 
+>click advanced config:
+>    solr.install.dir: /opt/solr
+
 
 click Save
 "
