@@ -441,34 +441,43 @@ click add server
 these are the options: see documentation for help:
 - https://islandora.github.io/documentation/installation/manual/installing_solr/
 
->Server name: islandora8
->Enabled: X
->backend: Solr 
->Standard X
->solr core :islandora8 
->click advanced config:
->    solr.install.dir: /opt/solr
+**config settings in gui**
+
+Server name: islandora8
+
+Enabled: X
+
+backend: Solr 
+
+Standard X
+
+solr core :islandora8 
+
+click advanced config:
+
+    solr.install.dir: /opt/solr
 
 
 click Save
-"
-
-#NOTICE You can ignore the error about an incompatible Solr schema; we're going to set this up in the next step. In fact, if you refresh the page after restarting Solr in the next step, you should see the error disappear.
 
 
-#apply solr configs
-#back in the vm
+NOTICE You can ignore the error about an incompatible Solr schema; we're going to set this up in the next step. In fact, if you refresh the page after restarting Solr in the next step, you should see the error disappear.
 
-cd /opt/drupal
-drush solr-gsc islandora8 /opt/drupal/solrconfig.zip
-unzip -d ~/solrconfig solrconfig.zip
-sudo cp ~/solrconfig/* /var/solr/data/islandora8/conf
-sudo systemctl restart solr
+
+apply solr configs
+- go back in the vm
+
+- ```cd /opt/drupal```
+- ```drush solr-gsc islandora8 /opt/drupal/solrconfig.zip```
+- ```unzip -d ~/solrconfig solrconfig.zip```
+- ```sudo cp ~/solrconfig/* /var/solr/data/islandora8/conf```
+- ```sudo systemctl restart solr```
 
 #adding an index
 #In gui navigate XXX.XXX.XXX.XXX or localhost:80/admin/config/search/search-api/add-index
+ 
+ **configure index via gui***
 
-"
 Index name: Islandora 8 Index
 Content: X
 File: X
@@ -476,169 +485,177 @@ Server: islandora8
 Enabled X
 
 click Save
-"
 
-#crayfish microservices
-#change vm back to bridged network (only if needed) (right click vm, settings, network adaptor, save)
-#ping www.google.com a few times until you get bytes back
+
+#### crayfish microservices
+
+change vm back to bridged network (only if needed) (right click vm, settings, network adaptor, save)
+
+- ```ping www.google.com```
+- do this a few times until you get bytes back
 
 sh /mnt/hgfs/shared/crayfish_reqs.sh
 #executes: takes a while...
-"
-sudo add-apt-repository -y ppa:lyrasis/imagemagick-jp2
-sudo apt-get update
-sudo apt-get -y install imagemagick tesseract-ocr ffmpeg poppler-utils
-cd /opt
-sudo git clone https://github.com/Islandora/Crayfish.git crayfish
-sudo chown -R www-data:www-data crayfish
-sudo -u www-data composer install -d crayfish/Homarus
-sudo -u www-data composer install -d crayfish/Houdini
-sudo -u www-data composer install -d crayfish/Hypercube
-sudo -u www-data composer install -d crayfish/Milliner
-sudo -u www-data composer install -d crayfish/Recast
-sudo mkdir /var/log/islandora
-sudo chown www-data:www-data /var/log/islandora
-"
+>```
+>sudo add-apt-repository -y ppa:lyrasis/imagemagick-jp2
+>sudo apt-get update
+>sudo apt-get -y install imagemagick tesseract-ocr ffmpeg poppler-utils
+>cd /opt
+>sudo git clone https://github.com/Islandora/Crayfish.git crayfish
+>sudo chown -R www-data:www-data crayfish
+>sudo -u www-data composer install -d crayfish/Homarus
+>sudo -u www-data composer install -d crayfish/Houdini
+>sudo -u www-data composer install -d crayfish/Hypercube
+>sudo -u www-data composer install -d crayfish/Milliner
+>sudo -u www-data composer install -d crayfish/Recast
+>sudo mkdir /var/log/islandora
+>sudo chown www-data:www-data /var/log/islandora
+>```
 
 #moving config files over (tedious)
 
-#not microservices-conf.sh 
-sh /mnt/hgfs/shared/microservices-config.sh
+(not microservices-conf.sh )
 
-#runs
-"
-#!/bin/bash
-sudo cp /mnt/hgfs/shared/homarus.config.yaml /opt/crayfish/Homarus/cfg/config.yaml
-sudo cp /mnt/hgfs/shared/houdini.services.yaml /opt/crayfish/Houdini/config/services.yaml
-sudo cp /mnt/hgfs/shared/crayfish_commons.yml /opt/crayfish/Houdini/config/packages/crayfish_commons.yml
-sudo cp /mnt/hgfs/shared/monolog.yml /opt/crayfish/Houdini/config/packages/monolog.yml
-sudo cp /mnt/hgfs/shared/security.yml /opt/crayfish/Houdini/config/packages/security.yml
-sudo cp /mnt/hgfs/shared/hypercube.config.yaml /opt/crayfish/Hypercube/cfg/config.yaml 
-sudo cp /mnt/hgfs/shared/milliner.config.yaml /opt/crayfish/Milliner/cfg/config.yaml
-sudo cp /mnt/hgfs/shared/recast.config.yaml /opt/crayfish/Recast/cfg/config.yaml
-sudo chown www-data:www-data /opt/crayfish/Homarus/cfg/config.yaml
-sudo chmod 644 /opt/crayfish/Homarus/cfg/config.yaml
-sudo chown www-data:www-data /opt/crayfish/Houdini/config/services.yaml
-sudo chmod 644 /opt/crayfish/Houdini/config/services.yaml
-sudo chown www-data:www-data /opt/crayfish/Houdini/config/packages/crayfish_commons.yml
-sudo chmod 644 /opt/crayfigsh/Houdini/config/packages/crayfish_commons.yml
-sudo chown www-data:www-data /opt/crayfish/Houdini/config/packages/monolog.yml
-sudo chmod 644 /opt/crayfish/Houdini/config/packages/monolog.yml
-sudo chown www-data:www-data /opt/crayfish/Houdini/config/packages/security.yml
-sudo chmod 644 /opt/crayfish/Houdini/config/packages/security.yml
-sudo chown www-data:www-data /opt/crayfish/Hypercube/cfg/config.yaml 
-sudo chmod 644 /opt/crayfish/Hypercube/cfg/config.yaml 
-sudo chown www-data:www-data /opt/crayfish/Milliner/cfg/config.yaml
-sudo chmod 644 /opt/crayfish/Milliner/cfg/config.yaml
-sudo chown www-data:www-data /opt/crayfish/Recast/cfg/config.yaml
-sudo chmod 644 /opt/crayfish/Recast/cfg/config.yaml
-"
+- ```sh /mnt/hgfs/shared/microservices-config.sh```
 
-#configure apache confs for microservices
-sh microservices-conf.sh
+runs the following, so very tedious, no one should ever want to type all this out, but this makes certain all the files are named correctly and have the correct permissions, it also beats typing out these configs.
+>```
+>#!/bin/bash
+>sudo cp /mnt/hgfs/shared/homarus.config.yaml /opt/crayfish/Homarus/cfg/config.yaml
+>sudo cp /mnt/hgfs/shared/houdini.services.yaml /opt/crayfish/Houdini/config/services.yaml
+>sudo cp /mnt/hgfs/shared/crayfish_commons.yml /opt/crayfish/Houdini/config/packages/crayfish_commons.yml
+>sudo cp /mnt/hgfs/shared/monolog.yml /opt/crayfish/Houdini/config/packages/monolog.yml
+>sudo cp /mnt/hgfs/shared/security.yml /opt/crayfish/Houdini/config/packages/security.yml
+>sudo cp /mnt/hgfs/shared/hypercube.config.yaml /opt/crayfish/Hypercube/cfg/config.yaml 
+>sudo cp /mnt/hgfs/shared/milliner.config.yaml /opt/crayfish/Milliner/cfg/config.yaml
+>sudo cp /mnt/hgfs/shared/recast.config.yaml /opt/crayfish/Recast/cfg/config.yaml
+>sudo chown www-data:www-data /opt/crayfish/Homarus/cfg/config.yaml
+>sudo chmod 644 /opt/crayfish/Homarus/cfg/config.yaml
+>sudo chown www-data:www-data /opt/crayfish/Houdini/config/services.yaml
+>sudo chmod 644 /opt/crayfish/Houdini/config/services.yaml
+>sudo chown www-data:www-data /opt/crayfish/Houdini/config/packages/crayfish_commons.yml
+>sudo chmod 644 /opt/crayfigsh/Houdini/config/packages/crayfish_commons.yml
+>sudo chown www-data:www-data /opt/crayfish/Houdini/config/packages/monolog.yml
+>sudo chmod 644 /opt/crayfish/Houdini/config/packages/monolog.yml
+>sudo chown www-data:www-data /opt/crayfish/Houdini/config/packages/security.yml
+>sudo chmod 644 /opt/crayfish/Houdini/config/packages/security.yml
+>sudo chown www-data:www-data /opt/crayfish/Hypercube/cfg/config.yaml 
+>sudo chmod 644 /opt/crayfish/Hypercube/cfg/config.yaml 
+>sudo chown www-data:www-data /opt/crayfish/Milliner/cfg/config.yaml
+>sudo chmod 644 /opt/crayfish/Milliner/cfg/config.yaml
+>sudo chown www-data:www-data /opt/crayfish/Recast/cfg/config.yaml
+>sudo chmod 644 /opt/crayfish/Recast/cfg/config.yaml
+>```
+
+configure apache confs for microservices
+- ```sh microservices-conf.sh```
 
 #microservices-conf.sh
-"
-#!/bin/bash
-sudo cp /mnt/hgfs/shared/Houdini.conf /etc/apache2/conf-available/Houdini.conf
-sudo chown root:root /etc/apache2/conf-available/Houdini.conf 
-sudo chmod 644 /etc/apache2/conf-available/Houdini.conf
-sudo cp /mnt/hgfs/shared/Homarus.conf /etc/apache2/conf-available/Homarus.conf 
-sudo chown root:root /etc/apache2/conf-available/Homarus.conf 
-sudo chmod 644 /etc/apache2/conf-available/Homarus.conf 
-sudo cp /mnt/hgfs/shared/Hypercube.conf /etc/apache2/conf-available/Hypercube.conf 
-sudo chown root:root /etc/apache2/conf-available/Hypercube.conf 
-sudo chmod 644 /etc/apache2/conf-available/Hypercube.conf 
-sudo cp /mnt/hgfs/shared/Milliner.conf /etc/apache2/conf-available/Milliner.conf
-sudo chown root:root /etc/apache2/conf-available/Milliner.conf
-sudo chmod 644 /etc/apache2/conf-available/Milliner.conf
-sudo cp /mnt/hgfs/shared/Recast.conf /etc/apache2/conf-available/Recast.conf 
-sudo chown root:root /etc/apache2/conf-available/Recast.conf 
-sudo chmod 644 /etc/apache2/conf-available/Recast.conf 
-"
 
-#Installing Karaf and Alpaca
+>```
+>#!/bin/bash
+>sudo cp /mnt/hgfs/shared/Houdini.conf /etc/apache2/conf-available/Houdini.conf
+>sudo chown root:root /etc/apache2/conf-available/Houdini.conf 
+>sudo chmod 644 /etc/apache2/conf-available/Houdini.conf
+>sudo cp /mnt/hgfs/shared/Homarus.conf /etc/apache2/conf-available/Homarus.conf 
+>sudo chown root:root /etc/apache2/conf-available/Homarus.conf 
+>sudo chmod 644 /etc/apache2/conf-available/Homarus.conf 
+>sudo cp /mnt/hgfs/shared/Hypercube.conf /etc/apache2/conf-available/Hypercube.conf 
+>sudo chown root:root /etc/apache2/conf-available/Hypercube.conf 
+>sudo chmod 644 /etc/apache2/conf-available/Hypercube.conf 
+>sudo cp /mnt/hgfs/shared/Milliner.conf /etc/apache2/conf-available/Milliner.conf
+>sudo chown root:root /etc/apache2/conf-available/Milliner.conf
+>sudo chmod 644 /etc/apache2/conf-available/Milliner.conf
+>sudo cp /mnt/hgfs/shared/Recast.conf /etc/apache2/conf-available/Recast.conf 
+>sudo chown root:root /etc/apache2/conf-available/Recast.conf 
+>sudo chmod 644 /etc/apache2/conf-available/Recast.conf 
+>```
 
-#this gives us some but not all requirements.
+Installing Karaf and Alpaca
 
-sudo apt-get -y install activemq
-cd /opt
-sudo wget  http://archive.apache.org/dist/activemq/5.15.11/apache-activemq-5.15.11-bin.tar.gz
-sudo tar -xvzf apache-activemq-5.15.11-bin.tar.gz
-sudo mv apache-activemq-5.15.11 activemq
-sudo chown -R activemq:activemq /opt/activemq
+this gives us some but not all requirements.
 
-sudo nano /etc/systemd/system/activemq.service
-"
-[Unit]
-Description=Apache ActiveMQ
-After=network.target
-[Service]
-Type=forking
-User=activemq
-Group=activemq
+- ```sudo apt-get -y install activemq```
+- ```cd /opt```
+- ```sudo wget  http://archive.apache.org/dist/activemq/5.15.11/apache-activemq-5.15.11-bin.tar.gz```
+- ```sudo tar -xvzf apache-activemq-5.15.11-bin.tar.gz```
+- ```sudo mv apache-activemq-5.15.11 activemq```
+- ```sudo chown -R activemq:activemq /opt/activemq```
 
-ExecStart=/opt/activemq/bin/activemq start
-ExecStop=/opt/activemq/bin/activemq stop
+- ```sudo nano /etc/systemd/system/activemq.service```
 
-[Install]
-WantedBy=multi-user.target
-"
+Edit the file like so:
+>```
+>[Unit]
+>Description=Apache ActiveMQ
+>After=network.target
+>[Service]
+>Type=forking
+>User=activemq
+>Group=activemq
+>
+>ExecStart=/opt/activemq/bin/activemq start
+>ExecStop=/opt/activemq/bin/activemq stop
+>
+>[Install]
+>WantedBy=multi-user.target
+>```
 
-sudo systemctl daemon-reload
-sudo systemctl start activemq
-sudo systemctl enable activemq
+- ```sudo systemctl daemon-reload```
+- ```sudo systemctl start activemq```
+- ```sudo systemctl enable activemq```
 
 
 ---
 lacking some documentation here:
-https://websiteforstudents.com/how-to-install-apache-activemq-on-ubuntu-20-04-18-04/
+- https://websiteforstudents.com/how-to-install-apache-activemq-on-ubuntu-20-04-18-04/
 
 
 
 
 
 #check version: Installed:  5.15.11-1
-sudo apt-cache policy activemq
+- ```sudo apt-cache policy activemq```
 
-sudo addgroup karaf
-sudo adduser karaf --ingroup karaf --home /opt/karaf --shell /usr/bin
+- ```sudo addgroup karaf```
+- ```sudo adduser karaf --ingroup karaf --home /opt/karaf --shell /usr/bin```
 
-#(made password karaf)
-#enter on all prompts
-#y
+(made password karaf)
+enter on all prompts
+press y
 
-#get karaf
-#latest 4.3.3 recc (could try 43)
-#KARAF_TARBALL_LINK: It’s recommended to get the most recent version of Karaf 4.3.3 This will depend on the current version of Karaf, which can be found on the Karaf downloads page under “Karaf Runtime”. Like Solr, you can’t directly wget these links, but clicking on the .tar.gz link for the binary distribution will bring you to a list of mirrors, as well as provide you with a recommended mirror you can use here.
+get karaf : latest 4.3.3 recc (could try 43)
+KARAF_TARBALL_LINK: It’s recommended to get the most recent version of Karaf 4.3.3 This will depend on the current version of Karaf, which can be found on the Karaf downloads page under “Karaf Runtime”. Like Solr, you can’t directly wget these links, but clicking on the .tar.gz link for the binary distribution will bring you to a list of mirrors, as well as provide you with a recommended mirror you can use here.
 
-#visit https://karaf.apache.org/download.html : http://www.apache.org/dyn/closer.lua/karaf/4.3.3/apache-karaf-4.3.3.tar.gz
+visit https://karaf.apache.org/download.html : http://www.apache.org/dyn/closer.lua/karaf/4.3.3/apache-karaf-4.3.3.tar.gz
 then get : https://dlcdn.apache.org/karaf/4.3.3/apache-karaf-4.3.3.tar.gz
 
-cd /opt
-sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.3.3/apache-karaf-4.3.3.tar.gz
-sudo tar -xzvf karaf.tar.gz
-sudo chown -R karaf:karaf apache-karaf-4.3.3
-sudo mv apache-karaf-4.3.3/* /opt/karaf
+- ```cd /opt```
+- ```sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.3.3/apache-karaf-4.3.3.tar.gz```
+- ```sudo tar -xzvf karaf.tar.gz```
+- ```sudo chown -R karaf:karaf apache-karaf-4.3.3```
+- ```sudo mv apache-karaf-4.3.3/* /opt/karaf```
 
-sudo mkdir /var/log/karaf
-sudo chown karaf:karaf /var/log/karaf
+- ```sudo mkdir /var/log/karaf```
+- ```sudo chown karaf:karaf /var/log/karaf```
 
 
 
-sudo cp /mnt/hgfs/shared/org.pos4j.pax.logging.cfg /opt/karaf/etc/org.pos4j.pax.logging.cfg
-sudo chown karaf:karaf /opt/karaf/etc/org.pos4j.pax.logging.cfg
-sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg
 
-sudo su
-sudo echo '#!/bin/sh
-export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv
+- ```sudo cp /mnt/hgfs/shared/org.pos4j.pax.logging.cfg /opt/karaf/etc/org.pos4j.pax.logging.cfg```
+- ```sudo chown karaf:karaf /opt/karaf/etc/org.pos4j.pax.logging.cfg```
+- ```sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg```
 
-#(CTL-d) #to exit from root account
-sudo chown karaf:karaf /opt/karaf/bin/setenv
-sudo chmod 755 /opt/karaf/bin/setenv
+- ```sudo su```
+```sudo echo '#!/bin/sh
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv```
 
-sudo nano /opt/karaf/etc/users.properties
+(CTL-d) #to exit from root account
+
+- ```sudo chown karaf:karaf /opt/karaf/bin/setenv```
+- ```sudo chmod 755 /opt/karaf/bin/setenv```
+
+- ```sudo nano /opt/karaf/etc/users.properties```
 
 #uncomment lines:
 Before:
@@ -654,30 +671,37 @@ After:
     33 | _g_\:admingroup = group,admin,manager,viewer,systembundles,ssh
 
 
-sudo -u karaf /opt/karaf/bin/start
-# You may want to wait a bit for Karaf to start.
-# If you're not sure whether or not it's running, you can always run:
-# ps aux | grep karaf
+- ```sudo -u karaf /opt/karaf/bin/start```
+
+You may want to wait a bit for Karaf to start.
+If you're not sure whether or not it's running, you can always run:
+
+- ```ps aux | grep karaf```
+
+
 #run these:
-/opt/karaf/bin/client feature:install wrapper
-/opt/karaf/bin/client wrapper:install
-/opt/karaf/bin/stop
+- ```/opt/karaf/bin/client feature:install wrapper```
+- ```/opt/karaf/bin/client wrapper:install```
+- ```/opt/karaf/bin/stop```
 
-sudo systemctl enable /opt/karaf/bin/karaf.service
-sudo systemctl start karaf
-sudo systemctl status karaf
-q
+- ```sudo systemctl enable /opt/karaf/bin/karaf.service```
+- ```sudo systemctl start karaf```
+- ```sudo systemctl status karaf```
+- ```q```
 
+(to quit type q)
 
-#Alpaca
-#check versions of things used in current ansible build or something. the documentation is off from last update, many new versions avail...
+### Alpaca
 
+check versions of things used in current ansible build or something. the documentation is off from last update, many new versions avail...
 
 from before:
 ACTIVEMQ_KARAF_VERSION  5.15.11 
 
-#stick with 2.X.X
+stick with 2.X.X
+
 visit https://mvnrepository.com/artifact/org.apache.camel.karaf/apache-camel The latest version of Apache Camel 2.x.x
+
 APACHE_CAMEL_VERSION https://repo1.maven.org/maven2/org/apache/camel/karaf/apache-camel/2.25.4/apache-camel-
 2.25.4
 
@@ -689,15 +713,16 @@ JENA_OSGI_VERSION
 The latest version of the Apache Jena 3.x OSGi features
 3.17.0
 
-# note /xml/ not .xml
+(note /xml/ not .xml)
 
 
-/opt/karaf/bin/client repo-add mvn:org.apache.activemq/activemq-karaf/5.15.11/xml/features
-/opt/karaf/bin/client repo-add mvn:org.apache.camel.karaf/apache-camel/2.25.4/xml/features
-/opt/karaf/bin/client repo-add mvn:ca.islandora.alpaca/islandora-karaf/1.0.5/xml/features
-# XXX: This shouldn't be strictly necessary, but appears to be a missing
-# upstream dependency for some fcrepo features.
-/opt/karaf/bin/client repo-add mvn:org.apache.jena/jena-osgi-features/3.17.0/xml/features
+- ```/opt/karaf/bin/client repo-add mvn:org.apache.activemq/activemq-karaf/5.15.11/xml/features
+- ```/opt/karaf/bin/client repo-add mvn:org.apache.camel.karaf/apache-camel/2.25.4/xml/features
+- ```/opt/karaf/bin/client repo-add mvn:ca.islandora.alpaca/islandora-karaf/1.0.5/xml/features```
+
+(This shouldn't be strictly necessary, but appears to be a missing) upstream dependency for some fcrepo features
+
+- ```/opt/karaf/bin/client repo-add mvn:org.apache.jena/jena-osgi-features/3.17.0/xml/features```
 
 
 - ```sudo -u karaf nano /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg```
