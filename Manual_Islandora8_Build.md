@@ -693,215 +693,219 @@ The latest version of the Apache Jena 3.x OSGi features
 /opt/karaf/bin/client repo-add mvn:org.apache.jena/jena-osgi-features/3.17.0/xml/features
 
 
-sudo -u karaf nano /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg
+- ```sudo -u karaf nano /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg```
 
-"
-token.value=islandora
-"
+>```
+>token.value=islandora
+>```
 
-sudo chmod 644 /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg
+- ```sudo chmod 644 /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg```
 
-sh /mnt/hgfs/shared/karaf-config.sh
+- ```sh /mnt/hgfs/shared/karaf-config.sh```
 #executes:
-"
-#!/bin/bash
-sudo cp /mnt/hgfs/shared/org.fcrepo.camel.indexing.triplestore.cfg /opt/karaf/etc/org.fcrepo.camel.indexing.triplestore.cfg
-sudo chown karaf:karaf /opt/karaf/etc/org.fcrepo.camel.indexing.triplestore.cfg
-sudo chmod 644 /opt/karaf/etc/org.fcrepo.camel.indexing.triplestore.cfg
-sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.indexing.triplestore.cfg /opt/karaf/etc/ca.islandora.alpaca.indexing.triplestore.cfg 
-sudo chown karaf:karaf /opt/karaf/etc/ca.islandora.alpaca.indexing.triplestore.cfg 
-sudo chmod 644 /opt/karaf/etc/ca.islandora.alpaca.indexing.triplestore.cfg 
-sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.indexing.fcrepo.cfg /opt/karaf/etc/ca.islandora.alpaca.indexing.fcrepo.cfg
-sudo chown karaf:karaf /opt/karaf/etc/ca.islandora.alpaca.indexing.fcrepo.cfg
-sudo chmod 644 /opt/karaf/etc/ca.islandora.alpaca.indexing.fcrepo.cfg
-"
 
-sh /mnt/hgfs/shared/karaf-blueprints.sh
+>```
+>!/bin/bash
+>sudo cp /mnt/hgfs/shared/org.fcrepo.camel.indexing.triplestore.cfg /opt/karaf/etc/org.fcrepo.camel.indexing.triplestore.cfg
+>sudo chown karaf:karaf /opt/karaf/etc/org.fcrepo.camel.indexing.triplestore.cfg
+>sudo chmod 644 /opt/karaf/etc/org.fcrepo.camel.indexing.triplestore.cfg
+>sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.indexing.triplestore.cfg /opt/karaf/etc/ca.islandora.alpaca.indexing.triplestore.cfg 
+>sudo chown karaf:karaf /opt/karaf/etc/ca.islandora.alpaca.indexing.triplestore.cfg 
+>sudo chmod 644 /opt/karaf/etc/ca.islandora.alpaca.indexing.triplestore.cfg 
+>sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.indexing.fcrepo.cfg /opt/karaf/etc/ca.islandora.alpaca.indexing.fcrepo.cfg
+>sudo chown karaf:karaf /opt/karaf/etc/ca.islandora.alpaca.indexing.fcrepo.cfg
+>sudo chmod 644 /opt/karaf/etc/ca.islandora.alpaca.indexing.fcrepo.cfg
+>```
+
+- ```sh /mnt/hgfs/shared/karaf-blueprints.sh```
 #executes
-"
-#!/bin/bash
-sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.connector.ocr.blueprint.xml /opt/karaf/deploy/ca.islandora.alpaca.connector.ocr.blueprint.xml
-sudo chown karaf:karaf /opt/karaf/deploy/ca.islandora.alpaca.connector.ocr.blueprint.xml
-sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.ocr.blueprint.xml
-sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.connector.houdini.blueprint.xml /opt/karaf/deploy/ca.islandora.alpaca.connector.houdini.blueprint.xml
-sudo chown karaf:karaf /opt/karaf/deploy/ca.islandora.alpaca.connector.houdini.blueprint.xml
-sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.houdini.blueprint.xml
-sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.connector.homarus.blueprint.xml /opt/karaf/deploy/ca.islandora.alpaca.connector.homarus.blueprint.xml
-sudo chown karaf:karaf /opt/karaf/deploy/ca.islandora.alpaca.connector.homarus.blueprint.xml
-sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.homarus.blueprint.xml
-sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.connector.fits.blueprint.xml /opt/karaf/deploy/ca.islandora.alpaca.connector.fits.blueprint.xml
-sudo chown karaf:karaf /opt/karaf/deploy/ca.islandora.alpaca.connector.fits.blueprint.xml
-sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.fits.blueprint.xml
-"
 
-sh /mnt/hgfs/shared/karaf-features.sh
+>```
+>#!/bin/bash
+>sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.connector.ocr.blueprint.xml /opt/karaf/deploy/ca.islandora.alpaca.connector.ocr.blueprint.xml
+>sudo chown karaf:karaf /opt/karaf/deploy/ca.islandora.alpaca.connector.ocr.blueprint.xml
+>sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.ocr.blueprint.xml
+>sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.connector.houdini.blueprint.xml /opt/karaf/deploy/ca.islandora.alpaca.connector.houdini.blueprint.xml
+>sudo chown karaf:karaf /opt/karaf/deploy/ca.islandora.alpaca.connector.houdini.blueprint.xml
+>sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.houdini.blueprint.xml
+>sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.connector.homarus.blueprint.xml /opt/karaf/deploy>/ca.islandora.alpaca.connector.homarus.blueprint.xml
+>sudo chown karaf:karaf /opt/karaf/deploy/ca.islandora.alpaca.connector.homarus.blueprint.xml
+>sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.homarus.blueprint.xml
+>sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.connector.fits.blueprint.xml /opt/karaf/deploy/ca.islandora.alpaca.connector.fits.blueprint.xml
+>sudo chown karaf:karaf /opt/karaf/deploy/ca.islandora.alpaca.connector.fits.blueprint.xml
+>sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.fits.blueprint.xml
+>```
 
-#contains:
-"
-/opt/karaf/bin/client feature:install camel-blueprint
-/opt/karaf/bin/client feature:install activemq-blueprint
-/opt/karaf/bin/client feature:install fcrepo-service-activemq
-# This again should not be strictly necessary, since this isn't the triplestore
-# we're using, but is being included here to resolve the aforementioned
-# missing link in the dependency chain.
-/opt/karaf/bin/client feature:install jena
-/opt/karaf/bin/client feature:install fcrepo-camel
-/opt/karaf/bin/client feature:install fcrepo-indexing-triplestore
-/opt/karaf/bin/client feature:install islandora-http-client
-/opt/karaf/bin/client feature:install islandora-indexing-triplestore
-/opt/karaf/bin/client feature:install islandora-indexing-fcrepo
-/opt/karaf/bin/client feature:install islandora-connector-derivative
-"
+- ```sh /mnt/hgfs/shared/karaf-features.sh```
+
+contains:
+
+>```
+>/opt/karaf/bin/client feature:install camel-blueprint
+>/opt/karaf/bin/client feature:install activemq-blueprint
+>/opt/karaf/bin/client feature:install fcrepo-service-activemq
+># This again should not be strictly necessary, since this isn't the triplestore
+># we're using, but is being included here to resolve the aforementioned
+># missing link in the dependency chain.
+>/opt/karaf/bin/client feature:install jena
+>/opt/karaf/bin/client feature:install fcrepo-camel
+>/opt/karaf/bin/client feature:install fcrepo-indexing-triplestore
+>/opt/karaf/bin/client feature:install islandora-http-client
+>/opt/karaf/bin/client feature:install islandora-indexing-triplestore
+>/opt/karaf/bin/client feature:install islandora-indexing-fcrepo
+>/opt/karaf/bin/client feature:install islandora-connector-derivative
+>```
 
 #configure drupal
 
 #settings.php
 
-sudo nano /opt/drupal/web/sites/default/settings.php
+- ```sudo nano /opt/drupal/web/sites/default/settings.php```
 
 add the following to the end of the file:
 
-"
-$settings['trusted_host_patterns'] = [
-  'localhost',
-  '^192\.168\.12\.131$',
-];
-$settings['flysystem'] = [
- 'fedora' => [
- 'driver' => 'fedora',
- 'config' => [
-  'root' => 'http://localhost:8080/fcrepo/rest/',
- ],
-],
-];
-"
+>```
+>$settings['trusted_host_patterns'] = [
+>  'localhost',
+>  '^192\.168\.12\.131$',
+>];
+>$settings['flysystem'] = [
+> 'fedora' => [
+> 'driver' => 'fedora',
+> 'config' => [
+>  'root' => 'http://localhost:8080/fcrepo/rest/',
+> ],
+>],
+>];
+>```
 
-cd /opt/drupal
-drush -y cr
-
-
-sudo sh /mnt/hgfs/shared/islandora_install.sh
-#runs the following:
-"
-#!/bin/bash
-cd /opt/drupal
-# This is a convenience piece that will help speed up most of the rest of our
-# process working with Composer and Drupal.
-sudo -u www-data composer require zaporylie/composer-drupal-optimizations:^1.0
-# Since islandora_defaults is near the bottom of the dependency chain, requiring
-# it will get most of the modules and libraries we need to deploy a standard
-# Islandora site.
-sudo -u www-data composer require islandora/islandora_defaults:dev-8.x-1.x
-# These can be considered important or required depending on your site's
-# requirements; some of them represent dependencies of Islandora submodules.
-sudo -u www-data composer require drupal/pdf:1.x-dev
-sudo -u www-data composer require drupal/rest_oai_pmh:^1.0
-sudo -u www-data composer require drupal/facets:^1.3
-sudo -u www-data composer require drupal/restui:^1.16
-sudo -u www-data composer require drupal/rdfui:^1.0-beta1
-sudo -u www-data composer require drupal/content_browser:^1.0@alpha
-# These tend to be good to enable for a development environment, or just for a
-# higher quality of life when managing Islandora. That being said, devel should
-# NEVER be enabled on a production environment, as it intentionally gives the
-# user tools that compromise the security of a site.
-sudo -u www-data composer require drupal/console:~1.0
-sudo -u www-data composer require drupal/devel:^2.0
-sudo -u www-data composer require drupal/admin_toolbar:^2.0
-# Islandora also provides a theme called Carapace designed to work well out of
-# the box with an Islandora site.
-sudo -u www-data composer require islandora/carapace:dev-8.x-3.x
-"
-
-#something happened, no no, did one fail?
-#something about sudo -u www-data composer require zaporylie/composer-drupal-optimizations:^1.0
-#no 
-#yes
-
-sh /mnt/hgfs/shared/isla_lib.sh
-
-"
-#!/bin/bash
-#add these before enable
-composer require drupal/masonry
-composer require drupal/libraries
-cd web
-mkdir libraries
-cd libraries
-mkdir masonry/dist
-mkdir imagesloaded
-wget -O masonry/dist/masonry.pkgd.min.js https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js
-wget -O imagesloaded/imagesloaded.pkgd.min.js https://unpkg.com/imagesloaded@4.1.4/imagesloaded.pkgd.min.js
-"
-
-sh /mnt/hgfs/shared/islandora_en.sh
-
-#set vm back into host only network 
-
-#if provided host name is not valid... try editing /setting.php change ip to match
+- ```cd /opt/drupal```
+- ```drush -y cr```
 
 
-#set vm back to host only network setting
+- ```sudo sh /mnt/hgfs/shared/islandora_install.sh```
+
+The above script will run the following (to save you time typing version numbers...)
+
+>```
+>#!/bin/bash
+>cd /opt/drupal
+># This is a convenience piece that will help speed up most of the rest of our
+># process working with Composer and Drupal.
+>sudo -u www-data composer require zaporylie/composer-drupal-optimizations:^1.0
+># Since islandora_defaults is near the bottom of the dependency chain, requiring
+># it will get most of the modules and libraries we need to deploy a standard
+># Islandora site.
+>sudo -u www-data composer require islandora/islandora_defaults:dev-8.x-1.x
+># These can be considered important or required depending on your site's
+># requirements; some of them represent dependencies of Islandora submodules.
+>sudo -u www-data composer require drupal/pdf:1.x-dev
+>sudo -u www-data composer require drupal/rest_oai_pmh:^1.0
+>sudo -u www-data composer require drupal/facets:^1.3
+>sudo -u www-data composer require drupal/restui:^1.16
+>sudo -u www-data composer require drupal/rdfui:^1.0-beta1
+>sudo -u www-data composer require drupal/content_browser:^1.0@alpha
+># These tend to be good to enable for a development environment, or just for a
+># higher quality of life when managing Islandora. That being said, devel should
+># NEVER be enabled on a production environment, as it intentionally gives the
+># user tools that compromise the security of a site.
+>sudo -u www-data composer require drupal/console:~1.0
+>sudo -u www-data composer require drupal/devel:^2.0
+>sudo -u www-data composer require drupal/admin_toolbar:^2.0
+># Islandora also provides a theme called Carapace designed to work well out of
+># the box with an Islandora site.
+>sudo -u www-data composer require islandora/carapace:dev-8.x-3.x
+>```
+
+something happened, no no, did one fail?
+something about sudo -u www-data composer require zaporylie/composer-drupal-optimizations:^1.0
+no 
+yes
+
+- ```sh /mnt/hgfs/shared/isla_lib.sh```
+
+The script above will execute the following (save on typing long links...)
+
+>```
+>#!/bin/bash
+>#add these before enable
+>composer require drupal/masonry
+>composer require drupal/libraries
+>cd web
+>mkdir libraries
+>cd libraries
+>mkdir masonry/dist
+>mkdir imagesloaded
+>wget -O masonry/dist/masonry.pkgd.min.js https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js
+>wget -O imagesloaded/imagesloaded.pkgd.min.js https://unpkg.com/imagesloaded@4.1.4/imagesloaded.pkgd.min.js
+>```
+
+- ```sh /mnt/hgfs/shared/islandora_en.sh```
+
+set vm back into host only network 
+
+if provided host name is not valid... try editing /setting.php change ip to match
+
+set vm back to host only network setting
+
+Adding a JWT Configuration to Drupal
+
+To allow our installation to talk to other services via Syn, we need to establish a Drupal-side JWT configuration using the keys we generated at that time.
+
+Log onto your site as an administrator at /user, then navigate to /admin/config/system/keys/add. Some of the settings here are unimportant, but pay close attention to the Key type, which should match the key we created earlier (an RSA key), and the File location, which should be the ultimate location of the key we created for Syn on the filesystem, /opt/keys/syn_private.key.
+
+Adding a JWT RSA Key
+
+Click Save to create the key.
+
+Once this key is created, navigate to /admin/config/system/jwt to select the key you just created from the list. Note that before the key will show up in the Private Key list, you need to select that key's type in the Algorithm section, namely RSASSA-PKCS1-v1_5 using SHA-256 (RS256).
+
+Configuring the JWT RSA Key for Use
+
+See instructions:
+- https://islandora.github.io/documentation/installation/manual/configuring_drupal/#adding-a-jwt-configuration-to-drupal
+
+visit http://XXX.XXX.XXX.XXX/admin/config/system/jwt
 
 
-#Adding a JWT Configuration to Drupal
+follow drupal config instructions:
+- https://islandora.github.io/documentation/installation/manual/configuring_drupal/#islandora
 
-#To allow our installation to talk to other services via Syn, we need to establish a Drupal-side JWT configuration using the keys we generated at that time.
+config canaloupe
+- https://islandora.github.io/documentation/installation/manual/configuring_drupal/#configuring-islandora-iiif
 
-#Log onto your site as an administrator at /user, then navigate to /admin/config/system/keys/add. Some of the settings here are unimportant, but pay close attention to the Key type, which should match the key we created earlier (an RSA key), and the File location, which should be the ultimate location of the key we created for Syn on the filesystem, /opt/keys/syn_private.key.
+cantaloupe endpoint was not 8080
+this worked for cantaloupe config:
 
-#Adding a JWT RSA Key
+had to unzip cantaloupe missed the unzip for some reason
+- http://XXX.XXX.XXX.XXX:8182/iiif/2
 
+Nav to openseadragog
+- http://XXX.XXX.XXX.XXX:8182/admin/config/media/openseadragon
 
-#Click Save to create the key.
+add to IIIf Image server location: http://XXX.XXX.XXX.XXX:8182/iiif/2
+select IIIF Manifest from dropdown
+save
 
-#Once this key is created, navigate to /admin/config/system/jwt to select the key you just created from the list. Note that before the key will show up in the Private Key list, you need to select that key's type in the Algorithm section, namely RSASSA-PKCS1-v1_5 using SHA-256 (RS256).
+navigate to flysystem settings
+http://XXX.XXX.XXX.XXX:8182/admin/config/media/file-system
+choose the flysystem button and save (scroll down)
 
-#Configuring the JWT RSA Key for Use
+give the admin fedoraAdmin role
 
-#See instructions: https://islandora.github.io/documentation/installation/manual/configuring_drupal/#adding-a-jwt-configuration-to-drupal
+- ```cd /opt/drupal```
+- ```sudo -u www-data drush -y urol "fedoraadmin" islandora```
 
-#visit http://XXX.XXX.XXX.XXX/admin/config/system/jwt
-
-
-#follow drupal config https://islandora.github.io/documentation/installation/manual/configuring_drupal/#islandora
-
-#config canaloupe
-#https://islandora.github.io/documentation/installation/manual/configuring_drupal/#configuring-islandora-iiif
-
-#cantaloupe endpoint was not 8080
-#this worked for cantaloupe config
-
-#had to unzip cantaloupe missed the unzip for some reason
-http://XXX.XXX.XXX.XXX:8182/iiif/2
-
-#Nav to openseadragog
-#http://XXX.XXX.XXX.XXX:8182/admin/config/media/openseadragon
-
-#add to IIIf Image server location: http://XXX.XXX.XXX.XXX:8182/iiif/2
-#select IIIF Manifest from dropdown
-#save
-
-#navigate to flysystem settings
-#http://XXX.XXX.XXX.XXX:8182/admin/config/media/file-system
-#choose the flysystem button and save
-
-#give the admin fedoraAdmin role
-
-cd /opt/drupal
-sudo -u www-data drush -y urol "fedoraadmin" islandora
-
-sudo -u www-data drush -y -l localhots --userid=1 mim --group=islandora
+- ```sudo -u www-data drush -y -l localhots --userid=1 mim --group=islandora```
 
 uninstall 
 /admin/modules/uninstall 
 search_defaults
 
+reslove a dependency
 
-
-#reslove a dep
-sudo -u www-data composer require 'drupal/jquery_ui_accordion:^1.1'
-
-drush en -y jquery_ui_accordion
+- ```sudo -u www-data composer require 'drupal/jquery_ui_accordion:^1.1'```
+- ```drush en -y jquery_ui_accordion```
 
 
 
