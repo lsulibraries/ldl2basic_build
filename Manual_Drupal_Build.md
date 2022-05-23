@@ -104,7 +104,8 @@ This is when we will input the following commands:
   >          Require all granted
   >  </Directory>
   >```
-  > you're changing the third AllowOverride from None to All (CTRL+O saves from nano CTRL+X to close )
+
+you're changing the third AllowOverride from None to All (CTRL+O saves from nano CTRL+X to close )
 
 - ```sudo nano /etc/apache2/sites-available/000-default.conf```
 
