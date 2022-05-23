@@ -61,7 +61,7 @@ These commands should all be executed in sequence:
 - ```sudo apt-get -y install apache2 apache2-utils```
 - ```sudo a2enmod ssl```
 - ```sudo a2enmod rewrite```
-- ```sudo h= restart apache2```
+- ```sudo systemctl restart apache2```
 - ```sudo usermod -a -G www-data `whoami` ```
 - ```sudo usermod -a -G `whoami` www-data```
 
