@@ -270,122 +270,128 @@ note: you may need this command if like me you had to edit cantaloupe.service se
 >\q
 >```
 
-#first 
-sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000
+first 
+- ```sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000```
 
-sudo sh /mnt/hgfs/shared/fedora-config.sh
+- ```sudo sh /mnt/hgfs/shared/fedora-config.sh```
 
-#fedora-config.sh
-"
-sudo cp /mnt/hgfs/shared/i8_namespace.cnd /opt/fcrepo/config/i8_namespace.cnd
-sudo chown tomcat:tomcat /opt/fcrepo/config/i8_namespace.cnd
-sudo chmod 644 /opt/fcrepo/config/i8_namespace.cnd
-sudo touch /opt/fcrepo/config/allowed_hosts.txt
-sudo chown tomcat:tomcat /opt/fcrepo/config/allowed_hosts.txt
-sudo chmod 644 /opt/fcrepo/config/allowed_hosts.txt
-sudo -u tomcat echo "http://localhost:80/" >> /opt/fcrepo/config/allowed_hosts.txt
-sudo cp /mnt/hgfs/shared/repository.json /opt/fcrepo/config/
-sudo chown tomcat:tomcat /opt/fcrepo/config/repository.json
-sudo chmod 644 /opt/fcrepo/config/repository.json
-sudo cp /mnt/hgfs/shared/fcrepo-config.xml /opt/fcrepo/config/
-sudo chmod 644 /opt/fcrepo/config/fcrepo-config.xml
-sudo chown tomcat:tomcat /opt/fcrepo/config/fcrepo-config.xml
-"
-#note: double check /opt/fcrepo/config/allowed_hosts.txt got created
+fedora-config.sh will run the following:
 
-sudo nano /opt/tomcat/bin/setenv.sh
+>```
+>sudo cp /mnt/hgfs/shared/i8_namespace.cnd /opt/fcrepo/config/i8_namespace.cnd
+>sudo chown tomcat:tomcat /opt/fcrepo/config/i8_namespace.cnd
+>sudo chmod 644 /opt/fcrepo/config/i8_namespace.cnd
+>sudo touch /opt/fcrepo/config/allowed_hosts.txt
+>sudo chown tomcat:tomcat /opt/fcrepo/config/allowed_hosts.txt
+>sudo chmod 644 /opt/fcrepo/config/allowed_hosts.txt
+>sudo -u tomcat echo "http://localhost:80/" >> /opt/fcrepo/config/allowed_hosts.txt
+>sudo cp /mnt/hgfs/shared/repository.json /opt/fcrepo/config/
+>sudo chown tomcat:tomcat /opt/fcrepo/config/repository.json
+>sudo chmod 644 /opt/fcrepo/config/repository.json
+>sudo cp /mnt/hgfs/shared/fcrepo-config.xml /opt/fcrepo/config/
+>sudo chmod 644 /opt/fcrepo/config/fcrepo-config.xml
+>sudo chown tomcat:tomcat /opt/fcrepo/config/fcrepo-config.xml
+>```
 
-#uncomment line 5, comment line 4 (CTL-c) shows line number
-#save (CTL-o) exit (CTL+x)
+note: double check /opt/fcrepo/config/allowed_hosts.txt got created
 
-#move up to fedora_config.sh?
-sudo cp /mnt/hgfs/shared/tomcat-users.xml /opt/tomcat/conf/tomcat-users.xml
-sudo chmod 600 /opt/tomcat/conf/tomcat-users.xml
-sudo chown tomcat:tomcat /opt/tomcat/conf/tomcat-users.xml
+- ```sudo nano /opt/tomcat/bin/setenv.sh```
 
-#visit: https://github.com/fcrepo/fcrepo/releases
+uncomment line 5, comment line 4 (CTL-c) shows line number
+save (CTL-o) exit (CTL+x)
 
-#move up to fedora_config.sh?
-sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.0.0/fcrepo-webapp-6.0.0.war
-sudo mv fcrepo.war /opt/tomcat/webapps
-sudo chown tomcat:tomcat /opt/tomcat/webapps/fcrepo.war
+(move up to fedora_config.sh)
+- ```sudo cp /mnt/hgfs/shared/tomcat-users.xml /opt/tomcat/conf/tomcat-users.xml```
+- ```sudo chmod 600 /opt/tomcat/conf/tomcat-users.xml```
+- ```sudo chown tomcat:tomcat /opt/tomcat/conf/tomcat-users.xml```
 
-sudo systemctl restart tomcat
+visit: https://github.com/fcrepo/fcrepo/releases
+
+(move up to fedora_config.sh?)
+- ```sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.0.0/fcrepo-webapp-6.0.0.war```
+- ```sudo mv fcrepo.war /opt/tomcat/webapps```
+- ```sudo chown tomcat:tomcat /opt/tomcat/webapps/fcrepo.war```
+
+- ```sudo systemctl restart tomcat```
 
 
 check here for link...
-#https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar
+- https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar
 
-sudo wget -P /opt/tomcat/lib https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar
-# Ensure the library has the correct permissions.
-sudo chown -R tomcat:tomcat /opt/tomcat/lib
-sudo chmod -R 640 /opt/tomcat/lib
+- ```sudo wget -P /opt/tomcat/lib https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar```
 
-sudo mkdir /opt/keys
-sudo openssl genrsa -out "/opt/keys/syn_private.key" 2048
-sudo openssl rsa -pubout -in "/opt/keys/syn_private.key" -out "/opt/keys/syn_public.key"
-sudo chown www-data:www-data /opt/keys/syn*
+Ensure the library has the correct permissions.
 
-sudo cp /mnt/hgfs/shared/syn-settings.xml /opt/fcrepo/config/
-sudo chown tomcat:tomcat /opt/fcrepo/config/syn-settings.xml
-sudo chmod 600 /opt/fcrepo/config/syn-settings.xml
+- ```sudo chown -R tomcat:tomcat /opt/tomcat/lib```
+- ```sudo chmod -R 640 /opt/tomcat/lib```
 
-sudo nano /opt/tomcat/conf/context.xml
+- ```sudo mkdir /opt/keys```
+- ```sudo openssl genrsa -out "/opt/keys/syn_private.key" 2048```
+- ```sudo openssl rsa -pubout -in "/opt/keys/syn_private.key" -out "/opt/keys/syn_public.key"```
+- ```sudo chown www-data:www-data /opt/keys/syn*```
+
+- ```sudo cp /mnt/hgfs/shared/syn-settings.xml /opt/fcrepo/config/```
+- ```sudo chown tomcat:tomcat /opt/fcrepo/config/syn-settings.xml```
+- ```sudo chmod 600 /opt/fcrepo/config/syn-settings.xml```
+
+- ```sudo nano /opt/tomcat/conf/context.xml```
 
 Add this line  before the closing </Context> tag:
+>```
+>    <Valve className="ca.islandora.syn.valve.SynValve" pathname="/opt/fcrepo/config/syn-settings.xml"/>
+></Context>
+>```
 
-    <Valve className="ca.islandora.syn.valve.SynValve" pathname="/opt/fcrepo/config/syn-settings.xml"/>
-</Context>
+(note above for spelling errors: valve V A L V E not Value)
 
-#valve V A L V E not Value
+- ```sudo systemctl restart tomcat```
 
-sudo systemctl restart tomcat
+#### blazegraph
 
-#blazegraph
+- ```sudo mkdir -p /opt/blazegraph/data```
+- ```sudo mkdir /opt/blazegraph/conf```
+- ```sudo chown -R tomcat:tomcat /opt/blazegraph```
 
-sudo mkdir -p /opt/blazegraph/data
-sudo mkdir /opt/blazegraph/conf
-sudo chown -R tomcat:tomcat /opt/blazegraph
-
-cd /opt
-sudo wget -O blazegraph.war https://repo1.maven.org/maven2/com/blazegraph/bigdata-war/2.1.5/bigdata-war-2.1.5.war
-sudo mv blazegraph.war /opt/tomcat/webapps
-sudo chown tomcat:tomcat /opt/tomcat/webapps/blazegraph.war
+- ```cd /opt```
+- ```sudo wget -O blazegraph.war https://repo1.maven.org/maven2/com/blazegraph/bigdata-war/2.1.5/bigdata-war-2.1.5.war```
+- ```sudo mv blazegraph.war /opt/tomcat/webapps```
+- ```sudo chown tomcat:tomcat /opt/tomcat/webapps/blazegraph.war```
 
 - ```sh /mnt/hgfs/shared/blazegraph_conf.sh```
 
 Typing out config files by hand is not worth the time. this script simplifies the process.
 
-#blazegraph_conf.sh 
-#configure logging
-#RWStore.properties
-#blazegraph.config
-#inference.nt
-"
-sudo cp /mnt/hgfs/shared/log4j.properties /opt/blazegraph/conf/
-sudo chown tomcat:tomcat /opt/blazegraph/conf/log4j.properties
-sudo chmod 644 /opt/blazegraph/conf/log4j.properties
-sudo cp /mnt/hgfs/shared/RWStore.properties /opt/blazegraph/conf
-sudo cp /mnt/hgfs/shared/blazegraph.properties /opt/blazegraph/conf
-sudo cp /mnt/hgfs/shared/inference.nt /opt/blazegraph/conf
-sudo chown tomcat:tomcat -R /opt/blazegraph/conf
-sudo chmod -R 644 /opt/blazegraph/conf
-"
+blazegraph_conf.sh 
+configure logging
+RWStore.properties
+blazegraph.config
+inference.nt
+
+>```
+>sudo cp /mnt/hgfs/shared/log4j.properties /opt/blazegraph/conf/
+>sudo chown tomcat:tomcat /opt/blazegraph/conf/log4j.properties
+>sudo chmod 644 /opt/blazegraph/conf/log4j.properties
+>sudo cp /mnt/hgfs/shared/RWStore.properties /opt/blazegraph/conf
+>sudo cp /mnt/hgfs/shared/blazegraph.properties /opt/blazegraph/conf
+>sudo cp /mnt/hgfs/shared/inference.nt /opt/blazegraph/conf
+>sudo chown tomcat:tomcat -R /opt/blazegraph/conf
+>sudo chmod -R 644 /opt/blazegraph/conf
+>```
 
 - ```sudo nano /opt/tomcat/bin/setenv.sh```
 
 comment out line 5 uncomment line 6
 
-#save (CTL+o) quit (CTL+x)
+save (CTL+o) quit (CTL+x)
 
 - ```sudo systemctl restart tomcat```
 
-#sudo?
-- - ```curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/blazegraph.properties http://localhost:8080/blazegraph/namespace```
+(sudo?)
+- ```curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/blazegraph.properties http://localhost:8080/blazegraph/namespace```
 
 If this worked correctly, Blazegraph should respond with "CREATED: islandora" to let us know it created the islandora namespace.
 
-#sudo?
+(sudo?)
 - ```curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/inference.nt http://localhost:8080/blazegraph/namespace/islandora/sparql```
 
 If this worked correctly, Blazegraph should respond with some XML letting us
@@ -401,22 +407,23 @@ solr
 - ```#(might not need to be at /opt to start this)```
 - ```q #to quit```
 
-#increase filesize optional 
+increase filesize (optional)
+
 - ```sudo su```
 - ```sudo echo "fs.file-max = 45535" >> /etc/sysctl.conf```
 - ```sudo sysctl -p```
 
-#create solr core
+create solr core
+
 - ```cd /opt/solr```
-```sudo mkdir -p /var/solr/data/islandora8/conf```
-```sudo cp -r example/files/conf/* /var/solr/data/islandora8/conf```
-```sudo chown -R solr:solr /var/solr```
-```sudo -u solr bin/solr create -c islandora8 -p 8983```
+- ```sudo mkdir -p /var/solr/data/islandora8/conf```
+- ```sudo cp -r example/files/conf/* /var/solr/data/islandora8/conf```
+- ```sudo chown -R solr:solr /var/solr```
+- ```sudo -u solr bin/solr create -c islandora8 -p 8983```
 
+warning using _default configset with data driven scheme functionality. NOT RECCOMENDED for production use. To turn off: bin/solr/ config -c islandora8 -p 8983 -action set-user-property -property update.autoCreateFields -value false
 
-#warning using _default configset with data driven scheme functionality. NOT RECCOMENDED for production use. To turn off: bin/solr/ config -c islandora8 -p 8983 -action set-user-property -property update.autoCreateFields -value false
-
-drupal search api
+#### drupal search api
 
 - ```cd /opt/drupal```
 - ```sudo -u www-data composer require drupal/search_api_solr:^4.2```
@@ -465,7 +472,7 @@ NOTICE You can ignore the error about an incompatible Solr schema; we're going t
 
 
 apply solr configs
-- go back in the vm
+- click back into the vm
 
 - ```cd /opt/drupal```
 - ```drush solr-gsc islandora8 /opt/drupal/solrconfig.zip```
@@ -479,9 +486,13 @@ apply solr configs
  **configure index via gui***
 
 Index name: Islandora 8 Index
+
 Content: X
+
 File: X
+
 Server: islandora8
+
 Enabled X
 
 click Save
@@ -489,13 +500,16 @@ click Save
 
 #### crayfish microservices
 
+click back into vm
 change vm back to bridged network (only if needed) (right click vm, settings, network adaptor, save)
 
 - ```ping www.google.com```
 - do this a few times until you get bytes back
 
-sh /mnt/hgfs/shared/crayfish_reqs.sh
-#executes: takes a while...
+- ```sh /mnt/hgfs/shared/crayfish_reqs.sh```
+
+let this execute: takes a while... maybe take a hydration break. It's running the following:
+
 >```
 >sudo add-apt-repository -y ppa:lyrasis/imagemagick-jp2
 >sudo apt-get update
@@ -550,7 +564,7 @@ runs the following, so very tedious, no one should ever want to type all this ou
 configure apache confs for microservices
 - ```sh microservices-conf.sh```
 
-#microservices-conf.sh
+microservices-conf.sh will be copying a lot of config files from the shared folder
 
 >```
 >#!/bin/bash
@@ -647,8 +661,7 @@ then get : https://dlcdn.apache.org/karaf/4.3.3/apache-karaf-4.3.3.tar.gz
 - ```sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg```
 
 - ```sudo su```
-```sudo echo '#!/bin/sh
-export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv```
+```sudo echo '#!/bin/sh \nexport JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv```
 
 (CTL-d) #to exit from root account
 
