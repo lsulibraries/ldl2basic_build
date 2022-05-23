@@ -65,88 +65,92 @@ These commands should all be executed in sequence:
 - ```sudo usermod -a -G www-data `whoami` ```
 - ```sudo usermod -a -G `whoami` www-data```
 
-#log out of the vm (CTL-D) (this is neccessary for group settings to be applied)
-#log back in
+Log out of the vm (CTL-D) (this is neccessary for group settings to be applied)
+Log back in
 
-#double check your shared folder exists
+Double check your shared folder exists
 
-ls /mnt/hgfs/shared
+- ```ls /mnt/hgfs/shared```
 
-#(if you don't see all the files something is wrong and you should try fiddling with vmware-netcfg)
-#or try "sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000")
+(if you don't see all the files something is wrong and you should try fiddling with vmware-netcfg)
+or try "sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000")
 
-sh /mnt/hgfs/shared/scratch_2.sh
+- ```sh /mnt/hgfs/shared/scratch_2.sh```
 
-#sh scratch_2.sh runs the following command (which is tedious to type):
-"
-sudo apt-get -y install php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-dev php7.4-gd php7.4-imap php7.4-json php7.4-mbstring php7.4-opcache php7.4-xml php7.4-yaml php7.4-zip libapache2-mod-php7.4 php-pgsql php-redis php-xdebug unzip postgresql
-"
+the above command runs the following script (which is tedious to type, there are some copy paste limitations in vmware when using alt-keyboard layouts):
+- ```sudo apt-get -y install php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-dev php7.4-gd php7.4-imap php7.4-json php7.4-mbstring php7.4-opcache php7.4-xml php7.4-yaml php7.4-zip libapache2-mod-php7.4 php-pgsql php-redis php-xdebug unzip postgresql```
 
-#if you don't like nano use a different editor vi/vim/emacs
+if you don't like nano use a different editor vi/vim/emacs 
 
-sudo nano +642 /etc/postgresql/12/main/postgresql.conf
+- ```sudo nano +642 /etc/postgresql/12/main/postgresql.conf```
 
-#change line 642 from 
-"#bytea_output 'hex'"
+change line 642 from 
+>```
+>bytea_output 'hex'"
 
-#change to
-"bytea_output 'escape'"
+change to
+>```
+>bytea_output 'escape'"
+>```
 
-#(CTL+o)(to save)(CTL+x to close)
+(CTL+o)(to save)(CTL+x to close)
 
-sudo systemctl restart postgresql
+- ```sudo systemctl restart postgresql```
 
-sh /mnt/hgfs/shared/scratch_3.sh
+- ```sh /mnt/hgfs/shared/scratch_3.sh```
 
 #scratch_3.sh runs:
-"
-curl "https://getcomposer.org/installer" > composer-install.php
-chmod +x composer-install.php
-php composer-install.php
-sudo mv composer.phar /usr/local/bin/composer
-sudo mkdir /opt/drupal
-sudo chown www-data:www-data /opt/drupal
-sudo chmod 775 /opt/drupal
-sudo chown -R www-data:www-data /var/www/
-git clone https://github.com/drupal-composer/drupal-project.git
-"
+>```
+>curl "https://getcomposer.org/installer" > composer-install.php
+>chmod +x composer-install.php
+>php composer-install.php
+>sudo mv composer.phar /usr/local/bin/composer
+>sudo mkdir /opt/drupal
+>sudo chown www-data:www-data /opt/drupal
+>sudo chmod 775 /opt/drupal
+>sudo chown -R www-data:www-data /var/www/
+>git clone https://github.com/drupal-composer/drupal-project.git
+>```
 
-sudo apt install curl git
 
-sh /mnt/hgfs/shared/scratch_4
+- ```sudo apt install curl git```
 
-#scratch_4.sh runs:
-"
-cd drupal-project
-# Expect this to take a little while, as this is grabbing the entire
-# requirements set for Drupal.
-sudo -u www-data composer create-project drupal-composer/drupal-project:9.x-dev /opt/drupal --no-interaction
-sudo ln -s /opt/drupal/vendor/drush/drush/drush /usr/local/bin/drush
-"
+- ```sh /mnt/hgfs/shared/scratch_4```
 
-sudo nano /etc/apache2/ports.conf 
+scratch_4.sh runs:
+>```
+>cd drupal-project
+># Expect this to take a little while, as this is grabbing the entire
+># requirements set for Drupal.
+>sudo -u www-data composer create-project drupal-composer/drupal-project:9.x-dev /opt/drupal --no-interaction
+>sudo ln -s /opt/drupal/vendor/drush/drush/drush /usr/local/bin/drush
+>```
 
-#remove everything but (CTL+k)(to yank lines out of the file)
-"Listen 80"
+-  ```sudo nano /etc/apache2/ports.conf```
 
-#save the file (CTL+o) then (CTL+x)
+remove everything but (CTL+k)(to yank lines out of the file)
 
-sudo nano /etc/apache2/sites-enabled/000-default.conf
+> ```Listen 80
+> ```
 
-#edit file to contain only the following:
-"
-<VirtualHost *:80>
-  ServerName localhost
-  DocumentRoot "/opt/drupal/web"
-  <Directory "/opt/drupal/web">
-    Options Indexes FollowSymLinks MultiViews
-    AllowOverride all
-    Require all granted
-  </Directory>
-  ErrorLog "/var/log/apache2/localhost_error.log"
-  CustomLog "/var/log/apache2/localhost_access.log" combined
-</VirtualHost>
-"
+save the file (CTL+o) then (CTL+x)
+
+- ```sudo nano /etc/apache2/sites-enabled/000-default.conf```
+
+edit file to contain only the following:
+>```
+><VirtualHost *:80>
+>  ServerName localhost
+>  DocumentRoot "/opt/drupal/web"
+>  <Directory "/opt/drupal/web">
+>    Options Indexes FollowSymLinks MultiViews
+>    AllowOverride all
+>    Require all granted
+>  </Directory>
+>  ErrorLog "/var/log/apache2/localhost_error.log"
+>  CustomLog "/var/log/apache2/localhost_access.log" combined
+></VirtualHost>
+>```
 
 #save (CTL+o) exit(CTL+x)
 
