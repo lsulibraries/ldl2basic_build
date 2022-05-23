@@ -1,4 +1,6 @@
 # islandora8-build-instructions
 
 
-Building islandora 8 from scratch using vmware. Don't use this in production, and don't assume these are best practices.
+See Manual_Drupal_Build.md for building a simlple drupal. (todo update drupal versions).
+
+See Manual_Islandora_8.md for building a manual islandora 8 based on https://islandora.github.io/documentation/installation/manual
