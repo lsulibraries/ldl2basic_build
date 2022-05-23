@@ -729,8 +729,8 @@ The latest version of the Apache Jena 3.x OSGi features
 (note /xml/ not .xml)
 
 
-- ```/opt/karaf/bin/client repo-add mvn:org.apache.activemq/activemq-karaf/5.15.11/xml/features
-- ```/opt/karaf/bin/client repo-add mvn:org.apache.camel.karaf/apache-camel/2.25.4/xml/features
+- ```/opt/karaf/bin/client repo-add mvn:org.apache.activemq/activemq-karaf/5.15.11/xml/features```
+- ```/opt/karaf/bin/client repo-add mvn:org.apache.camel.karaf/apache-camel/2.25.4/xml/features```
 - ```/opt/karaf/bin/client repo-add mvn:ca.islandora.alpaca/islandora-karaf/1.0.5/xml/features```
 
 (This shouldn't be strictly necessary, but appears to be a missing) upstream dependency for some fcrepo features
@@ -740,6 +740,8 @@ The latest version of the Apache Jena 3.x OSGi features
 
 - ```sudo -u karaf nano /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg```
 
+edit the file to containt this text:
+
 >```
 >token.value=islandora
 >```
@@ -747,7 +749,8 @@ The latest version of the Apache Jena 3.x OSGi features
 - ```sudo chmod 644 /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg```
 
 - ```sh /mnt/hgfs/shared/karaf-config.sh```
-#executes:
+
+executes the following file copies:
 
 >```
 >!/bin/bash
@@ -763,7 +766,8 @@ The latest version of the Apache Jena 3.x OSGi features
 >```
 
 - ```sh /mnt/hgfs/shared/karaf-blueprints.sh```
-#executes
+
+ more configuration via file copying and permissions
 
 >```
 >#!/bin/bash
