@@ -112,7 +112,8 @@ you're changing the third AllowOverride from None to All (CTRL+O saves from nano
   >```
   >  DocumentRoot /var/www/html/drupal_site/web
   >```
-  > you're adding /drupal_site/web to the DocumentRoot line after /html
+
+you're adding /drupal_site/web to the DocumentRoot line after /html
 
 - ```sudo a2enmod rewrite```
 - ```sudo systemctl restart apache2``` 
