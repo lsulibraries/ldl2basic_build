@@ -102,6 +102,8 @@ change to
 
 - ```sudo systemctl restart postgresql```
 
+- ```sudo apt install curl git```
+
 - ```sh /mnt/hgfs/shared/scratch_3.sh```
 
 #scratch_3.sh runs:
@@ -119,9 +121,8 @@ change to
 >```
 
 
-- ```sudo apt install curl git```
 
-- ```sh /mnt/hgfs/shared/scratch_4```
+- ```sh /mnt/hgfs/shared/scratch_4.sh```
 
 scratch_4.sh runs:
 
