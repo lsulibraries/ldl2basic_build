@@ -326,7 +326,8 @@ visit: https://github.com/fcrepo/fcrepo/releases
 
 
 check here for link...
-- https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar
+- https://github.com/Islandora/Syn/releases/
+- copy the link (if changed from syn-1.1.1) and replace the link in the command below:
 
 - ```sudo wget -P /opt/tomcat/lib https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar```
 
