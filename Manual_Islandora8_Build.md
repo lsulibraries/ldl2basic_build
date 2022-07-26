@@ -215,7 +215,11 @@ watch for version change
 - https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.53/bin/apache-tomcat-9.0.53.tar.gz
 - https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
 - ```ls /opt``` to find name of TOMCAT_DIRECTORY: apache-tomcat-9.0.54
-
+- ``` cd /opt
+sudo wget -O tomcat.tar.gz TOMCAT_TARBALL_LINK
+sudo tar -zxvf tomcat.tar.gz
+sudo mv /opt/TOMCAT_DIRECTORY/* /opt/tomcat
+sudo chown -R tomcat:tomcat /opt/tomcat ```
 
 - ```sh /mnt/hgfs/shared/scratch_5.sh```
 
