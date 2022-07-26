@@ -413,6 +413,8 @@ know it added the 2 entries from inference.nt to the namespace.
 solr
 
 - ```sudo wget https://dlcdn.apache.org/lucene/solr/8.11.0/solr-8.11.0.tgz```
+#The Link is expired, Use this link stead:
+- ``` sudo wget https://dlcdn.apache.org/lucene/solr/8.11.2/solr-8.11.2-src.tgz ```
 - ```sudo tar -xzvf solr-8.11.0.tgz```
 - ```sudo solr-8.11.0/bin/install_solr_service.sh solr-8.11.0.tgz```
 - ```#(might not need to be at /opt to start this)```
