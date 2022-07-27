@@ -335,19 +335,25 @@ check here for link...
 
 - ```sudo wget -P /opt/tomcat/lib https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar```
 
-Ensure the library has the correct permissions.
+run Ensure the library has the correct permissions.
 
-- ```sudo chown -R tomcat:tomcat /opt/tomcat/lib```
-- ```sudo chmod -R 640 /opt/tomcat/lib```
+- ```sudo sh syn-config.sh```
 
-- ```sudo mkdir /opt/keys```
-- ```sudo openssl genrsa -out "/opt/keys/syn_private.key" 2048```
-- ```sudo openssl rsa -pubout -in "/opt/keys/syn_private.key" -out "/opt/keys/syn_public.key"```
-- ```sudo chown www-data:www-data /opt/keys/syn*```
+which runs this series of commands:
 
-- ```sudo cp /mnt/hgfs/shared/syn-settings.xml /opt/fcrepo/config/```
-- ```sudo chown tomcat:tomcat /opt/fcrepo/config/syn-settings.xml```
-- ```sudo chmod 600 /opt/fcrepo/config/syn-settings.xml```
+>```
+>sudo chown -R tomcat:tomcat /opt/tomcat/lib
+>sudo chmod -R 640 /opt/tomcat/lib
+>sudo mkdir /opt/keys
+>sudo openssl genrsa -out "/opt/keys/syn_private.key" 2048
+>sudo openssl rsa -pubout -in "/opt/keys/syn_private.key" -out "/opt/keys/syn_public.key"
+>sudo chown www-data:www-data /opt/keys/syn*
+>sudo cp /mnt/hgfs/shared/syn-settings.xml /opt/fcrepo/config/
+>sudo chown tomcat:tomcat /opt/fcrepo/config/syn-settings.xml
+>sudo chmod 600 /opt/fcrepo/config/syn-settings.xml
+>```
+ 
+edit the context.xml file:
 
 - ```sudo nano /opt/tomcat/conf/context.xml```
 
