@@ -201,8 +201,6 @@ ie:
 - ```sudo addgroup tomcat```
 - ```sudo adduser tomcat --ingroup tomcat --home /opt/tomcat --shell /usr/bin```
 
-(note: question about /usr/bin/ path...)
-
 choose a password
 ie: password: "tomcat"
 press enter for all default user prompts
