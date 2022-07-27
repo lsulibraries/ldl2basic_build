@@ -419,22 +419,19 @@ know it added the 2 entries from inference.nt to the namespace.
 
 
 
-solr
+## solr
 
-- ``` sudo wget https://dlcdn.apache.org/lucene/solr/8.11.2/solr-8.11.2-src.tgz ```
+- ``` sudo wget https://dlcdn.apache.org/lucene/solr/8.11.2/solr-8.11.2.tgz ```
 - ```sudo tar -xzvf solr-8.11.2.tgz```
-
-something is off in the next command...
-
-- ```sudo solr-8.11.2/solr/bin/install_solr_service.sh solr-8.11.2.tgz```
-- ```#(might not need to be at /opt to start this)```
-- ```q #to quit```
+- ```sudo solr-8.11.2/bin/install_solr_service.sh solr-8.11.2.tgz```
 
 increase filesize (optional)
 
 - ```sudo su```
 - ```sudo echo "fs.file-max = 45535" >> /etc/sysctl.conf```
 - ```sudo sysctl -p```
+
+(CTL + D) to exit root.
 
 create solr core
 
@@ -444,7 +441,12 @@ create solr core
 - ```sudo chown -R solr:solr /var/solr```
 - ```sudo -u solr bin/solr create -c islandora8 -p 8983```
 
+A warning will print:
+
 warning using _default configset with data driven scheme functionality. NOT RECCOMENDED for production use. To turn off: bin/solr/ config -c islandora8 -p 8983 -action set-user-property -property update.autoCreateFields -value false
+
+should also say:
+"Created new core 'islandora8'
 
 #### drupal search api
 
