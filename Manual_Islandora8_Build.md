@@ -407,8 +407,7 @@ save (CTL+o) quit (CTL+x)
 
 - ```sudo systemctl restart tomcat```
 
-(sudo?)
-- ```curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/blazegraph.properties http://localhost:8080/blazegraph/namespace```
+- ```sudo curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/blazegraph.properties http://localhost:8080/blazegraph/namespace```
 
 If this worked correctly, Blazegraph should respond with "CREATED: islandora" to let us know it created the islandora namespace.
 
@@ -424,7 +423,10 @@ solr
 
 - ``` sudo wget https://dlcdn.apache.org/lucene/solr/8.11.2/solr-8.11.2-src.tgz ```
 - ```sudo tar -xzvf solr-8.11.2.tgz```
-- ```sudo solr-8.11.0/bin/install_solr_service.sh solr-8.11.2.tgz```
+
+something is off in the next command...
+
+- ```sudo solr-8.11.2/solr/bin/install_solr_service.sh solr-8.11.2.tgz```
 - ```#(might not need to be at /opt to start this)```
 - ```q #to quit```
 
