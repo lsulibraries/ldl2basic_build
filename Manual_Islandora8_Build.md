@@ -38,7 +38,7 @@ This build is adapted from this link and it may help to read it or follow along:
 
 - when the vm boots up the os log in with you username and password you set before
 
-## any command that requires downloading (apt-get, wget, git clone etc) will require you to set the vm in bridged network mode (to get outside data)
+## any command that requires downloading (apt, wget, git clone etc) will require you to set the vm in bridged network mode (to get outside data)
 
 - try the "vmware-netcfg" command on the host machine if you have trouble connecting. 
 - I have found swapping between bridged and host-only connections are sometimes required
@@ -59,8 +59,8 @@ This build is adapted from this link and it may help to read it or follow along:
 
 These commands should all be executed in sequence:
 
-- ```sudo apt-get -y update```
-- ```sudo apt-get -y install apache2 apache2-utils```
+- ```sudo apt -y update```
+- ```sudo apt -y install apache2 apache2-utils```
 - ```sudo a2enmod ssl```
 - ```sudo a2enmod rewrite```
 - ```sudo systemctl restart apache2```
@@ -84,7 +84,7 @@ NOTE
 - ```sh /mnt/hgfs/shared/scratch_2.sh```
 
 the above command runs the following script (which is tedious to type, there are some copy paste limitations in vmware when using alt-keyboard layouts):
-- ```sudo apt-get -y install php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-dev php7.4-gd php7.4-imap php7.4-json php7.4-mbstring php7.4-opcache php7.4-xml php7.4-yaml php7.4-zip libapache2-mod-php7.4 php-pgsql php-redis php-xdebug unzip postgresql```
+- ```sudo apt -y install php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-dev php7.4-gd php7.4-imap php7.4-json php7.4-mbstring php7.4-opcache php7.4-xml php7.4-yaml php7.4-zip libapache2-mod-php7.4 php-pgsql php-redis php-xdebug unzip postgresql```
 
 Edit the postgresql.conf file starting at line 642
 
@@ -190,7 +190,7 @@ install a drupal
 
 next install tomcat and cantaloupe
 
-- ```sudo apt-get -y install openjdk-11-jdk openjdk-11-jre```
+- ```sudo apt -y install openjdk-11-jdk openjdk-11-jre```
 
 - ```update-alternatives --list java```
 
@@ -465,9 +465,19 @@ in my case it was XXX.XXX.XXX.XXX (don't put your ip in github...)
 configure in GUI by visiting the ip above XXX.XXX.XXX.XXX:80 in browser (firefox)
 log in with islandora:islandora
 
-navigate to : XXX.XXX.XXX.XXX:80/admin/config/search/search-api
+you may need to restart apache:
+
+- ```sudo systemctl restart apache2```
+
+
+
+
+navigate to : XXX.XXX.XXX.XXX:80/user/login
+
+then: XXX.XXX.XXX.XXX:80/admin/config/search/search-api
 or localhost:80/admin/config/search/search-api
-click add server
+
+- click add server
 
 
 these are the options: see documentation for help:
@@ -493,8 +503,7 @@ click advanced config:
 click Save
 
 
-NOTICE You can ignore the error about an incompatible Solr schema; we're going to set this up in the next step. In fact, if you refresh the page after restarting Solr in the next step, you should see the error disappear.
-
+NOTICE You can ignore the error about an incompatible Solr schema; we're going to set this up in the next step. 
 
 apply solr configs
 - click back into the vm
@@ -537,8 +546,8 @@ let this execute: takes a while... maybe take a hydration break. It's running th
 
 >```
 >sudo add-apt-repository -y ppa:lyrasis/imagemagick-jp2
->sudo apt-get update
->sudo apt-get -y install imagemagick tesseract-ocr ffmpeg poppler-utils
+>sudo apt update
+>sudo apt -y install imagemagick tesseract-ocr ffmpeg poppler-utils
 >cd /opt
 >sudo git clone https://github.com/Islandora/Crayfish.git crayfish
 >sudo chown -R www-data:www-data crayfish
@@ -551,7 +560,7 @@ let this execute: takes a while... maybe take a hydration break. It's running th
 >sudo chown www-data:www-data /var/log/islandora
 >```
 
-#moving config files over (tedious)
+# moving config files over
 
 (not microservices-conf.sh )
 
@@ -587,7 +596,7 @@ runs the following, so very tedious, no one should ever want to type all this ou
 >```
 
 configure apache confs for microservices
-- ```sh microservices-conf.sh```
+- ```sh /mnt/hgfs/shared/microservices-conf.sh```
 
 microservices-conf.sh will be copying a lot of config files from the shared folder
 
@@ -614,7 +623,7 @@ Installing Karaf and Alpaca
 
 this gives us some but not all requirements.
 
-- ```sudo apt-get -y install activemq```
+- ```sudo apt install -y activemq```
 - ```cd /opt```
 - ```sudo wget  http://archive.apache.org/dist/activemq/5.15.11/apache-activemq-5.15.11-bin.tar.gz```
 - ```sudo tar -xvzf apache-activemq-5.15.11-bin.tar.gz```
