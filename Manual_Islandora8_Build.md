@@ -262,6 +262,9 @@ check that unzip step worked ``` ls /opt/cantaloupe``` or something...
 note: you may need this command if like me you had to edit cantaloupe.service several times: 
 - ```sudo systemctl daemon-reload```
 
+=======================================
+
+## Installing fedora
 
 - ```sudo systemctl stop tomcat```
 - ```sudo mkdir -p /opt/fcrepo/data/objects```
@@ -277,7 +280,7 @@ note: you may need this command if like me you had to edit cantaloupe.service se
 >\q
 >```
 
-frist check that you mnt point is still working
+first check that you mnt point is still working
 
 - ```ls /mnt/hgfs/shared```
 
