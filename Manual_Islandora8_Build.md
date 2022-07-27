@@ -206,16 +206,16 @@ ie: password: "tomcat"
 press enter for all default user prompts
 type y for yes
 
-
 find the tar.gz here: https://tomcat.apache.org/download-90.cgi
 copy the TOMCAT_TARBALL_LINK
+
 watch for version change
 - ```ls /opt``` to find name of TOMCAT_DIRECTORY: (recently it was) apache-tomcat-9.0.65
-- ``` cd /opt
-sudo wget -O tomcat.tar.gz TOMCAT_TARBALL_LINK
-sudo tar -zxvf tomcat.tar.gz
-sudo mv /opt/TOMCAT_DIRECTORY/* /opt/tomcat
-sudo chown -R tomcat:tomcat /opt/tomcat ```
+- ``` cd /opt```
+- ```sudo wget -O tomcat.tar.gz TOMCAT_TARBALL_LINK```
+- ```sudo tar -zxvf tomcat.tar.gz```
+- ```sudo mv /opt/TOMCAT_DIRECTORY/* /opt/tomcat```
+- ```sudo chown -R tomcat:tomcat /opt/tomcat ```
 
 - ```sh /mnt/hgfs/shared/scratch_5.sh```
 
