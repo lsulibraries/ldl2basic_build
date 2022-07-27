@@ -660,10 +660,10 @@ visit https://karaf.apache.org/download.html : http://www.apache.org/dyn/closer.
 then get : https://dlcdn.apache.org/karaf/4.3.3/apache-karaf-4.3.3.tar.gz
 
 - ```cd /opt```
-- ```sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.3.3/apache-karaf-4.3.3.tar.gz```
+- ```sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.4.1/apache-karaf-4.4.1-src.tar.gz```
 - ```sudo tar -xzvf karaf.tar.gz```
-- ```sudo chown -R karaf:karaf apache-karaf-4.3.3```
-- ```sudo mv apache-karaf-4.3.3/* /opt/karaf```
+- ```sudo chown -R karaf:karaf apache-karaf-4.4.1```
+- ```sudo mv apache-karaf-4.4.1/* /opt/karaf```
 
 - ```sudo mkdir /var/log/karaf```
 - ```sudo chown karaf:karaf /var/log/karaf```
