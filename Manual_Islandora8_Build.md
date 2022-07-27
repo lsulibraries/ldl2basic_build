@@ -210,11 +210,9 @@ type y for yes
 
 
 find the tar.gz here: https://tomcat.apache.org/download-90.cgi
-copied link TOMCAT_TARBALL_LINK
+copy the TOMCAT_TARBALL_LINK
 watch for version change
-- https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.53/bin/apache-tomcat-9.0.53.tar.gz
-- https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
-- ```ls /opt``` to find name of TOMCAT_DIRECTORY: apache-tomcat-9.0.54
+- ```ls /opt``` to find name of TOMCAT_DIRECTORY: (recently it was) apache-tomcat-9.0.65
 - ``` cd /opt
 sudo wget -O tomcat.tar.gz TOMCAT_TARBALL_LINK
 sudo tar -zxvf tomcat.tar.gz
@@ -228,10 +226,10 @@ scratch_5.sh will run the following file:
 >#!/bin/bash
 >cd /opt
 >#O not 0
->sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
+>sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.65.tar.gz
 >sudo tar -zxvf tomcat.tar.gz
 >#don't miss the star*
->sudo mv /opt/apache-tomcat-9.0.54/* /opt/tomcat
+>sudo mv /opt/apache-tomcat-9.0.65/* /opt/tomcat
 >sudo chown -R tomcat:tomcat /opt/tomcat
 >```
 
