@@ -308,6 +308,9 @@ fedora-config.sh will run the following:
 >sudo cp /mnt/hgfs/shared/fcrepo-config.xml /opt/fcrepo/config/
 >sudo chmod 644 /opt/fcrepo/config/fcrepo-config.xml
 >sudo chown tomcat:tomcat /opt/fcrepo/config/fcrepo-config.xml
+>sudo cp /mnt/hgfs/shared/tomcat-users.xml /opt/tomcat/conf/tomcat-users.xml
+>sudo chmod 600 /opt/tomcat/conf/tomcat-users.xml
+>sudo chown tomcat:tomcat /opt/tomcat/conf/tomcat-users.xml
 >```
 
 note: double check /opt/fcrepo/config/allowed_hosts.txt got created
@@ -317,14 +320,8 @@ note: double check /opt/fcrepo/config/allowed_hosts.txt got created
 uncomment line 5, comment line 4 (CTL-c) shows line number
 save (CTL-o) exit (CTL+x)
 
-(move up to fedora_config.sh)
-- ```sudo cp /mnt/hgfs/shared/tomcat-users.xml /opt/tomcat/conf/tomcat-users.xml```
-- ```sudo chmod 600 /opt/tomcat/conf/tomcat-users.xml```
-- ```sudo chown tomcat:tomcat /opt/tomcat/conf/tomcat-users.xml```
-
 visit: https://github.com/fcrepo/fcrepo/releases
 
-(move up to fedora_config.sh?)
 - ```sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.0.0/fcrepo-webapp-6.0.0.war```
 - ```sudo mv fcrepo.war /opt/tomcat/webapps```
 - ```sudo chown tomcat:tomcat /opt/tomcat/webapps/fcrepo.war```
