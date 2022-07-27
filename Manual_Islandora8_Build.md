@@ -74,8 +74,12 @@ Double check your shared folder exists
 
 - ```ls /mnt/hgfs/shared```
 
-(if you don't see all the files something is wrong and you should try fiddling with vmware-netcfg)
-or try "sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000")
+
+NOTE
+
+(if you don't see all the files or try:
+- ```sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000```
+
 
 - ```sh /mnt/hgfs/shared/scratch_2.sh```
 
