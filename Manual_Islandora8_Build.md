@@ -672,14 +672,17 @@ lacking some documentation here:
 enter on all prompts
 press y
 
-get karaf : latest 4.3.3 recc (could try 43)
-KARAF_TARBALL_LINK: It’s recommended to get the most recent version of Karaf 4.3.3 This will depend on the current version of Karaf, which can be found on the Karaf downloads page under “Karaf Runtime”. Like Solr, you can’t directly wget these links, but clicking on the .tar.gz link for the binary distribution will bring you to a list of mirrors, as well as provide you with a recommended mirror you can use here.
 
-visit https://karaf.apache.org/download.html : http://www.apache.org/dyn/closer.lua/karaf/4.3.3/apache-karaf-4.3.3.tar.gz
-then get : https://dlcdn.apache.org/karaf/4.3.3/apache-karaf-4.3.3.tar.gz
+- Visit  https://karaf.apache.org/download.html
+- Right click Karaf Runtime binary distribution tar.gz link
+- select copy link
+
+This should be the latest link (subject to change)
+ https://dlcdn.apache.org/karaf/4.4.1/apache-karaf-4.4.1.tar.gz
+
 
 - ```cd /opt```
-- ```sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.4.1/apache-karaf-4.4.1-src.tar.gz```
+- ```sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.4.1/apache-karaf-4.4.1.tar.gz```
 - ```sudo tar -xzvf karaf.tar.gz```
 - ```sudo chown -R karaf:karaf apache-karaf-4.4.1```
 - ```sudo mv apache-karaf-4.4.1/* /opt/karaf```
