@@ -654,15 +654,8 @@ Edit the file like so:
 - ```sudo systemctl enable activemq```
 
 
----
-lacking some documentation here:
-- https://websiteforstudents.com/how-to-install-apache-activemq-on-ubuntu-20-04-18-04/
+check activemq version (5.15.11-1 as of writing):
 
-
-
-
-
-#check version: Installed:  5.15.11-1
 - ```sudo apt-cache policy activemq```
 
 - ```sudo addgroup karaf```
@@ -670,25 +663,24 @@ lacking some documentation here:
 
 (made password karaf)
 enter on all prompts
-press y
+- type y and enter.
 
+ 
+The latest karaf does not work with the version of activemq, apache-camel and islandora-karaf (https://karaf.apache.org/download.html)
 
-- Visit  https://karaf.apache.org/download.html
-- Right click Karaf Runtime binary distribution tar.gz link
-- select copy link
-
-This should be the latest link (subject to change)
- https://dlcdn.apache.org/karaf/4.4.1/apache-karaf-4.4.1.tar.gz
+Ilsandora Documentation reccomends 4.2.x. Other versions are available, <u>but they don't work with the other software below.</u>
+best link for now: 
+ https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz
 
 
 - ```cd /opt```
-- ```sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.4.1/apache-karaf-4.4.1.tar.gz```
+- ```sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz```
 
 double check for /mnt/hgfs/shared ```sudo vmhgfs-fuse.host/ /mnt/hgfs/ -o allow_other -o uid=1000```
 
 - ```sudo tar -xzvf karaf.tar.gz```
-- ```sudo chown -R karaf:karaf apache-karaf-4.4.1```
-- ```sudo mv apache-karaf-4.4.1/* /opt/karaf```
+- ```sudo chown -R karaf:karaf apache-karaf-4.2.16```
+- ```sudo mv apache-karaf-4.2.16/* /opt/karaf```
 
 - ```sudo sh /mnt/hgfs/shared/karaf-stuff.sh```
 
