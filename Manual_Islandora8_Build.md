@@ -668,7 +668,7 @@ enter on all prompts
  
 The latest karaf does not work with the version of activemq, apache-camel and islandora-karaf (https://karaf.apache.org/download.html)
 
-Ilsandora Documentation reccomends 4.2.x. Other versions are available, <u>but they don't work with the other software below.</u>
+Islandora Documentation reccomends 4.2.x. Other versions are available, <u>but they don't work with the other software below.</u>
 best link for now: 
  https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz
 
