@@ -683,22 +683,22 @@ This should be the latest link (subject to change)
 
 - ```cd /opt```
 - ```sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.4.1/apache-karaf-4.4.1.tar.gz```
+
+double check for /mnt/hgfs/shared ```sudo vmhgfs-fuse.host/ /mnt/hgfs/ -o allow_other -o uid=1000```
+
 - ```sudo tar -xzvf karaf.tar.gz```
 - ```sudo chown -R karaf:karaf apache-karaf-4.4.1```
 - ```sudo mv apache-karaf-4.4.1/* /opt/karaf```
 
-- ```sudo mkdir /var/log/karaf```
-- ```sudo chown karaf:karaf /var/log/karaf```
+- ```sudo sh /mnt/hgfs/shared/karaf-stuff.sh
 
-
-
-
-- ```sudo cp /mnt/hgfs/shared/org.pos4j.pax.logging.cfg /opt/karaf/etc/org.pos4j.pax.logging.cfg```
-- ```sudo chown karaf:karaf /opt/karaf/etc/org.pos4j.pax.logging.cfg```
-- ```sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg```
-
-- ```sudo su```
-```sudo echo '#!/bin/sh \nexport JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv```
+> sudo mkdir /var/log/karaf
+> sudo chown karaf:karaf /var/log/karaf
+> sudo cp /mnt/hgfs/shared/org.pos4j.pax.logging.cfg /opt/karaf/etc/org.pos4j.pax.logging.cfg
+> sudo chown karaf:karaf /opt/karaf/etc/org.pos4j.pax.logging.cfg
+> sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg
+> sudo su
+> sudo echo '#!/bin/sh \nexport JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv
 
 (CTL-d) #to exit from root account
 
@@ -728,16 +728,16 @@ If you're not sure whether or not it's running, you can always run:
 
 - ```ps aux | grep karaf```
 
+- ```sudo sh karaf-more.sh```
 
 #run these:
-- ```/opt/karaf/bin/client feature:install wrapper```
-- ```/opt/karaf/bin/client wrapper:install```
-- ```/opt/karaf/bin/stop```
-
-- ```sudo systemctl enable /opt/karaf/bin/karaf.service```
-- ```sudo systemctl start karaf```
-- ```sudo systemctl status karaf```
-- ```q```
+>```
+> /opt/karaf/bin/client feature:install wrapper
+> /opt/karaf/bin/client wrapper:install
+> /opt/karaf/bin/stop
+> sudo systemctl enable /opt/karaf/bin/karaf.service
+> sudo systemctl start karaf
+> sudo systemctl status karaf```
 
 (to quit type q)
 
