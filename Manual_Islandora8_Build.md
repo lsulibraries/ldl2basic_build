@@ -691,7 +691,8 @@ will run the following:
 > sudo chown karaf:karaf /var/log/karaf
 > sudo cp /mnt/hgfs/shared/org.pos4j.pax.logging.cfg /opt/karaf/etc/org.pos4j.pax.logging.cfg
 > sudo chown karaf:karaf /opt/karaf/etc/org.pos4j.pax.logging.cfg
-> sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg```
+> sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg
+>```
 
 
 
