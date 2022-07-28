@@ -691,16 +691,13 @@ will run the following:
 > sudo chown karaf:karaf /var/log/karaf
 > sudo cp /mnt/hgfs/shared/org.pos4j.pax.logging.cfg /opt/karaf/etc/org.pos4j.pax.logging.cfg
 > sudo chown karaf:karaf /opt/karaf/etc/org.pos4j.pax.logging.cfg
-> sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg
-> sudo su
-> sudo echo '#!/bin/sh' >> /opt/karaf/bin/setenv```
-> sudo  echo 'export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv```
+> sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg```
 
-(CTL-d) #to exit from root account
 
+
+- ```sudo export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"```
 - ```sudo chown karaf:karaf /opt/karaf/bin/setenv```
 - ```sudo chmod 755 /opt/karaf/bin/setenv```
-
 - ```sudo nano /opt/karaf/etc/users.properties```
 
 #uncomment lines:
@@ -724,7 +721,7 @@ If you're not sure whether or not it's running, you can always run:
 
 - ```ps aux | grep karaf```
 
-- ```sudo sh karaf-more.sh```
+- ```sudo sh /mnt/hgfs/shared/karaf-more.sh```
 
 will run this:
 
