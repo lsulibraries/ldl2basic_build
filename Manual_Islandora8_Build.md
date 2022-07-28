@@ -747,25 +747,19 @@ will run this:
 
 ### Alpaca
 
-check versions of things used in current ansible build or something. the documentation is off from last update, many new versions avail...
-
-from before:
+note the version of activemq from before:
 ACTIVEMQ_KARAF_VERSION  5.15.11 
 
-stick with 2.X.X
+visit https://mvnrepository.com/artifact/org.apache.camel.karaf/apache-camel look for the latest version of Apache Camel 2.x.x
 
-visit https://mvnrepository.com/artifact/org.apache.camel.karaf/apache-camel The latest version of Apache Camel 2.x.x
-
-APACHE_CAMEL_VERSION https://repo1.maven.org/maven2/org/apache/camel/karaf/apache-camel/2.25.4/apache-camel-
+APACHE_CAMEL_VERSION [https://repo1.maven.org/maven2/org/apache/camel/karaf/apache-camel/2.25.4/apache-camel-
 2.25.4
+](https://repo1.maven.org/maven2/org/apache/camel/karaf/apache-camel/2.25.4/)
 
 visit https://mvnrepository.com/artifact/ca.islandora.alpaca/islandora-karaf
-ISLANDORA_KARAF_VERSION 
-1.0.5
+confirm that the ISLANDORA_KARAF_VERSION is still 1.0.5
 
-JENA_OSGI_VERSION
-The latest version of the Apache Jena 3.x OSGi features
-3.17.0
+JENA_OSGI_VERSION The latest version of the Apache Jena 3.x OSGi features 3.17.0
 
 (note /xml/ not .xml)
 
