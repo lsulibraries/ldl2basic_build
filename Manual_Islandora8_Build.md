@@ -701,7 +701,8 @@ will run the following:
 > sudo chown karaf:karaf /opt/karaf/etc/org.pos4j.pax.logging.cfg
 > sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg
 > sudo su
-> sudo echo '#!/bin/sh \nexport JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv```
+> sudo echo '#!/bin/sh' >> /opt/karaf/bin/setenv```
+> sudo  echo 'export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv```
 
 (CTL-d) #to exit from root account
 
