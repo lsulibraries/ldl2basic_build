@@ -690,15 +690,18 @@ double check for /mnt/hgfs/shared ```sudo vmhgfs-fuse.host/ /mnt/hgfs/ -o allow_
 - ```sudo chown -R karaf:karaf apache-karaf-4.4.1```
 - ```sudo mv apache-karaf-4.4.1/* /opt/karaf```
 
-- ```sudo sh /mnt/hgfs/shared/karaf-stuff.sh
+- ```sudo sh /mnt/hgfs/shared/karaf-stuff.sh```
 
+will run the following:
+
+>```
 > sudo mkdir /var/log/karaf
 > sudo chown karaf:karaf /var/log/karaf
 > sudo cp /mnt/hgfs/shared/org.pos4j.pax.logging.cfg /opt/karaf/etc/org.pos4j.pax.logging.cfg
 > sudo chown karaf:karaf /opt/karaf/etc/org.pos4j.pax.logging.cfg
 > sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg
 > sudo su
-> sudo echo '#!/bin/sh \nexport JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv
+> sudo echo '#!/bin/sh \nexport JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv```
 
 (CTL-d) #to exit from root account
 
@@ -730,7 +733,8 @@ If you're not sure whether or not it's running, you can always run:
 
 - ```sudo sh karaf-more.sh```
 
-#run these:
+will run this:
+
 >```
 > /opt/karaf/bin/client feature:install wrapper
 > /opt/karaf/bin/client wrapper:install
