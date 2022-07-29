@@ -732,7 +732,8 @@ will run this:
 > /opt/karaf/bin/stop
 > sudo systemctl enable /opt/karaf/bin/karaf.service
 > sudo systemctl start karaf
-> sudo systemctl status karaf```
+> sudo systemctl status karaf
+>```
 
 (to quit type q)
 
