@@ -694,7 +694,14 @@ will run the following:
 > sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg
 >```
 
+- ```sudo nano /opt/karaf/bin/setenv```
 
+>```
+>#!/bin/sh
+>export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+>```
+
+Ctl-O to save
 
 - ```sudo export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"```
 - ```sudo chown karaf:karaf /opt/karaf/bin/setenv```
