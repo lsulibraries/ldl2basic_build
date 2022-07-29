@@ -921,12 +921,6 @@ The script above will execute the following (save on typing long links...)
 
 - ```sh /mnt/hgfs/shared/islandora_en.sh```
 
-set vm back into host only network 
-
-if provided host name is not valid... try editing /setting.php change ip to match
-
-set vm back to host only network setting
-
 Adding a JWT Configuration to Drupal
 
 To allow our installation to talk to other services via Syn, we need to establish a Drupal-side JWT configuration using the keys we generated at that time.
