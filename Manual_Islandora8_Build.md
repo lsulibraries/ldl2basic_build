@@ -813,6 +813,7 @@ executes the following file copies:
 
 - ```sh /mnt/hgfs/shared/karaf-features.sh```
 
+takes a while...
 contains:
 
 >```
@@ -831,7 +832,7 @@ contains:
 >/opt/karaf/bin/client feature:install islandora-connector-derivative
 >```
 
-#configure drupal
+## configure drupal
 
 #settings.php
 
