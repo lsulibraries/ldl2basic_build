@@ -949,7 +949,7 @@ Configuring the JWT RSA Key for Use
 See instructions:
 - https://islandora.github.io/documentation/installation/manual/configuring_drupal/#adding-a-jwt-configuration-to-drupal
 
-visit http://XXX.XXX.XXX.XXX/admin/config/system/jwt
+visit http://[your-site-ip-address]/admin/config/system/jwt
 
 
 follow drupal config instructions:
@@ -962,17 +962,17 @@ cantaloupe endpoint was not 8080
 this worked for cantaloupe config:
 
 had to unzip cantaloupe missed the unzip for some reason
-- http://XXX.XXX.XXX.XXX:8182/iiif/2
+- http://[your-site-ip-address]:8182/iiif/2
 
 Nav to openseadragog
-- http://XXX.XXX.XXX.XXX:8182/admin/config/media/openseadragon
+- http://[your-site-ip-address]:8182/admin/config/media/openseadragon
 
-add to IIIf Image server location: http://XXX.XXX.XXX.XXX:8182/iiif/2
+add to IIIf Image server location: http://[your-site-ip-address]:8182/iiif/2
 select IIIF Manifest from dropdown
 save
 
 navigate to flysystem settings
-http://XXX.XXX.XXX.XXX:8182/admin/config/media/file-system
+http://[your-site-ip-address]:8182/admin/config/media/file-system
 choose the flysystem button and save (scroll down)
 
 give the admin fedoraAdmin role
