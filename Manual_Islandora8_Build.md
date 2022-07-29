@@ -964,7 +964,7 @@ this worked for cantaloupe config:
 had to unzip cantaloupe missed the unzip for some reason
 - http://[your-site-ip-address]:8182/iiif/2
 
-Nav to openseadragog
+Nav to openseadragon
 - http://[your-site-ip-address]:8182/admin/config/media/openseadragon
 
 add to IIIf Image server location: http://[your-site-ip-address]:8182/iiif/2
