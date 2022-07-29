@@ -851,6 +851,7 @@ add the following to the end of the file:
 >```
 >$settings['trusted_host_patterns'] = [
 >  'localhost',
+>  'your-site-ip'
 >];
 >$settings['flysystem'] = [
 > 'fedora' => [
