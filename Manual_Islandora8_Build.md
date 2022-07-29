@@ -895,17 +895,12 @@ The above script will run the following (to save you time typing version numbers
 ># NEVER be enabled on a production environment, as it intentionally gives the
 ># user tools that compromise the security of a site.
 >sudo -u www-data composer require drupal/console:~1.0
->sudo -u www-data composer require drupal/devel:^2.0
+># sudo -u www-data composer require drupal/devel:^2.0 --with-all-dependencies #not working or conflict with symphony/var-dumper
 >sudo -u www-data composer require drupal/admin_toolbar:^2.0
 ># Islandora also provides a theme called Carapace designed to work well out of
 ># the box with an Islandora site.
 >sudo -u www-data composer require islandora/carapace:dev-8.x-3.x
 >```
-
-something happened, no no, did one fail?
-something about sudo -u www-data composer require zaporylie/composer-drupal-optimizations:^1.0
-no 
-yes
 
 - ```sh /mnt/hgfs/shared/isla_lib.sh```
 
