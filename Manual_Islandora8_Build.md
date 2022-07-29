@@ -921,6 +921,17 @@ The script above will execute the following (save on typing long links...)
 
 - ```sh /mnt/hgfs/shared/islandora_en.sh```
 
+The above script runs:
+
+>```
+>cd /opt/drupal
+>drush -y en rdf responsive_image syslog serialization basic_auth rest restui search_api_solr facets content_browser pdf admin_toolbar islandora_defaults controlled_access_terms_defaults islandora_breadcrumbs islandora_iiif islandora_oaipmh
+>drush -y theme:enable carapace
+> drush -y config-set system.theme default carapace
+>drush -y cr
+>```
+
+
 Adding a JWT Configuration to Drupal
 
 To allow our installation to talk to other services via Syn, we need to establish a Drupal-side JWT configuration using the keys we generated at that time.
