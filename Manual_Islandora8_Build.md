@@ -8,7 +8,7 @@ This build is adapted from this link and it may help to read it or follow along:
 - many config files and scripts are included to elimanate a lot of typing within the build. 
 - you'll need to enable shared folders in the vm settings and place the files in the shared folder
 - code outside a comment or gui instruction is indended to be executed in the the vmware terminal, ie:
-- ```whoami```
+- `whoami`
 - you should know the linux command line fairly well
 - you should know how to use nano or some other command line editor vi/m emacs
 - you need to have downloaded vmware, and an ubuntu 20.04 server image.
