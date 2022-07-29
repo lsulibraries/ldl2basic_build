@@ -889,7 +889,6 @@ The above script will run the following (to save you time typing version numbers
 >sudo -u www-data composer require drupal/restui:^1.16
 >sudo -u www-data composer require drupal/rdfui:^1.0-beta1
 >sudo -u www-data composer require drupal/content_browser:^1.0@alpha
->sudo -u www-data composer require drupal/search_api_solr_defaults
 ># These tend to be good to enable for a development environment, or just for a
 ># higher quality of life when managing Islandora. That being said, devel should
 ># NEVER be enabled on a production environment, as it intentionally gives the
