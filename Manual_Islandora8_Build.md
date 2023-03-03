@@ -85,17 +85,17 @@ NOTE
 - ```sh /mnt/hgfs/shared/scratch_2.sh```
 
 the above command runs the following script (which is tedious to type, there are some copy paste limitations in vmware when using alt-keyboard layouts):
-- ```sudo apt -y install php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-dev php7.4-gd php7.4-imap php7.4-json php7.4-mbstring php7.4-opcache php7.4-xml php7.4-yaml php7.4-zip libapache2-mod-php7.4 php-pgsql php-redis php-xdebug unzip postgresql```
+- ```sudo apt -y install php8.1 php8.1-cli php8.1-common php8.1-curl php8.1-dev php8.1-gd php8.1-imap php8.1-mbstring php8.1-opcache php8.1-xml php8.1-yaml php8.1-zip libapache2-mod-php8.1 php-pgsql php-redis php-xdebug unzip postgresql```
 
-Edit the postgresql.conf file starting at line 642
+Edit the postgresql.conf file starting at line 688
 
-- ```sudo nano +642 /etc/postgresql/12/main/postgresql.conf```
+- ```sudo nano +688 /etc/postgresql/14/main/postgresql.conf```
 
 (if you don't like nano use a different editor vi/vim/emacs )
 
-change line 642 from 
+change line 688 from 
 >```
->bytea_output 'hex'
+>#bytea_output 'hex'
 >```
 
 change to
@@ -106,8 +106,6 @@ change to
 (CTL+o)(to save)(CTL+x to close)
 
 - ```sudo systemctl restart postgresql```
-
-- ```sudo apt install curl git```
 
 - ```sh /mnt/hgfs/shared/scratch_3.sh```
 
