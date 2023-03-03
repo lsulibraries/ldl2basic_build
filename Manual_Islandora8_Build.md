@@ -60,6 +60,7 @@ This build is adapted from this link and it may help to read it or follow along:
 These commands should all be executed in sequence:
 
 - ```sudo apt -y update```
+- ```sudo apt -y upgrade```
 - ```sudo apt -y install apache2 apache2-utils```
 - ```sudo a2enmod ssl```
 - ```sudo a2enmod rewrite```
