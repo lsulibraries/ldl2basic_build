@@ -124,7 +124,6 @@ change to
 >```
 
 
-
 - ```sh /mnt/hgfs/shared/scratch_4.sh```
 
 scratch_4.sh runs:
@@ -136,6 +135,13 @@ scratch_4.sh runs:
 >sudo -u www-data composer create-project drupal-composer/drupal-project:9.x-dev /opt/drupal --no-interaction
 >sudo ln -s /opt/drupal/vendor/drush/drush/drush /usr/local/bin/drush
 >```
+
+confirm link:
+
+- ```ls -lart /usr/local/bin/drush```
+
+Expected output will link to /opt/drupal/vendor/drush/drush/drush
+
 
 -  ```sudo nano /etc/apache2/ports.conf```
 
@@ -187,6 +193,7 @@ install a drupal
 - ```cd /opt/drupal/web```
 - ```sudo drush -y site-install standard --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal9" --site-name="LDL 2.0" --account-name=islandora --account-pass=islandora```
 
+
 next install tomcat and cantaloupe
 
 - ```sudo apt -y install openjdk-11-jdk openjdk-11-jre```
@@ -212,10 +219,15 @@ type y for yes
 find the tar.gz here: https://tomcat.apache.org/download-90.cgi
 copy the TOMCAT_TARBALL_LINK
 
+as of 03-03-23 it was:
+
+https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz
+
+
 watch for version change
 - ``` cd /opt```
 - ```sudo wget -O tomcat.tar.gz TOMCAT_TARBALL_LINK```
-- ```ls /opt``` to find name of TOMCAT_DIRECTORY: (recently it was: apache-tomcat-9.0.65)
+- ```ls /opt``` to find name of TOMCAT_DIRECTORY: (recently it was: apache-tomcat-9.0.73)
 - ```sudo tar -zxvf tomcat.tar.gz```
 - ```sudo mv /opt/TOMCAT_DIRECTORY/* /opt/tomcat```
 - ```sudo chown -R tomcat:tomcat /opt/tomcat ```
@@ -227,15 +239,15 @@ scratch_5.sh will run the following file:
 >#!/bin/bash
 >cd /opt
 >#O not 0
->sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.tar.gz
+>sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz
 >sudo tar -zxvf tomcat.tar.gz
 >#don't miss the star*
->sudo mv /opt/apache-tomcat-9.0.65/* /opt/tomcat
+>sudo mv /opt/apache-tomcat-9.0.73/* /opt/tomcat
 >sudo chown -R tomcat:tomcat /opt/tomcat
 >```
 
 - ```sh /mnt/hgfs/shared/scratch_6.sh```
-
+l
 scratch_6 runs this file:
 
 >```
@@ -261,7 +273,7 @@ check that unzip step worked ``` ls /opt/cantaloupe``` or something...
 note: you may need this command if like me you had to edit cantaloupe.service several times: 
 - ```sudo systemctl daemon-reload```
 
-=======================================
+=s======================================
 
 ## Installing fedora
 
@@ -280,7 +292,7 @@ note: you may need this command if like me you had to edit cantaloupe.service se
 >```
 
 first check that you mnt point is still working
-
+s
 - ```ls /mnt/hgfs/shared```
 
 if no files are listed of the folder is not found run this:
@@ -300,7 +312,7 @@ fedora-config.sh will run the following:
 >sudo touch /opt/fcrepo/config/allowed_hosts.txt
 >sudo chown tomcat:tomcat /opt/fcrepo/config/allowed_hosts.txt
 >sudo chmod 644 /opt/fcrepo/config/allowed_hosts.txt
->sudo -u tomcat echo "http://localhost:80/" >> /opt/fcrepo/config/allowed_hosts.txt
+>ssudo -u tomcat echo "http://localhost:80/" >> /opt/fcrepo/config/allowed_hosts.txt
 >sudo cp /mnt/hgfs/shared/repository.json /opt/fcrepo/config/
 >sudo chown tomcat:tomcat /opt/fcrepo/config/repository.json
 >sudo chmod 644 /opt/fcrepo/config/repository.json
@@ -314,6 +326,9 @@ fedora-config.sh will run the following:
 
 note: double check /opt/fcrepo/config/allowed_hosts.txt got created
 
+
+copy setenv.sh from /mnt/hgfs/shared/ to /opt/tomcat/bin/
+
 - ```sudo nano /opt/tomcat/bin/setenv.sh```
 
 uncomment line 5, comment line 4 (CTL-c) shows line number
@@ -321,10 +336,9 @@ save (CTL-o) exit (CTL+x)
 
 visit: https://github.com/fcrepo/fcrepo/releases
 
-- ```sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.0.0/fcrepo-webapp-6.0.0.war```
+- ```sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.3.0/fcrepo-webapp-6.3.0.war```
 - ```sudo mv fcrepo.war /opt/tomcat/webapps```
 - ```sudo chown tomcat:tomcat /opt/tomcat/webapps/fcrepo.war```
-
 - ```sudo systemctl restart tomcat```
 
 
@@ -360,7 +374,7 @@ Add this line  before the closing </Context> tag:
 >```
 >    <Valve className="ca.islandora.syn.valve.SynValve" pathname="/opt/fcrepo/config/syn-settings.xml"/>
 ></Context>
->```
+su>```
 
 (note above for spelling errors: valve V A L V E not Value)
 
@@ -405,7 +419,6 @@ comment out line 5 uncomment line 6
 save (CTL+o) quit (CTL+x)
 
 - ```sudo systemctl restart tomcat```
-
 - ```sudo curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/blazegraph.properties http://localhost:8080/blazegraph/namespace```
 
 If this worked correctly, Blazegraph should respond with "CREATED: islandora" to let us know it created the islandora namespace.
@@ -413,9 +426,10 @@ If this worked correctly, Blazegraph should respond with "CREATED: islandora" to
 (sudo?)
 - ```curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/inference.nt http://localhost:8080/blazegraph/namespace/islandora/sparql```
 
+#not sure
+
 If this worked correctly, Blazegraph should respond with some XML letting us
 know it added the 2 entries from inference.nt to the namespace.
-
 
 
 ## solr
@@ -423,6 +437,9 @@ know it added the 2 entries from inference.nt to the namespace.
 - ``` sudo wget https://dlcdn.apache.org/lucene/solr/8.11.2/solr-8.11.2.tgz ```
 - ```sudo tar -xzvf solr-8.11.2.tgz```
 - ```sudo solr-8.11.2/bin/install_solr_service.sh solr-8.11.2.tgz```
+
+
+#q to quit...
 
 increase filesize (optional)
 
@@ -439,6 +456,11 @@ create solr core
 - ```sudo cp -r example/files/conf/* /var/solr/data/islandora8/conf```
 - ```sudo chown -R solr:solr /var/solr```
 - ```sudo -u solr bin/solr create -c islandora8 -p 8983```
+
+#had to cd into /opt/solr/exmaple/files/conf 
+#ran
+#sudo cp -r . /var/solr/data/islandora8/conf
+
 
 A warning will print:
 
@@ -512,6 +534,9 @@ apply solr configs
 - ```unzip -d ~/solrconfig solrconfig.zip```
 - ```sudo cp ~/solrconfig/* /var/solr/data/islandora8/conf```
 - ```sudo systemctl restart solr```
+
+##encountered some trouble with solr on unzip step
+
 
 #adding an index
 #In gui navigate XXX.XXX.XXX.XXX or localhost:80/admin/config/search/search-api/add-index
@@ -587,7 +612,7 @@ runs the following, so very tedious, no one should ever want to type all this ou
 >sudo chown www-data:www-data /opt/crayfish/Houdini/config/packages/security.yml
 >sudo chmod 644 /opt/crayfish/Houdini/config/packages/security.yml
 >sudo chown www-data:www-data /opt/crayfish/Hypercube/cfg/config.yaml 
->sudo chmod 644 /opt/crayfish/Hypercube/cfg/config.yaml 
+>sudo chmod 644 /opt/crayfish/Hypercube/cfg/configl.yaml 
 >sudo chown www-data:www-data /opt/crayfish/Milliner/cfg/config.yaml
 >sudo chmod 644 /opt/crayfish/Milliner/cfg/config.yaml
 >sudo chown www-data:www-data /opt/crayfish/Recast/cfg/config.yaml
@@ -622,11 +647,13 @@ Installing Karaf and Alpaca
 
 this gives us some but not all requirements.
 
+#change version from 5.15.11 to 5.17.4
+
 - ```sudo apt install -y activemq```
 - ```cd /opt```
-- ```sudo wget  http://archive.apache.org/dist/activemq/5.15.11/apache-activemq-5.15.11-bin.tar.gz```
-- ```sudo tar -xvzf apache-activemq-5.15.11-bin.tar.gz```
-- ```sudo mv apache-activemq-5.15.11 activemq```
+- ```sudo wget  http://archive.apache.org/dist/activemq/5.17.4/apache-activemq-5.17.4-bin.tar.gz```
+- ```sudo tar -xvzf apache-activemq-5.17.4-bin.tar.gz```
+- ```sudo mv apache-activemq-5.17.4 activemq```
 - ```sudo chown -R activemq:activemq /opt/activemq```
 
 - ```sudo nano /etc/systemd/system/activemq.service```
@@ -637,7 +664,7 @@ Edit the file like so:
 >Description=Apache ActiveMQ
 >After=network.target
 >[Service]
->Type=forking
+>Type=forkings
 >User=activemq
 >Group=activemq
 >
@@ -653,9 +680,12 @@ Edit the file like so:
 - ```sudo systemctl enable activemq```
 
 
-check activemq version (5.15.11-1 as of writing):
+#check activemq version (5.15.11-1 as of writing):
+check activemq version (5.16.1-1 as of writing):
 
 - ```sudo apt-cache policy activemq```
+
+##KARAF is removed
 
 - ```sudo addgroup karaf```
 - ```sudo adduser karaf --ingroup karaf --home /opt/karaf --shell /usr/bin```
@@ -839,7 +869,7 @@ contains:
 >/opt/karaf/bin/client feature:install islandora-connector-derivative
 >```
 
-## configure drupal
+## configure drupal #starthere
 
 #settings.php
 
