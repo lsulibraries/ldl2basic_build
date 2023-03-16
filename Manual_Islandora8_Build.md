@@ -1009,16 +1009,28 @@ give the admin fedoraAdmin role
 - ```cd /opt/drupal```
 - ```sudo -u www-data drush -y urol "fedoraadmin" islandora```
 
-- ```sudo -u www-data drush -y -l localhots --userid=1 mim --group=islandora```
+- ```sudo -u www-data drush -y -l localhost --userid=1 mim --group=islandora```
+
+
 
 uninstall 
 /admin/modules/uninstall 
 search_defaults
 
+
+
+--skip this dependency isn't needed 
 reslove a dependency
 
 - ```sudo -u www-data composer require 'drupal/jquery_ui_accordion:^1.1'```
 - ```drush en -y jquery_ui_accordion```
 
 
+###Theme trouble try remove require install
+
+- ```sudo -u www-data composer remove islandora/carapace```
+
+- ```sudo -u www-data composer require islandora/carapace```
+
+- visit "localhost/admin/appearance" and install a the carapace theme
 
