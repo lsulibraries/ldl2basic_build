@@ -350,7 +350,7 @@ check here for link...
 
 run Ensure the library has the correct permissions.
 
-- ```sudo sh syn-config.sh```
+- ```sudo sh /mnt/hgfs/shared/syn-config.sh```
 
 which runs this series of commands:
 
