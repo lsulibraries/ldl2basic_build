@@ -1041,5 +1041,6 @@ reslove a dependency
 
 https://github.com/mjordan/islandora_workbench_integration
 
+- ```cd /opt/drupal```
 - ```sudo -u www-data composer require mjordan/islandora_workbench_integration "dev-main"```
 - ```drush en -y islandora_workbench_integration```
