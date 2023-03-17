@@ -1009,9 +1009,12 @@ give the admin fedoraAdmin role
 - ```cd /opt/drupal```
 - ```sudo -u www-data drush -y urol "fedoraadmin" islandora```
 
+<!--
+this line isn't right
 - ```sudo -u www-data drush -y -l localhost --userid=1 mim --group=islandora```
+-->
 
-
+- ```sudo -u www-data drush -y -l localhost --userid=1 mim```
 
 uninstall 
 /admin/modules/uninstall 
@@ -1034,3 +1037,9 @@ reslove a dependency
 
 - visit "localhost/admin/appearance" and install a the carapace theme
 
+###require islandora workbench
+
+https://github.com/mjordan/islandora_workbench_integration
+
+- ```sudo -u www-data composer require mjordan/islandora_workbench_integration "dev-main"```
+- ```drush en -y islandora_workbench_integration```
