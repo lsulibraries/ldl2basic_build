@@ -832,3 +832,23 @@ https://github.com/mjordan/islandora_workbench_integration
 - ```drush cim -y --partial --source=modules/contrib/islandora_workbench_integration/config/optional```
 
 - ```drush cr -y```
+
+- an follow documentation for islandora workbench 
+
+- outside of your virtual machine clone
+
+- git clone https://github.com/mjordan/islandora_workbench_integration
+
+- edit a config.yml file with the http://your-virtualmachine-ip-address in the config
+
+- config file could look something like this:
+
+>```
+>Task: create
+>host: "http://your-virtualmachine-ip-addr"
+>username: islandora
+>password: islandora
+>input_csv: path-to-your-input.csv
+>allow_adding_terms: True
+>allow_missing_files: True
+>```
