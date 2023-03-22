@@ -5,9 +5,9 @@
 This build is adapted from this link and it may help to read it or follow along:
 - https://islandora.github.io/documentation/installation/manual/introduction/
 - some downloads will need new links as new versions come out
-- many config files and scripts are included to elimanate a lot of typing within the build. 
+- many config files and scripts are included to eliminate a lot of typing within the build. 
 - you'll need to enable shared folders in the vm settings and place the files in the shared folder
-- code outside a comment or gui instruction is indended to be executed in the the vmware terminal, ie:
+- code outside a comment or gui instruction is intended to be executed in the vmware terminal, ie:
 - `whoami`
 - you should know the linux command line fairly well
 - you should know how to use nano or some other command line editor vi/m emacs
@@ -17,7 +17,7 @@ This build is adapted from this link and it may help to read it or follow along:
 
 ### download vmware
 - https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html
-- LSU has a way to get a liscense: https://software.grok.lsu.edu/Article.aspx?articleId=20512
+- LSU has a way to get a license: https://software.grok.lsu.edu/Article.aspx?articleId=20512
 - visit LSU box and download shared folder contents these will be your configuration files and others needed for the build add them to your shared folder in the vmware machine
 - https://lsu.box.com/s/o2uy4yx57lrzlu6tbpmuis6n5ocgq1r9
 
@@ -30,7 +30,7 @@ This build is adapted from this link and it may help to read it or follow along:
 - (right click the vm, go to settings>network adapter, select "Bridged", then save)
 
 - go through the os installation process
-- all prompts you don't need to change anything unless you want openssh (for remote acces via ssh)
+- all prompts you don't need to change anything unless you want openssh (for remote access via ssh)
 - set your username and password
 - allow the OS to install
 
@@ -348,7 +348,7 @@ check here for link...
 
 - ```sudo wget -P /opt/tomcat/lib https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar```
 
-run Ensure the library has the correct permissions.
+confirm the library has the correct permissions.
 
 - ```sudo sh /mnt/hgfs/shared/syn-config.sh```
 
@@ -464,7 +464,7 @@ create solr core
 
 A warning will print:
 
-warning using _default configset with data driven scheme functionality. NOT RECCOMENDED for production use. To turn off: bin/solr/ config -c islandora8 -p 8983 -action set-user-property -property update.autoCreateFields -value false
+warning using _default configset with data driven scheme functionality. NOT RECOMMENDED for production use. To turn off: bin/solr/ config -c islandora8 -p 8983 -action set-user-property -property update.autoCreateFields -value false
 
 should also say:
 "Created new core 'islandora8'
@@ -697,7 +697,7 @@ enter on all prompts
  
 The latest karaf does not work with the version of activemq, apache-camel and islandora-karaf (https://karaf.apache.org/download.html)
 
-Islandora Documentation reccomends 4.2.x. Other versions are available, <u>but they don't work with the other software below.</u>
+Islandora Documentation recommends 4.2.x. Other versions are available, <u>but they don't work with the other software below.</u>
 best link for now: 
  https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz
 
@@ -754,7 +754,7 @@ After:
 - ```sudo -u karaf /opt/karaf/bin/start```
 
 You may want to wait a bit for Karaf to start.
-If you're not sure whether or not it's running, you can always run:
+run these commands to confirm that the process for karaf is running:
 
 - ```ps aux | grep karaf```
 
@@ -803,7 +803,7 @@ JENA_OSGI_VERSION The latest version of the Apache Jena 3.x OSGi features 3.17.0
 
 - ```sudo -u karaf nano /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg```
 
-edit the file to containt this text:
+edit the file to contain this text:
 
 >```
 >token.value=islandora
@@ -850,8 +850,8 @@ executes the following file copies:
 
 - ```sh /mnt/hgfs/shared/karaf-features.sh```
 
-takes a while...
-contains:
+wait for it to finish, it takes a while...
+the script contains:
 
 >```
 >/opt/karaf/bin/client feature:install camel-blueprint
@@ -971,7 +971,7 @@ Adding a JWT RSA Key
 
 Click Save to create the key.
 
-Once this key is created, navigate to /admin/config/system/jwt to select the key you just created from the list. Note that before the key will show up in the Private Key list, you need to select that key's type in the Algorithm section, namely RSASSA-PKCS1-v1_5 using SHA-256 (RS256).
+Once this key is created, navigate to /admin/config/system/jwt to select the key you just created from the list. Note that before the key shows up in the Private Key list, you need to select that key's type in the Algorithm section, namely RSASSA-PKCS1-v1_5 using SHA-256 (RS256).
 
 Configuring the JWT RSA Key for Use
 
@@ -1023,7 +1023,7 @@ search_defaults
 
 
 --skip this dependency isn't needed 
-reslove a dependency
+resolve a dependency
 
 - ```sudo -u www-data composer require 'drupal/jquery_ui_accordion:^1.1'```
 - ```drush en -y jquery_ui_accordion```
