@@ -864,5 +864,6 @@ https://github.com/mjordan/islandora_workbench_integration
 - ```sudo nano /etc/php/8.1/apache2/php.ini```
 - change ```post_max_size = 8M``` to ```post_max_size = 200M```
 - change ```upload_max_filesize = 8M``` to ```upload_max_filesize = 200M```
-- change  max_file_uploads = 1000 #(confirm this limit)
+- change  ```max_file_uploads = 200``` to an appropriate number #(confirm this limit)
 - adjust filesize to an appropriate size for your uploads
+- ```sudo systemctl restart apache2```
