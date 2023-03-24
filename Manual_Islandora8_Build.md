@@ -18,8 +18,7 @@ This build is adapted from this link and it may help to read it or follow along:
 ### download vmware
 - https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html
 - LSU has a way to get a license: https://software.grok.lsu.edu/Article.aspx?articleId=20512
-- visit LSU box and download shared folder contents these will be your configuration files and others needed for the build add them to your shared folder in the vmware machine
-- https://lsu.box.com/s/o2uy4yx57lrzlu6tbpmuis6n5ocgq1r9
+- LSU ONEDRIVE LINK TO [shared folders](https://lsumail2.sharepoint.com/:f:/r/sites/Team-LIB-WebDev/Shared%20Documents/LDL/LDL-2/islandora8_Build_Instructions/shared_vmware_files_for_building/real_shared?csf=1&web=1&e=0fvyiQ)
 
 - create a vmware machine 
 - install ubuntu 20.04 Server from an ISO image:
