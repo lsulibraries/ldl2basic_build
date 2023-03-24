@@ -852,3 +852,17 @@ https://github.com/mjordan/islandora_workbench_integration
 >allow_adding_terms: True
 >allow_missing_files: True
 >```
+
+
+### styles folder problem:
+
+- ```chown -R www-data:www-data /opt/web/sites/default/files/styles```
+
+
+## upload size and max post size
+
+- ```sudo nano /etc/php/8.1/apache2/php.ini```
+- change ```post_max_size = 8M``` to ```post_max_size = 200M```
+- change ```upload_max_filesize = 8M``` to ```upload_max_filesize = 200M```
+- change  max_file_uploads = 1000 #(confirm this limit)
+- adjust filesize to an appropriate size for your uploads
