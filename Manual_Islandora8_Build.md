@@ -246,7 +246,6 @@ you may need to reload cantaloupe:
 
 - ```sudo systemctl daemon-reload```
 
-=======================================
 
 ## Installing fedora
 
@@ -355,7 +354,7 @@ su>```
 
 - ```sudo systemctl restart tomcat```
 
-#### blazegraph
+#### installing blazegraph
 
 - ```sudo mkdir -p /opt/blazegraph/data```
 - ```sudo mkdir /opt/blazegraph/conf```
@@ -405,7 +404,7 @@ If this worked correctly, Blazegraph should respond with some XML letting us
 know it added the 2 entries from inference.nt to the namespace.
 
 
-## solr
+### installing solr
 
 - ``` sudo wget https://dlcdn.apache.org/lucene/solr/8.11.2/solr-8.11.2.tgz ```
 - ```sudo tar -xzvf solr-8.11.2.tgz```
@@ -442,7 +441,7 @@ warning using _default configset with data driven scheme functionality. NOT RECO
 should also say:
 "Created new core 'islandora8'
 
-#### drupal search api
+### configure the drupal search api
 
 - ```cd /opt/drupal```
 - ```sudo -u www-data composer require drupal/search_api_solr:^4.2```
@@ -476,7 +475,7 @@ or localhost:80/admin/config/search/search-api
 these are the options: see documentation for help:
 - https://islandora.github.io/documentation/installation/manual/installing_solr/
 
-**config settings in gui**
+**enable the config settings in the gui**
 
 Server name: islandora8
 
@@ -495,7 +494,6 @@ click advanced config:
 
 click Save
 
-
 NOTICE You can ignore the error about an incompatible Solr schema; we're going to set this up in the next step. 
 
 apply solr configs
@@ -507,11 +505,8 @@ apply solr configs
 - ```sudo cp ~/solrconfig/* /var/solr/data/islandora8/conf```
 - ```sudo systemctl restart solr```
 
-##encountered some trouble with solr on unzip step
-
-
-#adding an index
-#In gui navigate XXX.XXX.XXX.XXX or localhost:80/admin/config/search/search-api/add-index
+adding an index
+- In gui navigate XXX.XXX.XXX.XXX or localhost:80/admin/config/search/search-api/add-index
  
  **configure index via gui***
 
@@ -528,13 +523,9 @@ Enabled X
 click Save
 
 
-#### crayfish microservices
+### crayfish microservices
 
 click back into vm
-change vm back to bridged network (only if needed) (right click vm, settings, network adaptor, save)
-
-- ```ping www.google.com```
-- do this a few times until you get bytes back
 
 - ```sh /mnt/hgfs/shared/crayfish_reqs.sh```
 
@@ -556,13 +547,12 @@ let this execute: takes a while... maybe take a hydration break. It's running th
 >sudo chown www-data:www-data /var/log/islandora
 >```
 
-# moving config files over
-
-(not microservices-conf.sh )
+moving config files over
 
 - ```sh /mnt/hgfs/shared/microservices-config.sh```
 
-runs the following, so very tedious, no one should ever want to type all this out, but this makes certain all the files are named correctly and have the correct permissions, it also beats typing out these configs.
+runs the following script:
+
 >```
 >#!/bin/bash
 >sudo cp /mnt/hgfs/shared/homarus.config.yaml /opt/crayfish/Homarus/cfg/config.yaml
@@ -592,6 +582,7 @@ runs the following, so very tedious, no one should ever want to type all this ou
 >```
 
 configure apache confs for microservices
+
 - ```sh /mnt/hgfs/shared/microservices-conf.sh```
 
 microservices-conf.sh will be copying a lot of config files from the shared folder
@@ -620,12 +611,13 @@ enable microservices
 - ```sudo a2enconf Homarus Houdini Hypercube Milliner Recast```
 - ```sudo systemctl restart apache2```
 
+### ActiveMQ 
 
-### ActiveMQ Karaf Alpaca  section removed. not required for build.
+### Karaf and Alpaca section removed. not required for build.
 
 ### configure drupal
 
-edit settings.php
+edit the settings.php file
 
 - ```sudo nano /opt/drupal/web/sites/default/settings.php```
 
@@ -648,11 +640,9 @@ add the following to the end of the file:
 
 - ```cd /opt/drupal```
 - ```drush -y cr```
-
-
 - ```sudo sh /mnt/hgfs/shared/islandora_install.sh```
 
-The above script will run the following (to save you time typing version numbers...)
+The script will execute:
 
 >```
 >#!/bin/bash
@@ -686,7 +676,7 @@ The above script will run the following (to save you time typing version numbers
 
 - ```sh /mnt/hgfs/shared/isla_lib.sh```
 
-The script above will execute the following (save on typing long links...)
+The script will execute:
 
 >```
 >#!/bin/bash
@@ -704,7 +694,7 @@ The script above will execute the following (save on typing long links...)
 
 - ```sh /mnt/hgfs/shared/islandora_en.sh```
 
-The above script runs:
+Script contains:
 
 >```
 >cd /opt/drupal
