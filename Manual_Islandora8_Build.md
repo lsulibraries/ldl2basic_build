@@ -1,6 +1,6 @@
 # Describes adapted build using shared folders and scripts to manually build islandora.
 
-### Notes
+**Notes**
 
 This build is adapted from this link and it may help to read it or follow along:
 - https://islandora.github.io/documentation/installation/manual/introduction/
@@ -11,11 +11,11 @@ This build is adapted from this link and it may help to read it or follow along:
 - `whoami`
 - you should know the linux command line fairly well
 - you should know how to use nano or some other command line editor vi/m emacs
-- you need to have downloaded vmware, and an ubuntu 20.04 server image.
+- you need to have downloaded vmware, and an ubuntu server 22.04 image.
 
 **Pre-BUILD Requirements**
 
-### download vmware
+- download vmware
 - https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html
 - LSU has a way to get a license: https://software.grok.lsu.edu/Article.aspx?articleId=20512
 - LSU ONEDRIVE LINK TO [shared folders](https://lsumail2.sharepoint.com/:f:/r/sites/Team-LIB-WebDev/Shared%20Documents/LDL/LDL-2/islandora8_Build_Instructions/shared_vmware_files_for_building/real_shared?csf=1&web=1&e=0fvyiQ)
