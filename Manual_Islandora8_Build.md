@@ -16,7 +16,7 @@ This build is adapted from [official islandora documentation](https://islandora.
 - download vmware
 - https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html
 - LSU has a way to get a license: https://software.grok.lsu.edu/Article.aspx?articleId=20512
-- LSU ONEDRIVE link to [shared folders](https://lsumail2.sharepoint.com/:f:/r/sites/Team-LIB-WebDev/Shared%20Documents/LDL/LDL-2/islandora8_Build_Instructions/shared_vmware_files_for_building/real_shared?csf=1&web=1&e=0fvyiQ)
+- LSU OneDrive link to [shared](https://lsumail2.sharepoint.com/:f:/r/sites/Team-LIB-WebDev/Shared%20Documents/LDL/LDL-2/islandora8_Build_Instructions/shared_vmware_files_for_building/real_shared?csf=1&web=1&e=0fvyiQ)
 
 - create a vmware machine 
 - choose ubuntu server 22.04 iso 
@@ -36,16 +36,16 @@ This build is adapted from [official islandora documentation](https://islandora.
 - ```ping www.google.com```
 - if you get bytes back you're connection is good.
 
-## enable shared folders on the vmware instance
-- (toggle "Connected" button)
-- (right click the vm, settings, options, shared folders, select "Always Enabled")
-- (select a path to the files' folder, click save)
+***enable shared folders on the virtual machine***
+- (right click the vm, go to settings, click the options tab, select "Always Enabled" for shared folders
+- (select a path to the "shared" folder from LSU OneDrive, click save)
 - I keep my path simple and put the files in a folder called 'shared'
 - my path is /mnt/hgfs/shared within the vm, if you use a different path, change it in all commands that use '/mnt/hgfs/shared'
 
-**Begin Build**
 
-These commands should all be executed in sequence:
+### Begin Build
+
+These commands should all be executed in sequence from within the vmware CLI:
 
 - ```sudo apt -y update```
 - ```sudo apt -y upgrade```
@@ -56,30 +56,22 @@ These commands should all be executed in sequence:
 - ```sudo usermod -a -G www-data `whoami` ```
 - ```sudo usermod -a -G `whoami` www-data```
 
-Log out of the vm (CTL-D) (this is neccessary for group settings to be applied)
-Log back in
-
-Double check your shared folder exists
+- Log out of the vm (CTL-D) (this is neccessary for group settings to be applied)
+- Log back in
 
 - ```ls /mnt/hgfs/shared```
-
-
-NOTE
-
-(if you don't see all the files or try:
+- you should see the shared folders from LSU OneDrive. if you don't see the shared folder, run this command in the vmware cli:
 - ```sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000```
 
-
+- execute in the vmware cli after shared folders are connected:
 - ```sh /mnt/hgfs/shared/scratch_2.sh```
 
-the above command runs the following script (which is tedious to type, there are some copy paste limitations in vmware when using alt-keyboard layouts):
+the above command runs the following script (which is tedious to type):
 - ```sudo apt -y install php8.1 php8.1-cli php8.1-common php8.1-curl php8.1-dev php8.1-gd php8.1-imap php8.1-mbstring php8.1-opcache php8.1-xml php8.1-yaml php8.1-zip libapache2-mod-php8.1 php-pgsql php-redis php-xdebug unzip postgresql```
 
 Edit the postgresql.conf file starting at line 688
 
 - ```sudo nano +688 /etc/postgresql/14/main/postgresql.conf```
-
-(if you don't like nano use a different editor vi/vim/emacs )
 
 change line 688 from 
 >```
@@ -91,7 +83,7 @@ change to
 >bytea_output 'escape'
 >```
 
-(CTL+o)(to save)(CTL+x to close)
+-when using nano you press (CTL+o) to save (CTL+x) to close
 
 - ```sudo systemctl restart postgresql```
 
