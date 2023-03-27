@@ -799,15 +799,14 @@ https://github.com/mjordan/islandora_workbench_integration
 
 - ```drush cr -y```
 
-- an follow documentation for islandora workbench 
+- outside of your virtual machine open a terminal to clone islandora workbench
 
-- outside of your virtual machine clone
-
-- git clone https://github.com/mjordan/islandora_workbench_integration
+- ```cd ~/Documents/``` (example directory)
+- ```git clone https://github.com/mjordan/islandora_workbench```
 
 - edit a config.yml file with the http://your-virtualmachine-ip-address in the config
 
-- config file could look something like this:
+- a working config file could look something like this:
 
 >```
 >Task: create
@@ -819,6 +818,7 @@ https://github.com/mjordan/islandora_workbench_integration
 >allow_missing_files: True
 >```
 
+For more information see the [islandora_workbench_docs](https://mjordan.github.io/islandora_workbench_docs)
 
 ### enable views display_media and open default styles permissions to www-data:
 
