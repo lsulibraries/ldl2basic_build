@@ -19,30 +19,21 @@ This build is adapted from [official islandora documentation](https://islandora.
 - LSU ONEDRIVE link to [shared folders](https://lsumail2.sharepoint.com/:f:/r/sites/Team-LIB-WebDev/Shared%20Documents/LDL/LDL-2/islandora8_Build_Instructions/shared_vmware_files_for_building/real_shared?csf=1&web=1&e=0fvyiQ)
 
 - create a vmware machine 
-- install ubuntu 20.04 Server from an ISO image:
-- https://ubuntu.com/download/server#downloads
+- choose ubuntu server 22.04 iso 
 - 20 GB on one file for disk size 
-
-- make sure the vm is on bridged network setting for installation
-- (right click the vm, go to settings>network adapter, select "Bridged", then save)
-
+- the vm must have network access (right click the vm, go to settings>network adapter, select "Bridged", then save)
 - go through the os installation process
-- all prompts you don't need to change anything unless you want openssh (for remote access via ssh)
 - set your username and password
-- allow the OS to install
+- finish the OS installation
+- when the installation finishes, you should accept the prompt to reboot the machine.
+- when the vm boots, log in with you username and password you set.
 
-- when the installation finishes accept the prompt to reboot the machine
-
-- when the vm boots up the os log in with you username and password you set before
-
-## any command that requires downloading (apt, wget, git clone etc) will require you to set the vm in bridged network mode (to get outside data)
+***network debugging***
 
 - try the "vmware-netcfg" command on the host machine if you have trouble connecting. 
-- I have found swapping between bridged and host-only connections are sometimes required
-
+- you may need to change between bridged and host-only connections (
 - check your network connection in the command line with 
 - ```ping www.google.com```
-
 - if you get bytes back you're connection is good.
 
 ## enable shared folders on the vmware instance
