@@ -163,9 +163,9 @@ save (CTL+o) and exit (CTL+x)
 >create database drupal9 encoding 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8' TEMPLATE template0;
 >create user drupal with encrypted password 'drupal';
 >grant all privileges on database drupal9 to drupal;
->#\q to quit
->\q
 >```
+
+type ```\q``` to quit
 
 ***install a drupal site***
 
