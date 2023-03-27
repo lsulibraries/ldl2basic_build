@@ -836,5 +836,6 @@ For more information see the [islandora_workbench_docs](https://mjordan.github.i
 ### add and enable drupal 'group' module and 'groupmedia'
 
 - ```sudo -u www-data composer require 'drupal/group:^3.0'```
+- ```sudo -u www-data composer require 'drupal/gnode'```
 - ```sudo -u www-data composer require 'drupal/groupmedia'```
 - ```drush en -y group groupmedia```
