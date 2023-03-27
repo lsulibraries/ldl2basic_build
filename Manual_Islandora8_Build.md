@@ -205,7 +205,7 @@ watch for version change. Keep the links and directory names consistent with the
 
 - ```sh /mnt/hgfs/shared/scratch_5.sh```
 
-scratch_5.sh **(if the tomcat tarball link is different you must change the path in the script)**
+scratch_5.sh **(if the tomcat tarball link is different you must change the path in the script)**:
 
 >```
 >#!/bin/bash
@@ -220,7 +220,7 @@ scratch_5.sh **(if the tomcat tarball link is different you must change the path
 
 - ```sh /mnt/hgfs/shared/scratch_6.sh```
 
-scratch_6.sh contents ***if Cantaloupe version changes change the version number in this file***:
+scratch_6.sh contents **if Cantaloupe version changes change the version number in this file**:
 
 >```
 >sudo cp /mnt/hgfs/shared/setenv.sh /opt/tomcat/bin/
@@ -242,7 +242,7 @@ scratch_6.sh contents ***if Cantaloupe version changes change the version number
 
 check that unzip step worked ``` ls /opt/cantaloupe``` or something...
 
-you may need this command to reload cantaloupe: 
+you may need to reload cantaloupe: 
 
 - ```sudo systemctl daemon-reload```
 
@@ -256,7 +256,7 @@ you may need this command to reload cantaloupe:
 - ```sudo chown -R tomcat:tomcat /opt/fcrepo```
 - ```sudo -u postgres psql```
 
-execute these commands within psql database prompt:
+execute these commands within the psql database:
 
 >```
 >create database fcrepo encoding 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8' TEMPLATE template0;
@@ -401,8 +401,6 @@ If this worked correctly, Blazegraph should respond with "CREATED: islandora" to
 (sudo?)
 - ```curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/inference.nt http://localhost:8080/blazegraph/namespace/islandora/sparql```
 
-#not sure
-
 If this worked correctly, Blazegraph should respond with some XML letting us
 know it added the 2 entries from inference.nt to the namespace.
 
@@ -414,9 +412,9 @@ know it added the 2 entries from inference.nt to the namespace.
 - ```sudo solr-8.11.2/bin/install_solr_service.sh solr-8.11.2.tgz```
 
 
-#q to quit...
+- type q to quit...
 
-increase filesize (optional)
+increase filesize (optional?)
 
 - ```sudo su```
 - ```sudo echo "fs.file-max = 45535" >> /etc/sysctl.conf```
@@ -464,7 +462,6 @@ log in with islandora:islandora
 you may need to restart apache:
 
 - ```sudo systemctl restart apache2```
-
 
 
 
