@@ -2,16 +2,14 @@
 
 **Notes**
 
-This build is adapted from this link and it may help to read it or follow along:
-- https://islandora.github.io/documentation/installation/manual/introduction/
-- some downloads will need new links as new versions come out
-- many config files and scripts are included to eliminate a lot of typing within the build. 
-- you'll need to enable shared folders in the vm settings and place the files in the shared folder
-- code outside a comment or gui instruction is intended to be executed in the vmware terminal, ie:
+This build is adapted from [official islandora documentation](https://islandora.github.io/documentation/installation/manual/introduction/) reading it is encouraged.
+- check download links for new versions of software components.
+- in the shared folder many config files and scripts are included to automate repeated steps. 
+- enable shared folders in the virtual machine settings use the LSU Ondrive "shared folders"
+- formatted code in this document is intended to be executed in the command line of the virtual machine IE:
 - `whoami`
-- you should know the linux command line fairly well
-- you should know how to use nano or some other command line editor vi/m emacs
-- you need to have downloaded vmware, and an ubuntu server 22.04 image.
+- document assumes familiarity with CLI, file edititing and permissions
+- Download vmware, and an [ubuntu server 22.04 image](https://ubuntu.com/download/server).
 
 **Pre-BUILD Requirements**
 
