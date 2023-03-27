@@ -125,7 +125,7 @@ Expected output will link to /opt/drupal/vendor/drush/drush/drush
 
 -  ```sudo nano /etc/apache2/ports.conf```
 
-remove everything but (CTL+k)(to yank lines out of the file)
+Remove everything but "Listen 80" use (CTL+k) to remove lines from the file.
 
 > ```Listen 80```
 
@@ -150,12 +150,11 @@ edit file to contain only the following:
 ></VirtualHost>
 >```
 
-save (CTL+o) exit(CTL+x)
-
-in future when ssl is needed for prod build:
-- https://www.digitalocean.com/community/tutorials/how-to-install-an-ssl-certificate-from-a-commercial-certificate-authority
+save (CTL+o) and exit (CTL+x)
 
 - ```sudo systemctl restart apache2```
+
+***create a database***
 
 - ```sudo -u postgres psql```
 
@@ -168,25 +167,21 @@ in future when ssl is needed for prod build:
 >\q
 >```
 
-install a drupal
+***install a drupal site***
 
 - ```cd /opt/drupal/web```
 - ```sudo drush -y site-install standard --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal9" --site-name="LDL 2.0" --account-name=islandora --account-pass=islandora```
 
 
-next install tomcat and cantaloupe
+***install tomcat and cantaloupe***
 
 - ```sudo apt -y install openjdk-11-jdk openjdk-11-jre```
 
 - ```update-alternatives --list java```
 
-the above should output something like "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"
+The above should output something like "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"
 
-note this path for later use as JAVA_HOME
-
-note it's the path above without /bin/java:
-ie:
-"/usr/lib/jvm/java-11-openjdk-amd64"
+note this path for later use as JAVA_HOME. it is the same as the path above without "/bin/java". "/usr/lib/jvm/java-11-openjdk-amd64"
 
 - ```sudo addgroup tomcat```
 - ```sudo adduser tomcat --ingroup tomcat --home /opt/tomcat --shell /usr/bin```
@@ -197,24 +192,22 @@ press enter for all default user prompts
 type y for yes
 
 find the tar.gz here: https://tomcat.apache.org/download-90.cgi
-copy the TOMCAT_TARBALL_LINK
+copy the TOMCAT_TARBALL_LINK as of 03-03-23 it was: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz
 
-as of 03-03-23 it was:
+watch for version change. Keep the links and directory names consistent with the version you are using. Copy your version into TOMCAT_TARBALL_LINK or TOMCAT_DIRECTORY
 
-https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz
-
-
-watch for version change
 - ``` cd /opt```
 - ```sudo wget -O tomcat.tar.gz TOMCAT_TARBALL_LINK```
-- ```ls /opt``` to find name of TOMCAT_DIRECTORY: (recently it was: apache-tomcat-9.0.73)
+- ```ls /opt``` to find name of TOMCAT_DIRECTORY: (apache-tomcat-9.0.73) 
 - ```sudo tar -zxvf tomcat.tar.gz```
 - ```sudo mv /opt/TOMCAT_DIRECTORY/* /opt/tomcat```
 - ```sudo chown -R tomcat:tomcat /opt/tomcat ```
 
 - ```sh /mnt/hgfs/shared/scratch_5.sh```
 
-scratch_5.sh will run the following file:
+scratch_5.sh:
+***(if the tomcat tarball link is different you must change the path in the script)***
+
 >```
 >#!/bin/bash
 >cd /opt
@@ -227,8 +220,9 @@ scratch_5.sh will run the following file:
 >```
 
 - ```sh /mnt/hgfs/shared/scratch_6.sh```
-l
-scratch_6 runs this file:
+
+scratch_6.sh contents: 
+***if Cantaloupe version changes change the version number in this file***
 
 >```
 >sudo cp /mnt/hgfs/shared/setenv.sh /opt/tomcat/bin/
@@ -250,10 +244,11 @@ scratch_6 runs this file:
 
 check that unzip step worked ``` ls /opt/cantaloupe``` or something...
 
-note: you may need this command if like me you had to edit cantaloupe.service several times: 
+you may need this command to reload cantaloupe: 
+
 - ```sudo systemctl daemon-reload```
 
-=s======================================
+=======================================
 
 ## Installing fedora
 
@@ -261,8 +256,9 @@ note: you may need this command if like me you had to edit cantaloupe.service se
 - ```sudo mkdir -p /opt/fcrepo/data/objects```
 - ```sudo mkdir /opt/fcrepo/config```
 - ```sudo chown -R tomcat:tomcat /opt/fcrepo```
-
 - ```sudo -u postgres psql```
+
+execute these commands within psql database prompt:
 
 >```
 >create database fcrepo encoding 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8' TEMPLATE template0;
@@ -271,8 +267,8 @@ note: you may need this command if like me you had to edit cantaloupe.service se
 >\q
 >```
 
-first check that you mnt point is still working
-s
+check that you mount point is still working:
+
 - ```ls /mnt/hgfs/shared```
 
 if no files are listed of the folder is not found run this:
@@ -283,7 +279,7 @@ otherwise continue with this step if the files exist.
 
 - ```sudo sh /mnt/hgfs/shared/fedora-config.sh```
 
-fedora-config.sh will run the following:
+fedora-config.sh contains:
 
 >```
 >sudo cp /mnt/hgfs/shared/i8_namespace.cnd /opt/fcrepo/config/i8_namespace.cnd
@@ -292,7 +288,7 @@ fedora-config.sh will run the following:
 >sudo touch /opt/fcrepo/config/allowed_hosts.txt
 >sudo chown tomcat:tomcat /opt/fcrepo/config/allowed_hosts.txt
 >sudo chmod 644 /opt/fcrepo/config/allowed_hosts.txt
->ssudo -u tomcat echo "http://localhost:80/" >> /opt/fcrepo/config/allowed_hosts.txt
+>sudo -u tomcat echo "http://localhost:80/" >> /opt/fcrepo/config/allowed_hosts.txt
 >sudo cp /mnt/hgfs/shared/repository.json /opt/fcrepo/config/
 >sudo chown tomcat:tomcat /opt/fcrepo/config/repository.json
 >sudo chmod 644 /opt/fcrepo/config/repository.json
@@ -304,17 +300,20 @@ fedora-config.sh will run the following:
 >sudo chown tomcat:tomcat /opt/tomcat/conf/tomcat-users.xml
 >```
 
-note: double check /opt/fcrepo/config/allowed_hosts.txt got created
+double check /opt/fcrepo/config/allowed_hosts.txt got created
 
+- ```cat /opt/fcrepo/config/allowed_hosts.txt```
 
 copy setenv.sh from /mnt/hgfs/shared/ to /opt/tomcat/bin/
+
+- ```cp /mnt/hgfs/shared/setenv.sh /opt/tomcat/bin/```
 
 - ```sudo nano /opt/tomcat/bin/setenv.sh```
 
 uncomment line 5, comment line 4 (CTL-c) shows line number
 save (CTL-o) exit (CTL+x)
 
-visit: https://github.com/fcrepo/fcrepo/releases
+visit: https://github.com/fcrepo/fcrepo/releases choose the latest version and ajust the commands below if needed
 
 - ```sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.3.0/fcrepo-webapp-6.3.0.war```
 - ```sudo mv fcrepo.war /opt/tomcat/webapps```
@@ -322,17 +321,15 @@ visit: https://github.com/fcrepo/fcrepo/releases
 - ```sudo systemctl restart tomcat```
 
 
-check here for link...
-- https://github.com/Islandora/Syn/releases/
-- copy the link (if changed from syn-1.1.1) and replace the link in the command below:
+check here for link: https://github.com/Islandora/Syn/releases/ copy the link (if changed from syn-1.1.1) and replace the link in the command below:
 
 - ```sudo wget -P /opt/tomcat/lib https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar```
 
-confirm the library has the correct permissions.
+run the syn-confing.sh to ensure the library has the correct permissions:
 
 - ```sudo sh /mnt/hgfs/shared/syn-config.sh```
 
-which runs this series of commands:
+syn-config.sh contents:
 
 >```
 >sudo chown -R tomcat:tomcat /opt/tomcat/lib
