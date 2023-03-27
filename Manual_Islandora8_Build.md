@@ -833,3 +833,4 @@ https://github.com/mjordan/islandora_workbench_integration
 - change  ```max_file_uploads = 200``` to an appropriate number #(confirm this limit)
 - adjust filesize to an appropriate size for your uploads
 - ```sudo systemctl restart apache2```
+- ```drush -y views:enable display_media
