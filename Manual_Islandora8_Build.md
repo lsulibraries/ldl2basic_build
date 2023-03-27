@@ -613,7 +613,11 @@ enable microservices
 
 ### ActiveMQ 
 
-### Karaf and Alpaca section removed. not required for build.
+- ```sudo apt install -y activemq```
+
+### Karaf and Alpaca section removed. 
+
+- not - required -
 
 ### configure drupal
 
