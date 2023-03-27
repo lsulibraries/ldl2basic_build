@@ -89,7 +89,7 @@ change to
 
 - ```sh /mnt/hgfs/shared/scratch_3.sh```
 
-#scratch_3.sh runs:
+scratch_3.sh runs:
 >```
 >#!/bin/bash
 >curl "https://getcomposer.org/installer" > composer-install.php
