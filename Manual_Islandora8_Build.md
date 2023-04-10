@@ -441,7 +441,7 @@ warning using _default configset with data driven scheme functionality. NOT RECO
 should also say:
 "Created new core 'islandora8'
 
-### configure the drupal search api
+### Configure the drupal search api
 
 - ```cd /opt/drupal```
 - ```sudo -u www-data composer require drupal/search_api_solr:^4.2```
@@ -606,7 +606,7 @@ microservices-conf.sh will be copying a lot of config files from the shared fold
 >sudo chmod 644 /etc/apache2/conf-available/Recast.conf 
 >```
 
-enable microservices
+### Enable microservices
 
 - ```sudo a2enconf Homarus Houdini Hypercube Milliner Recast```
 - ```sudo systemctl restart apache2```
@@ -615,9 +615,9 @@ enable microservices
 
 - ```sudo apt install -y activemq```
 
-### Karaf and Alpaca section removed. 
+### Karaf and Alpaca 
 
-- not - required -
+- not - required - section removed.  
 
 ### configure drupal
 
@@ -777,7 +777,7 @@ resolve a dependency
 - ```drush en -y jquery_ui_accordion```
 
 
-###Theme trouble try remove require install
+### Theme trouble try remove require install
 
 - ```sudo -u www-data composer remove islandora/carapace```
 
@@ -785,7 +785,7 @@ resolve a dependency
 
 - visit "localhost/admin/appearance" and install a the carapace theme
 
-###require islandora workbench
+### require islandora workbench
 
 https://github.com/mjordan/islandora_workbench_integration
 
