@@ -709,25 +709,24 @@ Script contains:
 >```
 
 
-Adding a JWT Configuration to Drupal
+### Adding a JWT Configuration to Drupal
 
 To allow our installation to talk to other services via Syn, we need to establish a Drupal-side JWT configuration using the keys we generated at that time.
 
 Log onto your site as an administrator at /user, then navigate to /admin/config/system/keys/add. Some of the settings here are unimportant, but pay close attention to the Key type, which should match the key we created earlier (an RSA key), and the File location, which should be the ultimate location of the key we created for Syn on the filesystem, /opt/keys/syn_private.key.
 
-Adding a JWT RSA Key
+#### Adding a JWT RSA Key
 
 Click Save to create the key.
 
 Once this key is created, navigate to /admin/config/system/jwt to select the key you just created from the list. Note that before the key shows up in the Private Key list, you need to select that key's type in the Algorithm section, namely RSASSA-PKCS1-v1_5 using SHA-256 (RS256).
 
-Configuring the JWT RSA Key for Use
+#### Configuring the JWT RSA Key for Use
 
 See instructions:
 - https://islandora.github.io/documentation/installation/manual/configuring_drupal/#adding-a-jwt-configuration-to-drupal
 
 visit http://[your-site-ip-address]/admin/config/system/jwt
-
 
 follow drupal config instructions:
 - https://islandora.github.io/documentation/installation/manual/configuring_drupal/#islandora
@@ -738,7 +737,7 @@ config canaloupe
 cantaloupe endpoint was not 8080
 this worked for cantaloupe config:
 
-had to unzip cantaloupe missed the unzip for some reason
+had to unzip cantaloupe
 - http://[your-site-ip-address]:8182/iiif/2
 
 Nav to openseadragon
@@ -777,7 +776,7 @@ resolve a dependency
 - ```drush en -y jquery_ui_accordion```
 
 
-### Theme trouble try remove require install
+### Theme 
 
 - ```sudo -u www-data composer remove islandora/carapace```
 
@@ -785,7 +784,7 @@ resolve a dependency
 
 - visit "localhost/admin/appearance" and install a the carapace theme
 
-### require islandora workbench
+### Require islandora workbench
 
 https://github.com/mjordan/islandora_workbench_integration
 
