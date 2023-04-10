@@ -205,7 +205,7 @@ watch for version change. Keep the links and directory names consistent with the
 
 - ```sh /mnt/hgfs/shared/scratch_5.sh```
 
-scratch_5.sh **(if the tomcat tarball link is different you must change the path in the script)**:
+scratch_5.sh (if the tomcat tarball link is different you must change the path in the script):
 
 >```
 >#!/bin/bash
@@ -220,7 +220,7 @@ scratch_5.sh **(if the tomcat tarball link is different you must change the path
 
 - ```sh /mnt/hgfs/shared/scratch_6.sh```
 
-scratch_6.sh contents **if Cantaloupe version changes change the version number in this file**:
+scratch_6.sh contents (if Cantaloupe version changes change the version number in this file):
 
 >```
 >sudo cp /mnt/hgfs/shared/setenv.sh /opt/tomcat/bin/
@@ -247,7 +247,7 @@ you may need to reload cantaloupe:
 - ```sudo systemctl daemon-reload```
 
 
-## Installing fedora
+### Installing fedora
 
 - ```sudo systemctl stop tomcat```
 - ```sudo mkdir -p /opt/fcrepo/data/objects```
