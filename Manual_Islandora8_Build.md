@@ -347,7 +347,8 @@ edit the context.xml file:
 Add this line  before the closing </Context> tag:
 >```
 >    <Valve className="ca.islandora.syn.valve.SynValve" pathname="/opt/fcrepo/config/syn-settings.xml"/>
-></Context>```
+></Context>
+>```
 
 (note above for spelling errors: valve V A L V E not Value)
 
