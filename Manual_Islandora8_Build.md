@@ -611,13 +611,228 @@ microservices-conf.sh will be copying a lot of config files from the shared fold
 - ```sudo a2enconf Homarus Houdini Hypercube Milliner Recast```
 - ```sudo systemctl restart apache2```
 
-### ActiveMQ 
+### Installing Karaf and Alpaca
+
+check activemq version (last was 5.17.4)
 
 - ```sudo apt install -y activemq```
+- ```cd /opt```
+- ```sudo wget  http://archive.apache.org/dist/activemq/5.17.4/apache-activemq-5.17.4-bin.tar.gz```
+- ```sudo tar -xvzf apache-activemq-5.17.4-bin.tar.gz```
+- ```sudo mv apache-activemq-5.17.4 activemq```
+- ```sudo chown -R activemq:activemq /opt/activemq```
 
-### Karaf and Alpaca 
+- ```sudo nano /etc/systemd/system/activemq.service```
 
-- not - required - section removed.  
+Edit the file like so:
+>```
+>[Unit]
+>Description=Apache ActiveMQ
+>After=network.target
+>[Service]
+>Type=forkings
+>User=activemq
+>Group=activemq
+>
+>ExecStart=/opt/activemq/bin/activemq start
+>ExecStop=/opt/activemq/bin/activemq stop
+>
+>[Install]
+>WantedBy=multi-user.target
+>```
+
+- ```sudo systemctl daemon-reload```
+- ```sudo systemctl start activemq```
+- ```sudo systemctl enable activemq```
+
+
+check activemq version (5.16.1-1 as of writing):
+
+- ```sudo apt-cache policy activemq```
+
+##KARAF is removed
+
+- ```sudo addgroup karaf```
+- ```sudo adduser karaf --ingroup karaf --home /opt/karaf --shell /usr/bin```
+
+(made password karaf)
+enter on all prompts
+- type y and enter.
+
+ 
+The latest karaf does not work with the version of activemq, apache-camel and islandora-karaf (https://karaf.apache.org/download.html)
+
+Islandora Documentation recommends 4.2.x. Other versions are available, <u>but they don't work with the other software below.</u>
+best link for now: 
+ https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz
+
+
+- ```cd /opt```
+- ```sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz```
+
+double check for /mnt/hgfs/shared ```sudo vmhgfs-fuse.host/ /mnt/hgfs/ -o allow_other -o uid=1000```
+
+- ```sudo tar -xzvf karaf.tar.gz```
+- ```sudo chown -R karaf:karaf apache-karaf-4.2.16```
+- ```sudo mv apache-karaf-4.2.16/* /opt/karaf```
+
+- ```sudo sh /mnt/hgfs/shared/karaf-stuff.sh```
+
+will run the following:
+
+>```
+> sudo mkdir /var/log/karaf
+> sudo chown karaf:karaf /var/log/karaf
+> sudo cp /mnt/hgfs/shared/org.pos4j.pax.logging.cfg /opt/karaf/etc/org.pos4j.pax.logging.cfg
+> sudo chown karaf:karaf /opt/karaf/etc/org.pos4j.pax.logging.cfg
+> sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg
+>```
+
+- ```sudo nano /opt/karaf/bin/setenv```
+
+>```
+>#!/bin/sh
+>export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+>```
+
+Ctl-O to save
+
+- ```sudo export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"```
+- ```sudo chown karaf:karaf /opt/karaf/bin/setenv```
+- ```sudo chmod 755 /opt/karaf/bin/setenv```
+- ```sudo nano /opt/karaf/etc/users.properties```
+
+#uncomment lines:
+Before:
+
+    32 | # karaf = karaf,_g_:admingroup
+
+    33 | # _g_\:admingroup = group,admin,manager,viewer,systembundles,ssh
+
+After:
+
+    32 | karaf = karaf,_g_:admingroup
+
+    33 | _g_\:admingroup = group,admin,manager,viewer,systembundles,ssh
+
+
+- ```sudo -u karaf /opt/karaf/bin/start```
+
+You may want to wait a bit for Karaf to start.
+run these commands to confirm that the process for karaf is running:
+
+- ```ps aux | grep karaf```
+
+- ```sudo sh /mnt/hgfs/shared/karaf-more.sh```
+
+will run this:
+
+>```
+> /opt/karaf/bin/client feature:install wrapper
+> /opt/karaf/bin/client wrapper:install
+> /opt/karaf/bin/stop
+> sudo systemctl enable /opt/karaf/bin/karaf.service
+> sudo systemctl start karaf
+> sudo systemctl status karaf
+>```
+
+(to quit type q)
+
+### Alpaca
+
+note the version of activemq from before:
+ACTIVEMQ_KARAF_VERSION  5.15.11 
+
+visit https://mvnrepository.com/artifact/org.apache.camel.karaf/apache-camel look for the latest version of Apache Camel 2.x.x
+
+APACHE_CAMEL_VERSION [https://repo1.maven.org/maven2/org/apache/camel/karaf/apache-camel/2.25.4/apache-camel-
+2.25.4
+](https://repo1.maven.org/maven2/org/apache/camel/karaf/apache-camel/2.25.4/)
+
+visit https://mvnrepository.com/artifact/ca.islandora.alpaca/islandora-karaf
+confirm that the ISLANDORA_KARAF_VERSION is still 1.0.5
+
+JENA_OSGI_VERSION The latest version of the Apache Jena 3.x OSGi features 3.17.0
+
+(note /xml/ not .xml)
+
+
+- ```/opt/karaf/bin/client repo-add mvn:org.apache.activemq/activemq-karaf/5.15.11/xml/features```
+- ```/opt/karaf/bin/client repo-add mvn:org.apache.camel.karaf/apache-camel/2.25.4/xml/features```
+- ```/opt/karaf/bin/client repo-add mvn:ca.islandora.alpaca/islandora-karaf/1.0.5/xml/features```
+
+(This shouldn't be strictly necessary, but appears to be a missing) upstream dependency for some fcrepo features
+
+- ```/opt/karaf/bin/client repo-add mvn:org.apache.jena/jena-osgi-features/3.17.0/xml/features```
+
+
+- ```sudo -u karaf nano /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg```
+
+edit the file to contain this text:
+
+>```
+>token.value=islandora
+>```
+
+- ```sudo chmod 644 /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg```
+
+- ```sh /mnt/hgfs/shared/karaf-config.sh```
+
+executes the following file copies:
+
+>```
+>!/bin/bash
+>sudo cp /mnt/hgfs/shared/org.fcrepo.camel.indexing.triplestore.cfg /opt/karaf/etc/org.fcrepo.camel.indexing.triplestore.cfg
+>sudo chown karaf:karaf /opt/karaf/etc/org.fcrepo.camel.indexing.triplestore.cfg
+>sudo chmod 644 /opt/karaf/etc/org.fcrepo.camel.indexing.triplestore.cfg
+>sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.indexing.triplestore.cfg /opt/karaf/etc/ca.islandora.alpaca.indexing.triplestore.cfg 
+>sudo chown karaf:karaf /opt/karaf/etc/ca.islandora.alpaca.indexing.triplestore.cfg 
+>sudo chmod 644 /opt/karaf/etc/ca.islandora.alpaca.indexing.triplestore.cfg 
+>sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.indexing.fcrepo.cfg /opt/karaf/etc/ca.islandora.alpaca.indexing.fcrepo.cfg
+>sudo chown karaf:karaf /opt/karaf/etc/ca.islandora.alpaca.indexing.fcrepo.cfg
+>sudo chmod 644 /opt/karaf/etc/ca.islandora.alpaca.indexing.fcrepo.cfg
+>```
+
+- ```sh /mnt/hgfs/shared/karaf-blueprints.sh```
+
+ more configuration via file copying and permissions
+
+>```
+>#!/bin/bash
+>sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.connector.ocr.blueprint.xml /opt/karaf/deploy/ca.islandora.alpaca.connector.ocr.blueprint.xml
+>sudo chown karaf:karaf /opt/karaf/deploy/ca.islandora.alpaca.connector.ocr.blueprint.xml
+>sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.ocr.blueprint.xml
+>sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.connector.houdini.blueprint.xml /opt/karaf/deploy/ca.islandora.alpaca.connector.houdini.blueprint.xml
+>sudo chown karaf:karaf /opt/karaf/deploy/ca.islandora.alpaca.connector.houdini.blueprint.xml
+>sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.houdini.blueprint.xml
+>sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.connector.homarus.blueprint.xml /opt/karaf/deploy>/ca.islandora.alpaca.connector.homarus.blueprint.xml
+>sudo chown karaf:karaf /opt/karaf/deploy/ca.islandora.alpaca.connector.homarus.blueprint.xml
+>sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.homarus.blueprint.xml
+>sudo cp /mnt/hgfs/shared/ca.islandora.alpaca.connector.fits.blueprint.xml /opt/karaf/deploy/ca.islandora.alpaca.connector.fits.blueprint.xml
+>sudo chown karaf:karaf /opt/karaf/deploy/ca.islandora.alpaca.connector.fits.blueprint.xml
+>sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.fits.blueprint.xml
+>```
+
+- ```sh /mnt/hgfs/shared/karaf-features.sh```
+
+wait for it to finish, it takes a while...
+the script contains:
+
+>```
+>/opt/karaf/bin/client feature:install camel-blueprint
+>/opt/karaf/bin/client feature:install activemq-blueprint
+>/opt/karaf/bin/client feature:install fcrepo-service-activemq
+># This again should not be strictly necessary, since this isn't the triplestore
+># we're using, but is being included here to resolve the aforementioned
+># missing link in the dependency chain.
+>/opt/karaf/bin/client feature:install jena
+>/opt/karaf/bin/client feature:install fcrepo-camel
+>/opt/karaf/bin/client feature:install fcrepo-indexing-triplestore
+>/opt/karaf/bin/client feature:install islandora-http-client
+>/opt/karaf/bin/client feature:install islandora-indexing-triplestore
+>/opt/karaf/bin/client feature:install islandora-indexing-fcrepo
+>/opt/karaf/bin/client feature:install islandora-connector-derivative
+>```
 
 ### configure drupal
 
