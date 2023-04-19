@@ -194,18 +194,9 @@ type y for yes
 find the tar.gz here: https://tomcat.apache.org/download-90.cgi
 copy the TOMCAT_TARBALL_LINK as of 04-19-23 it was: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz
 
-watch for version change. Keep the links and directory names consistent with the version you are using. Copy your version into TOMCAT_TARBALL_LINK or TOMCAT_DIRECTORY
-
-- ``` cd /opt```
-- ```sudo wget -O tomcat.tar.gz TOMCAT_TARBALL_LINK```
-- ```ls /opt``` to find name of TOMCAT_DIRECTORY: (apache-tomcat-9.0.73) 
-- ```sudo tar -zxvf tomcat.tar.gz```
-- ```sudo mv /opt/TOMCAT_DIRECTORY/* /opt/tomcat```
-- ```sudo chown -R tomcat:tomcat /opt/tomcat ```
-
 - ```sh /mnt/hgfs/shared/scratch_5.sh```
 
-scratch_5.sh (if the tomcat tarball link is different you must change the path in the script):
+scratch_5.sh (if the tomcat tarball link is different you must change the path in the script or run the commands in the scratch_5 alt section):
 
 >```
 >#!/bin/bash
@@ -217,6 +208,22 @@ scratch_5.sh (if the tomcat tarball link is different you must change the path i
 >sudo mv /opt/apache-tomcat-9.0.74/* /opt/tomcat
 >sudo chown -R tomcat:tomcat /opt/tomcat
 >```
+
+scratch_5_alt
+
+run these steps without scratch_5.sh
+
+watch for version change. Keep the links and directory names consistent with the version you are using. Copy your version into TOMCAT_TARBALL_LINK or TOMCAT_DIRECTORY
+
+run these instead of scratch_5
+
+- ``` cd /opt```
+- ```sudo wget -O tomcat.tar.gz TOMCAT_TARBALL_LINK```
+- ```ls /opt``` to find name of TOMCAT_DIRECTORY: (apache-tomcat-9.0.74) 
+- ```sudo tar -zxvf tomcat.tar.gz```
+- ```sudo mv /opt/TOMCAT_DIRECTORY/* /opt/tomcat```
+- ```sudo chown -R tomcat:tomcat /opt/tomcat ```
+
 
 - ```sh /mnt/hgfs/shared/scratch_6.sh```
 
