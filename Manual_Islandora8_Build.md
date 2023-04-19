@@ -753,9 +753,9 @@ JENA_OSGI_VERSION The latest version of the Apache Jena 3.x OSGi features 3.17.0
 (note /xml/ not .xml)
 
 
-- ```/opt/karaf/bin/client repo-add mvn:org.apache.activemq/activemq-karaf/5.16.1/xml/features```
-- ```/opt/karaf/bin/client repo-add mvn:org.apache.camel.karaf/apache-camel/2.25.4/xml/features```
-- ```/opt/karaf/bin/client repo-add mvn:ca.islandora.alpaca/islandora-karaf/1.0.5/xml/features```
+- ```sudo /opt/karaf/bin/client repo-add mvn:org.apache.activemq/activemq-karaf/5.16.1/xml/features```
+- ```sudo /opt/karaf/bin/client repo-add mvn:org.apache.camel.karaf/apache-camel/2.25.4/xml/features```
+- ```sudo /opt/karaf/bin/client repo-add mvn:ca.islandora.alpaca/islandora-karaf/1.0.5/xml/features```
 
 (This shouldn't be strictly necessary, but appears to be a missing) upstream dependency for some fcrepo features
 
@@ -809,7 +809,7 @@ executes the following file copies:
 >sudo chmod 644 /opt/karaf/deploy/ca.islandora.alpaca.connector.fits.blueprint.xml
 >```
 
-- ```sh /mnt/hgfs/shared/karaf-features.sh```
+- ```sudo sh /mnt/hgfs/shared/karaf-features.sh```
 
 wait for it to finish, it takes a while...
 the script contains:
