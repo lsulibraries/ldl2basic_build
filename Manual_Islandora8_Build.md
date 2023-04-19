@@ -737,7 +737,7 @@ will run this:
 ### Alpaca
 
 note the version of activemq from before:
-ACTIVEMQ_KARAF_VERSION  5.15.11 
+ACTIVEMQ_KARAF_VERSION  5.16.1-1
 
 visit https://mvnrepository.com/artifact/org.apache.camel.karaf/apache-camel look for the latest version of Apache Camel 2.x.x
 
