@@ -613,13 +613,13 @@ microservices-conf.sh will be copying a lot of config files from the shared fold
 
 ### Installing Karaf and Alpaca
 
-check activemq version (last was 5.17.4)
+check apache-activemq version (last was 5.18.1)
 
 - ```sudo apt install -y activemq```
 - ```cd /opt```
-- ```sudo wget  http://archive.apache.org/dist/activemq/5.17.4/apache-activemq-5.17.4-bin.tar.gz```
-- ```sudo tar -xvzf apache-activemq-5.17.4-bin.tar.gz```
-- ```sudo mv apache-activemq-5.17.4 activemq```
+- ```sudo wget  http://archive.apache.org/dist/activemq/5.18.1/apache-activemq-5.18.1-bin.tar.gz```
+- ```sudo tar -xvzf apache-activemq-5.18.1-bin.tar.gz```
+- ```sudo mv apache-activemq-5.18.1 activemq```
 - ```sudo chown -R activemq:activemq /opt/activemq```
 
 - ```sudo nano /etc/systemd/system/activemq.service```
