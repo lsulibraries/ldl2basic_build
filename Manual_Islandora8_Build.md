@@ -839,3 +839,19 @@ For more information see the [islandora_workbench_docs](https://mjordan.github.i
 - ```sudo -u www-data composer require 'drupal/gnode'```
 - ```sudo -u www-data composer require 'drupal/groupmedia'```
 - ```drush en -y group groupmedia gnode```
+
+# custom digitalutsc group modules / needs more testing 
+
+- ```sudo -u www-data composer require squizlabs/phpcs_codesniffer```
+- ```sudo -u www-data composer require digitalutsc/islandora_group```
+- ```sudo -u www-data composer require digitalutsc/islandora_group_defaults```
+
+- ```drush en -y islandora_group islandora_group_defaults```
+
+Code and Docs here
+https://github.com/digitalutsc/islandora_group
+https://github.com/digitalutsc/islandora_group_defaults
+https://docs.google.com/document/d/1fy2KyjlURBpseLbwqspD3Yv5iFPpv1HQF_qKClV7zso/edit
+
+Other Group modules
+git clone https://github.com/agile-humanities/Access-Control-By-Group
