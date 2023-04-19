@@ -404,8 +404,7 @@ save (CTL+o) quit (CTL+x)
 
 If this worked correctly, Blazegraph should respond with "CREATED: islandora" to let us know it created the islandora namespace.
 
-(sudo?)
-- ```curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/inference.nt http://localhost:8080/blazegraph/namespace/islandora/sparql```
+- ```sudo curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/inference.nt http://localhost:8080/blazegraph/namespace/islandora/sparql```
 
 If this worked correctly, Blazegraph should respond with some XML letting us
 know it added the 2 entries from inference.nt to the namespace.
