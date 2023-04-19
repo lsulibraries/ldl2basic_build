@@ -247,7 +247,7 @@ scratch_6.sh contents (if Cantaloupe version changes change the version number i
 >sudo systemctl start cantaloupe
 >```
 
-check that unzip step worked ``` ls /opt/cantaloupe``` or something...
+check that unzip step worked ``` ls /opt/cantaloupe*``` or something...
 
 you may need to reload cantaloupe: 
 
