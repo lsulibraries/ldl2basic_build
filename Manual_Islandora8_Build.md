@@ -691,7 +691,7 @@ will run the following:
 > sudo echo 'export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv
 >```
 
-Ctl-O to save
+Ctl-D to log out of su
 
 - ```sudo export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"```
 - ```sudo chown karaf:karaf /opt/karaf/bin/setenv```
