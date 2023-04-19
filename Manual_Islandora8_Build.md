@@ -753,7 +753,7 @@ JENA_OSGI_VERSION The latest version of the Apache Jena 3.x OSGi features 3.17.0
 (note /xml/ not .xml)
 
 
-- ```/opt/karaf/bin/client repo-add mvn:org.apache.activemq/activemq-karaf/5.15.11/xml/features```
+- ```/opt/karaf/bin/client repo-add mvn:org.apache.activemq/activemq-karaf/5.16.1-1/xml/features```
 - ```/opt/karaf/bin/client repo-add mvn:org.apache.camel.karaf/apache-camel/2.25.4/xml/features```
 - ```/opt/karaf/bin/client repo-add mvn:ca.islandora.alpaca/islandora-karaf/1.0.5/xml/features```
 
