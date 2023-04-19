@@ -192,7 +192,7 @@ press enter for all default user prompts
 type y for yes
 
 find the tar.gz here: https://tomcat.apache.org/download-90.cgi
-copy the TOMCAT_TARBALL_LINK as of 03-03-23 it was: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz
+copy the TOMCAT_TARBALL_LINK as of 04-19-23 it was: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz
 
 watch for version change. Keep the links and directory names consistent with the version you are using. Copy your version into TOMCAT_TARBALL_LINK or TOMCAT_DIRECTORY
 
@@ -211,10 +211,10 @@ scratch_5.sh (if the tomcat tarball link is different you must change the path i
 >#!/bin/bash
 >cd /opt
 >#O not 0
->sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz
+>sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz
 >sudo tar -zxvf tomcat.tar.gz
 >#don't miss the star*
->sudo mv /opt/apache-tomcat-9.0.73/* /opt/tomcat
+>sudo mv /opt/apache-tomcat-9.0.74/* /opt/tomcat
 >sudo chown -R tomcat:tomcat /opt/tomcat
 >```
 
