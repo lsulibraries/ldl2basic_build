@@ -686,13 +686,9 @@ will run the following:
 > sudo cp /mnt/hgfs/shared/org.pos4j.pax.logging.cfg /opt/karaf/etc/org.pos4j.pax.logging.cfg
 > sudo chown karaf:karaf /opt/karaf/etc/org.pos4j.pax.logging.cfg
 > sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg
->```
-
-- ```sudo nano /opt/karaf/bin/setenv```
-
->```
->#!/bin/sh
->export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+> sudo su
+> sudo echo '#!/bin/sh' >> /opt/karaf/bin/setenv
+> sudo echo 'export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /opt/karaf/bin/setenv
 >```
 
 Ctl-O to save
