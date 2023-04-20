@@ -668,7 +668,7 @@ The script will execute:
 ># Since islandora_defaults is near the bottom of the dependency chain, requiring
 ># it will get most of the modules and libraries we need to deploy a standard
 ># Islandora site.
->#sudo -u www-data composer require "islandora/islandora_defaults"
+>sudo -u www-data composer require "islandora/islandora_defaults"
 >#sudo -u www-data composer require "islandora/islandora_install_profile_demo"
 >sudo -u www-data composer require "drupal/flysystem:^2.0@alpha"
 >sudo -u www-data composer require "islandora/islandora:^2.4"
