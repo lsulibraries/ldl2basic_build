@@ -799,8 +799,6 @@ resolve a dependency
 
 ### Theme 
 
-- ```sudo -u www-data composer remove islandora/carapace```
-
 - ```sudo -u www-data composer require islandora/carapace```
 
 - visit "localhost/admin/appearance" and install a the carapace theme
