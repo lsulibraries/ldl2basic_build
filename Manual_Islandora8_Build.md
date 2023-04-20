@@ -843,7 +843,6 @@ For more information see the [islandora_workbench_docs](https://mjordan.github.i
 ### enable views display_media and open default styles permissions to www-data:
 
 - ```chown -R www-data:www-data /opt/web/sites/default/files/styles```
-- ```drush -y views:enable display_media```
 
 ### upload size and max post size
 
