@@ -840,7 +840,7 @@ https://github.com/mjordan/islandora_workbench_integration
 
 For more information see the [islandora_workbench_docs](https://mjordan.github.io/islandora_workbench_docs)
 
-### enable views display_media and open default styles permissions to www-data:
+### open default styles permissions to www-data:
 
 - ```chown -R www-data:www-data /opt/web/sites/default/files/styles```
 
