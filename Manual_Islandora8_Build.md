@@ -779,7 +779,7 @@ this line isn't right
 - ```sudo -u www-data drush -y -l localhost --userid=1 mim --group=islandora```
 -->
 
-- ```sudo -u www-data drush -y -l localhost --userid=1 mim```
+- ```sudo -u www-data drush -y -l localhost --userid=1 mim --all```
 
 uninstall 
 /admin/modules/uninstall 
