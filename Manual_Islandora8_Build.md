@@ -652,38 +652,48 @@ add the following to the end of the file:
 
 - ```cd /opt/drupal```
 - ```drush -y cr```
-- ```sudo sh /mnt/hgfs/shared/islandora_install.sh```
+- ```sudo sh /mnt/hgfs/shared/islandora_install_2.sh```
+
+older requirement script
+```sudo sh /mnt/hgfs/shared/islandora_install.sh```
 
 The script will execute:
 
 >```
 >#!/bin/bash
+>
+>#This file is newer from the official documentation could replace islandora_install.sh
+>
 >cd /opt/drupal
-># This is a convenience piece that will help speed up most of the rest of our
-># process working with Composer and Drupal.
->sudo -u www-data composer require zaporylie/composer-drupal-optimizations:^1.0
 ># Since islandora_defaults is near the bottom of the dependency chain, requiring
 ># it will get most of the modules and libraries we need to deploy a standard
 ># Islandora site.
->sudo -u www-data composer require islandora/islandora_defaults:dev-8.x-1.x
+>#sudo -u www-data composer require "islandora/islandora_defaults"
+>#sudo -u www-data composer require "islandora/islandora_install_profile_demo"
+>sudo -u www-data composer require "drupal/flysystem:^2.0@alpha"
+>sudo -u www-data composer require "islandora/islandora:^2.4"
+>sudo -u www-data composer require "islandora/controlled_access_terms:^2"
+>sudo -u www-data composer require "islandora/openseadragon:^2"
+>
 ># These can be considered important or required depending on your site's
 ># requirements; some of them represent dependencies of Islandora submodules.
->sudo -u www-data composer require drupal/pdf:1.x-dev
->sudo -u www-data composer require drupal/rest_oai_pmh:^1.0
->sudo -u www-data composer require drupal/facets:^1.3
->sudo -u www-data composer require drupal/restui:^1.16
->sudo -u www-data composer require drupal/rdfui:^1.0-beta1
->sudo -u www-data composer require drupal/content_browser:^1.0@alpha
+>sudo -u www-data composer require "drupal/pdf:1.1"
+>sudo -u www-data composer require "drupal/rest_oai_pmh:^2.0@beta"
+>sudo -u www-data composer require "drupal/search_api_solr:^4.2"
+>sudo -u www-data composer require "drupal/facets:^2"
+>sudo -u www-data composer require "drupal/content_browser:^1.0@alpha" ## TODO do we need this?
+>sudo -u www-data composer require "drupal/field_permissions:^1"
+>sudo -u www-data composer require "drupal/transliterate_filenames:^2.0"
+>
 ># These tend to be good to enable for a development environment, or just for a
 ># higher quality of life when managing Islandora. That being said, devel should
 ># NEVER be enabled on a production environment, as it intentionally gives the
 ># user tools that compromise the security of a site.
+>sudo -u www-data composer require drupal/restui:^1.21
 >sudo -u www-data composer require drupal/console:~1.0
-># sudo -u www-data composer require drupal/devel:^2.0 --with-all-dependencies #not working or conflict with symphony/var-dumper
+>sudo -u www-data composer require symfony/var-dumper
+>sudo -u www-data composer require drupal/devel
 >sudo -u www-data composer require drupal/admin_toolbar:^2.0
-># Islandora also provides a theme called Carapace designed to work well out of
-># the box with an Islandora site.
->sudo -u www-data composer require islandora/carapace:dev-8.x-3.x
 >```
 
 - ```sh /mnt/hgfs/shared/isla_lib.sh```
