@@ -781,6 +781,9 @@ this line isn't right
 
 - ```sudo -u www-data drush -y -l localhost --userid=1 mim --all```
 
+enable EVA views
+- ```drush -y views:enable display_media```
+
 uninstall 
 /admin/modules/uninstall 
 search_defaults
