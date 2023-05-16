@@ -313,10 +313,11 @@ copy setenv.sh from /mnt/hgfs/shared/ to /opt/tomcat/bin/
 - ```cp /mnt/hgfs/shared/setenv.sh /opt/tomcat/bin/```
 
 - ```sudo nano /opt/tomcat/bin/setenv.sh```
+uncomment line 5, comment line 4 (CTL-c) shows line number
+
 - ```sudo chown tomcat:tomcat /opt/tomcat/bin/setenv.sh```
 
 
-uncomment line 5, comment line 4 (CTL-c) shows line number
 save (CTL-o) exit (CTL+x)
 
 visit: https://github.com/fcrepo/fcrepo/releases choose the latest version and ajust the commands below if needed
