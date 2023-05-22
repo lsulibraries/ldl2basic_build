@@ -61,6 +61,8 @@ These commands should all be executed in sequence from within the vmware CLI:
 
 - ```ls /mnt/hgfs/shared```
 - you should see the shared folders from LSU OneDrive. if you don't see the shared folder, run this command in the vmware cli:
+- if bad mount point '/mnt/hgfs/' no such file or directory
+- ```mkdir /mnt/hgfs/``` 
 - ```sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000```
 
 - execute in the vmware cli after shared folders are connected:
