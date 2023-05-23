@@ -211,21 +211,6 @@ scratch_5.sh (if the tomcat tarball link is different you must change the path i
 >sudo chown -R tomcat:tomcat /opt/tomcat
 >```
 
-scratch_5_alt_begin
-
-run these steps instead of scratch_5.sh
-
-watch for version change. Keep the links and directory names consistent with the version you are using. Copy your version into TOMCAT_TARBALL_LINK or TOMCAT_DIRECTORY
-
-- ``` cd /opt```
-- ```sudo wget -O tomcat.tar.gz TOMCAT_TARBALL_LINK```
-- ```ls /opt``` to find name of TOMCAT_DIRECTORY: (apache-tomcat-9.0.74) 
-- ```sudo tar -zxvf tomcat.tar.gz```
-- ```sudo mv /opt/TOMCAT_DIRECTORY/* /opt/tomcat```
-- ```sudo chown -R tomcat:tomcat /opt/tomcat ```
-
-end scratch_5_alt
-
 
 - ```sh /mnt/hgfs/shared/scratch_6.sh```
 
