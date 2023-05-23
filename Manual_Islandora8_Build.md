@@ -71,18 +71,18 @@ These commands should all be executed in sequence from within the vmware CLI:
 the above command runs the following script (which is tedious to type):
 - ```sudo apt -y install php8.1 php8.1-cli php8.1-common php8.1-curl php8.1-dev php8.1-gd php8.1-imap php8.1-mbstring php8.1-opcache php8.1-xml php8.1-yaml php8.1-zip libapache2-mod-php8.1 php-pgsql php-redis php-xdebug unzip postgresql```
 
-Edit the postgresql.conf file starting at line 688
+Edit the postgresql.conf file starting at line 687
 
-- ```sudo nano +688 /etc/postgresql/14/main/postgresql.conf```
+- ```sudo nano +687 /etc/postgresql/14/main/postgresql.conf```
 
-change line 688 from 
+change line 687 from 
 >```
->#bytea_output 'hex'
+>#bytea_output = 'hex'
 >```
 
 change to
 >```
->bytea_output 'escape'
+>bytea_output = 'escape'
 >```
 
 -when using nano you press (CTL+o) to save (CTL+x) to close
