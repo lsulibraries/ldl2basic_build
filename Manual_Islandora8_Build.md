@@ -833,7 +833,7 @@ For more information see the [islandora_workbench_docs](https://mjordan.github.i
 
 ### open default styles permissions to www-data:
 
-- ```sudo chown -R www-data:www-data /opt/web/sites/default/files/styles```
+- ```sudo chown -R www-data:www-data /opt/drupal/web/sites/default/files/styles```
 
 ### upload size and max post size
 
