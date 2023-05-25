@@ -721,9 +721,14 @@ To allow our installation to talk to other services via Syn, we need to establis
 
 Log onto your site as an administrator at /user, then navigate to /admin/config/system/keys/add. Some of the settings here are unimportant, but pay close attention to the Key type, which should match the key we created earlier (an RSA key), and the File location, which should be the ultimate location of the key we created for Syn on the filesystem, /opt/keys/syn_private.key.
 
+Change Provider Settings
+
+Key Provider:  File
+
 #### Adding a JWT RSA Key
 
 Click Save to create the key.
+enter: /opt/keys/syn_private.key
 
 Once this key is created, navigate to /admin/config/system/jwt to select the key you just created from the list. Note that before the key shows up in the Private Key list, you need to select that key's type in the Algorithm section, namely RSASSA-PKCS1-v1_5 using SHA-256 (RS256).
 
