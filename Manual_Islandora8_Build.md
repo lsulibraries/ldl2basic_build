@@ -482,12 +482,9 @@ backend: Solr
 
 Standard X
 
-solr core :islandora8 
+solr core: islandora8 
 
-click advanced config:
-
-    solr.install.dir: /opt/solr
-
+solr path: /
 
 click Save
 
