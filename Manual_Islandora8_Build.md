@@ -797,7 +797,7 @@ resolve a dependency
 - visit "localhost/admin/appearance" and install a the carapace theme
 
 ### Require islandora workbench
-
+dr
 https://github.com/mjordan/islandora_workbench_integration
 
 - ```cd /opt/drupal```
@@ -843,12 +843,14 @@ For more information see the [islandora_workbench_docs](https://mjordan.github.i
 - change  ```max_file_uploads = 200``` to an appropriate number (1000?)
 - ```sudo systemctl restart apache2```
 
-### add and enable drupal 'group' module and 'groupmedia'
+# custom digitalutsc group modules / needs more testing 
 
-- ```cd /opt/drupal```
-- ```sudo -u www-data composer require 'drupal/group:^3.0'```
-- ```sudo -u www-data composer require drupal/group_permissions```
-- ```sudo -u www-data composer require 'drupal/gnode'```
-- ```sudo -u www-data composer require 'drupal/groupmedia'```
-- ```drush en -y group groupmedia gnode group_permissions```
+- ```sudo -u www-data composer require digitalutsc/islandora_group```
+- ```sudo -u www-data composer require drupal/gnode```
+- ```sudo -u www-data composer require drupal/flexible_permissions```
+
+- ```drush en -y islandora_group gnode flexible_permissions```
+
+# follow instructions to configure groups
+[link](https://lsumail2.sharepoint.com/:w:/r/sites/Team-LIB-WebDev/Shared%20Documents/LDL/LDL-2/Islandora-Groups-Documentation/Islandora-Group-Config-Instructions.docx?d=w2a8f1bbb639640b28b318fd20386b9f5&csf=1&web=1&e=8peqxQ)
 
