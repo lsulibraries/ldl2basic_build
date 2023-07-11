@@ -8,6 +8,4 @@ You will need shared folders enabled on the virtualmachine. Download the shared 
 
 Add the shared folder to your vmware's shared folder, instructions for connecting shared folders are in the Build Instructions.
 
-See [Manual_Islandora_8.md](https://github.com/lsulibraries/ldl2basic_build/blob/fedoraless-group-utsc/Manual_Islandora8_Build.md) for building a manual islandora 8 based on https://islandora.github.io/documentation/installation/manual (todo update versions)
-
-[Start Building](https://github.com/lsulibraries/ldl2basic_build/blob/fedoraless-group-utsc/Manual_Islandora8_Build.md)
+See [Manual_Islandora_8.md](https://github.com/lsulibraries/ldl2basic_build/blob/fedoraless-group-utsc/Manual_Islandora8_Build.md) to begin building a manual islandora 8 based on [Islandora Manual Build](https://islandora.github.io/documentation/installation/manual/introduction/)
