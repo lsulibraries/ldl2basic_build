@@ -61,6 +61,8 @@ These commands should all be executed in sequence from within the vmware CLI:
 
 - ```ls /mnt/hgfs/shared```
 - you should see the shared folders from LSU OneDrive. if you don't see the shared folder, run this command in the vmware cli:
+- if bad mount point '/mnt/hgfs/' no such file or directory
+- ```mkdir /mnt/hgfs/``` 
 - ```sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000```
 
 - execute in the vmware cli after shared folders are connected:
@@ -69,18 +71,18 @@ These commands should all be executed in sequence from within the vmware CLI:
 the above command runs the following script (which is tedious to type):
 - ```sudo apt -y install php8.1 php8.1-cli php8.1-common php8.1-curl php8.1-dev php8.1-gd php8.1-imap php8.1-mbstring php8.1-opcache php8.1-xml php8.1-yaml php8.1-zip libapache2-mod-php8.1 php-pgsql php-redis php-xdebug unzip postgresql```
 
-Edit the postgresql.conf file starting at line 688
+Edit the postgresql.conf file starting at line 687
 
-- ```sudo nano +688 /etc/postgresql/14/main/postgresql.conf```
+- ```sudo nano +687 /etc/postgresql/14/main/postgresql.conf```
 
-change line 688 from 
+change line 687 from 
 >```
->#bytea_output 'hex'
+>#bytea_output = 'hex'
 >```
 
 change to
 >```
->bytea_output 'escape'
+>bytea_output = 'escape'
 >```
 
 -when using nano you press (CTL+o) to save (CTL+x) to close
@@ -192,35 +194,27 @@ press enter for all default user prompts
 type y for yes
 
 find the tar.gz here: https://tomcat.apache.org/download-90.cgi
-copy the TOMCAT_TARBALL_LINK as of 03-03-23 it was: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz
-
-watch for version change. Keep the links and directory names consistent with the version you are using. Copy your version into TOMCAT_TARBALL_LINK or TOMCAT_DIRECTORY
-
-- ``` cd /opt```
-- ```sudo wget -O tomcat.tar.gz TOMCAT_TARBALL_LINK```
-- ```ls /opt``` to find name of TOMCAT_DIRECTORY: (apache-tomcat-9.0.73) 
-- ```sudo tar -zxvf tomcat.tar.gz```
-- ```sudo mv /opt/TOMCAT_DIRECTORY/* /opt/tomcat```
-- ```sudo chown -R tomcat:tomcat /opt/tomcat ```
+copy the TOMCAT_TARBALL_LINK as of 04-19-23 it was: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz
 
 - ```sh /mnt/hgfs/shared/scratch_5.sh```
 
-scratch_5.sh **(if the tomcat tarball link is different you must change the path in the script)**:
+scratch_5.sh (if the tomcat tarball link is different you must change the path in the script or run the commands in the scratch_5 alt section):
 
 >```
 >#!/bin/bash
 >cd /opt
 >#O not 0
->sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz
+>sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz
 >sudo tar -zxvf tomcat.tar.gz
 >#don't miss the star*
->sudo mv /opt/apache-tomcat-9.0.73/* /opt/tomcat
+>sudo mv /opt/apache-tomcat-9.0.74/* /opt/tomcat
 >sudo chown -R tomcat:tomcat /opt/tomcat
 >```
 
+
 - ```sh /mnt/hgfs/shared/scratch_6.sh```
 
-scratch_6.sh contents **if Cantaloupe version changes change the version number in this file**:
+scratch_6.sh contents (if Cantaloupe version changes change the version number in this file):
 
 >```
 >sudo cp /mnt/hgfs/shared/setenv.sh /opt/tomcat/bin/
@@ -240,14 +234,14 @@ scratch_6.sh contents **if Cantaloupe version changes change the version number 
 >sudo systemctl start cantaloupe
 >```
 
-check that unzip step worked ``` ls /opt/cantaloupe``` or something...
+check that unzip step worked ``` ls /opt/cantaloupe*``` or something...
 
 you may need to reload cantaloupe: 
 
 - ```sudo systemctl daemon-reload```
 
 
-## Installing fedora
+### Installing fedora
 
 - ```sudo systemctl stop tomcat```
 - ```sudo mkdir -p /opt/fcrepo/data/objects```
@@ -308,11 +302,15 @@ copy setenv.sh from /mnt/hgfs/shared/ to /opt/tomcat/bin/
 - ```sudo nano /opt/tomcat/bin/setenv.sh```
 
 uncomment line 5, comment line 4 (CTL-c) shows line number
+
+- ```sudo chown tomcat:tomcat /opt/tomcat/bin/setenv.sh```
+
+
 save (CTL-o) exit (CTL+x)
 
 visit: https://github.com/fcrepo/fcrepo/releases choose the latest version and ajust the commands below if needed
 
-- ```sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.3.0/fcrepo-webapp-6.3.0.war```
+- ```sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.4.0/fcrepo-webapp-6.4.0.war```
 - ```sudo mv fcrepo.war /opt/tomcat/webapps```
 - ```sudo chown tomcat:tomcat /opt/tomcat/webapps/fcrepo.war```
 - ```sudo systemctl restart tomcat```
@@ -348,7 +346,7 @@ Add this line  before the closing </Context> tag:
 >```
 >    <Valve className="ca.islandora.syn.valve.SynValve" pathname="/opt/fcrepo/config/syn-settings.xml"/>
 ></Context>
-su>```
+>```
 
 (note above for spelling errors: valve V A L V E not Value)
 
@@ -397,8 +395,7 @@ save (CTL+o) quit (CTL+x)
 
 If this worked correctly, Blazegraph should respond with "CREATED: islandora" to let us know it created the islandora namespace.
 
-(sudo?)
-- ```curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/inference.nt http://localhost:8080/blazegraph/namespace/islandora/sparql```
+- ```sudo curl -X POST -H "Content-Type: text/plain" --data-binary @/opt/blazegraph/conf/inference.nt http://localhost:8080/blazegraph/namespace/islandora/sparql```
 
 If this worked correctly, Blazegraph should respond with some XML letting us
 know it added the 2 entries from inference.nt to the namespace.
@@ -441,7 +438,7 @@ warning using _default configset with data driven scheme functionality. NOT RECO
 should also say:
 "Created new core 'islandora8'
 
-### configure the drupal search api
+### Configure the drupal search api
 
 - ```cd /opt/drupal```
 - ```sudo -u www-data composer require drupal/search_api_solr:^4.2```
@@ -485,12 +482,9 @@ backend: Solr
 
 Standard X
 
-solr core :islandora8 
+solr core: islandora8 
 
-click advanced config:
-
-    solr.install.dir: /opt/solr
-
+solr path: /
 
 click Save
 
@@ -547,7 +541,9 @@ let this execute: takes a while... maybe take a hydration break. It's running th
 >sudo chown www-data:www-data /var/log/islandora
 >```
 
-moving config files over
+moving config files over 
+
+## may be deprecated
 
 - ```sh /mnt/hgfs/shared/microservices-config.sh```
 
@@ -606,7 +602,7 @@ microservices-conf.sh will be copying a lot of config files from the shared fold
 >sudo chmod 644 /etc/apache2/conf-available/Recast.conf 
 >```
 
-enable microservices
+### Enable microservices
 
 - ```sudo a2enconf Homarus Houdini Hypercube Milliner Recast```
 - ```sudo systemctl restart apache2```
@@ -615,9 +611,9 @@ enable microservices
 
 - ```sudo apt install -y activemq```
 
-### Karaf and Alpaca section removed. 
+### Karaf and Alpaca 
 
-- not - required -
+- not - required - section removed.  
 
 ### configure drupal
 
@@ -644,38 +640,48 @@ add the following to the end of the file:
 
 - ```cd /opt/drupal```
 - ```drush -y cr```
-- ```sudo sh /mnt/hgfs/shared/islandora_install.sh```
+- ```sudo sh /mnt/hgfs/shared/islandora_install_2.sh```
+
+older requirement script
+```sudo sh /mnt/hgfs/shared/islandora_install.sh```
 
 The script will execute:
 
 >```
 >#!/bin/bash
+>
+>#This file is newer from the official documentation could replace islandora_install.sh
+>
 >cd /opt/drupal
-># This is a convenience piece that will help speed up most of the rest of our
-># process working with Composer and Drupal.
->sudo -u www-data composer require zaporylie/composer-drupal-optimizations:^1.0
 ># Since islandora_defaults is near the bottom of the dependency chain, requiring
 ># it will get most of the modules and libraries we need to deploy a standard
 ># Islandora site.
->sudo -u www-data composer require islandora/islandora_defaults:dev-8.x-1.x
+>sudo -u www-data composer require "islandora/islandora_defaults"
+>#sudo -u www-data composer require "islandora/islandora_install_profile_demo"
+>sudo -u www-data composer require "drupal/flysystem:^2.0@alpha"
+>sudo -u www-data composer require "islandora/islandora:^2.4"
+>sudo -u www-data composer require "islandora/controlled_access_terms:^2"
+>sudo -u www-data composer require "islandora/openseadragon:^2"
+>
 ># These can be considered important or required depending on your site's
 ># requirements; some of them represent dependencies of Islandora submodules.
->sudo -u www-data composer require drupal/pdf:1.x-dev
->sudo -u www-data composer require drupal/rest_oai_pmh:^1.0
->sudo -u www-data composer require drupal/facets:^1.3
->sudo -u www-data composer require drupal/restui:^1.16
->sudo -u www-data composer require drupal/rdfui:^1.0-beta1
->sudo -u www-data composer require drupal/content_browser:^1.0@alpha
+>sudo -u www-data composer require "drupal/pdf:1.1"
+>sudo -u www-data composer require "drupal/rest_oai_pmh:^2.0@beta"
+>sudo -u www-data composer require "drupal/search_api_solr:^4.2"
+>sudo -u www-data composer require "drupal/facets:^2"
+>sudo -u www-data composer require "drupal/content_browser:^1.0@alpha" ## TODO do we need this?
+>sudo -u www-data composer require "drupal/field_permissions:^1"
+>sudo -u www-data composer require "drupal/transliterate_filenames:^2.0"
+>
 ># These tend to be good to enable for a development environment, or just for a
 ># higher quality of life when managing Islandora. That being said, devel should
 ># NEVER be enabled on a production environment, as it intentionally gives the
 ># user tools that compromise the security of a site.
+>sudo -u www-data composer require drupal/restui:^1.21
 >sudo -u www-data composer require drupal/console:~1.0
-># sudo -u www-data composer require drupal/devel:^2.0 --with-all-dependencies #not working or conflict with symphony/var-dumper
+>sudo -u www-data composer require symfony/var-dumper
+>sudo -u www-data composer require drupal/devel
 >sudo -u www-data composer require drupal/admin_toolbar:^2.0
-># Islandora also provides a theme called Carapace designed to work well out of
-># the box with an Islandora site.
->sudo -u www-data composer require islandora/carapace:dev-8.x-3.x
 >```
 
 - ```sh /mnt/hgfs/shared/isla_lib.sh```
@@ -709,25 +715,29 @@ Script contains:
 >```
 
 
-Adding a JWT Configuration to Drupal
+### Adding a JWT Configuration to Drupal
 
 To allow our installation to talk to other services via Syn, we need to establish a Drupal-side JWT configuration using the keys we generated at that time.
 
 Log onto your site as an administrator at /user, then navigate to /admin/config/system/keys/add. Some of the settings here are unimportant, but pay close attention to the Key type, which should match the key we created earlier (an RSA key), and the File location, which should be the ultimate location of the key we created for Syn on the filesystem, /opt/keys/syn_private.key.
 
-Adding a JWT RSA Key
+Change Provider Settings
+
+Key Provider:  File
+
+#### Adding a JWT RSA Key
 
 Click Save to create the key.
+enter: /opt/keys/syn_private.key
 
 Once this key is created, navigate to /admin/config/system/jwt to select the key you just created from the list. Note that before the key shows up in the Private Key list, you need to select that key's type in the Algorithm section, namely RSASSA-PKCS1-v1_5 using SHA-256 (RS256).
 
-Configuring the JWT RSA Key for Use
+#### Configuring the JWT RSA Key for Use
 
 See instructions:
 - https://islandora.github.io/documentation/installation/manual/configuring_drupal/#adding-a-jwt-configuration-to-drupal
 
 visit http://[your-site-ip-address]/admin/config/system/jwt
-
 
 follow drupal config instructions:
 - https://islandora.github.io/documentation/installation/manual/configuring_drupal/#islandora
@@ -738,7 +748,7 @@ config canaloupe
 cantaloupe endpoint was not 8080
 this worked for cantaloupe config:
 
-had to unzip cantaloupe missed the unzip for some reason
+had to unzip cantaloupe
 - http://[your-site-ip-address]:8182/iiif/2
 
 Nav to openseadragon
@@ -762,7 +772,10 @@ this line isn't right
 - ```sudo -u www-data drush -y -l localhost --userid=1 mim --group=islandora```
 -->
 
-- ```sudo -u www-data drush -y -l localhost --userid=1 mim```
+- ```sudo -u www-data drush -y -l localhost --userid=1 mim --all```
+
+enable EVA views
+- ```drush -y views:enable display_media```
 
 uninstall 
 /admin/modules/uninstall 
@@ -777,16 +790,14 @@ resolve a dependency
 - ```drush en -y jquery_ui_accordion```
 
 
-###Theme trouble try remove require install
-
-- ```sudo -u www-data composer remove islandora/carapace```
+### Theme 
 
 - ```sudo -u www-data composer require islandora/carapace```
 
 - visit "localhost/admin/appearance" and install a the carapace theme
 
-###require islandora workbench
-
+### Require islandora workbench
+dr
 https://github.com/mjordan/islandora_workbench_integration
 
 - ```cd /opt/drupal```
@@ -820,10 +831,9 @@ https://github.com/mjordan/islandora_workbench_integration
 
 For more information see the [islandora_workbench_docs](https://mjordan.github.io/islandora_workbench_docs)
 
-### enable views display_media and open default styles permissions to www-data:
+### open default styles permissions to www-data:
 
-- ```chown -R www-data:www-data /opt/web/sites/default/files/styles```
-- ```drush -y views:enable display_media```
+- ```sudo chown -R www-data:www-data /opt/drupal/web/sites/default/files/styles```
 
 ### upload size and max post size
 
@@ -833,25 +843,14 @@ For more information see the [islandora_workbench_docs](https://mjordan.github.i
 - change  ```max_file_uploads = 200``` to an appropriate number (1000?)
 - ```sudo systemctl restart apache2```
 
-### add and enable drupal 'group' module and 'groupmedia'
-
-- ```sudo -u www-data composer require 'drupal/group:^3.0'```
-- ```sudo -u www-data composer require 'drupal/gnode'```
-- ```sudo -u www-data composer require 'drupal/groupmedia'```
-- ```drush en -y group groupmedia gnode```
-
 # custom digitalutsc group modules / needs more testing 
 
-- ```sudo -u www-data composer require squizlabs/phpcs_codesniffer```
 - ```sudo -u www-data composer require digitalutsc/islandora_group```
-- ```sudo -u www-data composer require digitalutsc/islandora_group_defaults```
+- ```sudo -u www-data composer require drupal/gnode```
+- ```sudo -u www-data composer require drupal/flexible_permissions```
 
-- ```drush en -y islandora_group islandora_group_defaults```
+- ```drush en -y islandora_group gnode flexible_permissions```
 
-Code and Docs here
-https://github.com/digitalutsc/islandora_group
-https://github.com/digitalutsc/islandora_group_defaults
-https://docs.google.com/document/d/1fy2KyjlURBpseLbwqspD3Yv5iFPpv1HQF_qKClV7zso/edit
+# follow instructions to configure groups
+[link](https://lsumail2.sharepoint.com/:w:/r/sites/Team-LIB-WebDev/Shared%20Documents/LDL/LDL-2/Islandora-Groups-Documentation/Islandora-Group-Config-Instructions.docx?d=w2a8f1bbb639640b28b318fd20386b9f5&csf=1&web=1&e=8peqxQ)
 
-Other Group modules
-git clone https://github.com/agile-humanities/Access-Control-By-Group

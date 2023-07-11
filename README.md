@@ -10,4 +10,4 @@ Add the shared folder to your vmware's shared folder, instructions for connectin
 
 See Manual_Islandora_8.md for building a manual islandora 8 based on https://islandora.github.io/documentation/installation/manual (todo update versions)
 
-[Start Building](https://github.com/lsulibraries/ldl2basic_build/blob/main/Manual_Islandora8_Build.md)
+[Start Building](https://github.com/lsulibraries/ldl2basic_build/blob/fedoraless-group-utsc/Manual_Islandora8_Build.md)
