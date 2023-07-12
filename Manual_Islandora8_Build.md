@@ -26,7 +26,7 @@ This build is adapted from [official islandora documentation](https://islandora.
 - set your username and password
 - finish the OS installation
 - when the installation finishes, you should accept the prompt to reboot the machine.
-- when the vm boots, log in with you username and password you set.
+- when the vm boots, log in with the username and password you set.
 
 ***network debugging***
 
@@ -38,9 +38,9 @@ This build is adapted from [official islandora documentation](https://islandora.
 
 ***enable shared folders on the virtual machine***
 - (right click the vm, go to settings, click the options tab, select "Always Enabled" for shared folders
-- (select a path to the "shared" folder from LSU OneDrive, click save)
-- I keep my path simple and put the files in a folder called 'shared'
-- my path is /mnt/hgfs/shared within the vm, if you use a different path, change it in all commands that use '/mnt/hgfs/shared'
+- (select a path to the "shared" folder with files from the LSU OneDrive, click save)
+- name the folder 'shared'
+- the path is /mnt/hgfs/shared within the vm
 
 
 ### Begin Build
@@ -59,17 +59,21 @@ These commands should all be executed in sequence from within the vmware CLI:
 - Log out of the vm (CTL-D) (this is neccessary for group settings to be applied)
 - Log back in
 
-- ```ls /mnt/hgfs/shared```
-- you should see the shared folders from LSU OneDrive. if you don't see the shared folder, run this command in the vmware cli:
-- if bad mount point '/mnt/hgfs/' no such file or directory
-- ```mkdir /mnt/hgfs/``` 
+- ```ls /mnt/hgfs/```
+- you should see the "shared" folder from LSU OneDrive. if you don't see the shared folder, run this command in the vmware cli:
+- if nothing prinst or you see "bad mount point '/mnt/hgfs/' no such file or directory"
 - ```sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000```
+- Then you should see the folder 'shared' when you type 
+- ```ls /mnt/hgfs/```
 
 - execute in the vmware cli after shared folders are connected:
 - ```sh /mnt/hgfs/shared/scratch_2.sh```
 
-the above command runs the following script (which is tedious to type):
+the above command runs the following command:
 - ```sudo apt -y install php8.1 php8.1-cli php8.1-common php8.1-curl php8.1-dev php8.1-gd php8.1-imap php8.1-mbstring php8.1-opcache php8.1-xml php8.1-yaml php8.1-zip libapache2-mod-php8.1 php-pgsql php-redis php-xdebug unzip postgresql```
+
+- select <OK> from the package configuration menu if one appears
+
 
 Edit the postgresql.conf file starting at line 687
 
@@ -85,9 +89,12 @@ change to
 >bytea_output = 'escape'
 >```
 
--when using nano you press (CTL+o) to save (CTL+x) to close
+- when using nano you press (CTL+o) to save (CTL+x) to close
 
 - ```sudo systemctl restart postgresql```
+
+
+***Install composer and clone drupal project***
 
 - ```sh /mnt/hgfs/shared/scratch_3.sh```
 
@@ -105,6 +112,8 @@ scratch_3.sh runs:
 >git clone https://github.com/drupal-composer/drupal-project.git
 >```
 
+
+***Run composer create-project to create a drupal 9 (Drupal 10 coming soon...) and link drush***
 
 - ```sh /mnt/hgfs/shared/scratch_4.sh```
 
@@ -124,14 +133,17 @@ confirm link:
 
 Expected output will link to /opt/drupal/vendor/drush/drush/drush
 
+***Edit apache2 ports, and configuration files***
+
+
 
 -  ```sudo nano /etc/apache2/ports.conf```
 
-Remove everything but "Listen 80" use (CTL+k) to remove lines from the file.
+- Remove everything but "Listen 80" use (CTL+k) to remove lines from the file.
 
 > ```Listen 80```
 
-save the file (CTL+o) then (CTL+x)
+- save the file (CTL+o) then (CTL+x)
 
 Edit the apache 000-default.conf file
 
@@ -156,6 +168,9 @@ save (CTL+o) and exit (CTL+x)
 
 - ```sudo systemctl restart apache2```
 
+If apache fails to restart, likely there is a typo in one of the above files.
+
+
 ***create a database***
 
 - ```sudo -u postgres psql```
@@ -179,6 +194,8 @@ type ```\q``` to quit
 
 - ```sudo apt -y install openjdk-11-jdk openjdk-11-jre```
 
+- tab and press enter, selecting '<OK>' to restart suggested services
+
 - ```update-alternatives --list java```
 
 The above should output something like "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"
@@ -188,14 +205,15 @@ note this path for later use as JAVA_HOME. it is the same as the path above with
 - ```sudo addgroup tomcat```
 - ```sudo adduser tomcat --ingroup tomcat --home /opt/tomcat --shell /usr/bin```
 
-choose a password
-ie: password: "tomcat"
-press enter for all default user prompts
-type y for yes
+- choose a password ie: password: "tomcat"
+- press enter for all prompts you don't need to fill them out
+- type y, press enter
 
-find the tar.gz here: https://tomcat.apache.org/download-90.cgi
-copy the TOMCAT_TARBALL_LINK as of 04-19-23 it was: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz
+find the latest tar.gz here: https://tomcat.apache.org/download-90.cgi
+copy the TOMCAT_TARBALL_LINK as of 07-11-23 it was: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.78/bin/apache-tomcat-9.0.78.tar.gz 
 
+
+- ```cd /opt```
 - ```sh /mnt/hgfs/shared/scratch_5.sh```
 
 scratch_5.sh (if the tomcat tarball link is different you must change the path in the script or run the commands in the scratch_5 alt section):
@@ -204,17 +222,17 @@ scratch_5.sh (if the tomcat tarball link is different you must change the path i
 >#!/bin/bash
 >cd /opt
 >#O not 0
->sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz
+>sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.78/bin/apache-tomcat-9.0.78.tar.gz
 >sudo tar -zxvf tomcat.tar.gz
 >#don't miss the star*
->sudo mv /opt/apache-tomcat-9.0.74/* /opt/tomcat
+>sudo mv /opt/apache-tomcat-9.0.78/* /opt/tomcat
 >sudo chown -R tomcat:tomcat /opt/tomcat
 >```
 
 
 - ```sh /mnt/hgfs/shared/scratch_6.sh```
 
-scratch_6.sh contents (if Cantaloupe version changes change the version number in this file):
+scratch_6.sh contents (Cantaloupe version has not changed in a while visit https://github.com/cantaloupe-project/cantaloupe/releases/ to confirm version):
 
 >```
 >sudo cp /mnt/hgfs/shared/setenv.sh /opt/tomcat/bin/
@@ -241,117 +259,6 @@ you may need to reload cantaloupe:
 - ```sudo systemctl daemon-reload```
 
 
-### Installing fedora
-
-- ```sudo systemctl stop tomcat```
-- ```sudo mkdir -p /opt/fcrepo/data/objects```
-- ```sudo mkdir /opt/fcrepo/config```
-- ```sudo chown -R tomcat:tomcat /opt/fcrepo```
-- ```sudo -u postgres psql```
-
-execute these commands within the psql database:
-
->```
->create database fcrepo encoding 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8' TEMPLATE template0;
->create user fedora with encrypted password 'fedora';
->grant all privileges on database fcrepo to fedora;
->\q
->```
-
-check that you mount point is still working:
-
-- ```ls /mnt/hgfs/shared```
-
-if no files are listed of the folder is not found run this:
-
-- ```sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000```
-
-otherwise continue with this step if the files exist.
-
-- ```sudo sh /mnt/hgfs/shared/fedora-config.sh```
-
-fedora-config.sh contains:
-
->```
->sudo cp /mnt/hgfs/shared/i8_namespace.cnd /opt/fcrepo/config/i8_namespace.cnd
->sudo chown tomcat:tomcat /opt/fcrepo/config/i8_namespace.cnd
->sudo chmod 644 /opt/fcrepo/config/i8_namespace.cnd
->sudo touch /opt/fcrepo/config/allowed_hosts.txt
->sudo chown tomcat:tomcat /opt/fcrepo/config/allowed_hosts.txt
->sudo chmod 644 /opt/fcrepo/config/allowed_hosts.txt
->sudo -u tomcat echo "http://localhost:80/" >> /opt/fcrepo/config/allowed_hosts.txt
->sudo cp /mnt/hgfs/shared/repository.json /opt/fcrepo/config/
->sudo chown tomcat:tomcat /opt/fcrepo/config/repository.json
->sudo chmod 644 /opt/fcrepo/config/repository.json
->sudo cp /mnt/hgfs/shared/fcrepo-config.xml /opt/fcrepo/config/
->sudo chmod 644 /opt/fcrepo/config/fcrepo-config.xml
->sudo chown tomcat:tomcat /opt/fcrepo/config/fcrepo-config.xml
->sudo cp /mnt/hgfs/shared/tomcat-users.xml /opt/tomcat/conf/tomcat-users.xml
->sudo chmod 600 /opt/tomcat/conf/tomcat-users.xml
->sudo chown tomcat:tomcat /opt/tomcat/conf/tomcat-users.xml
->```
-
-double check /opt/fcrepo/config/allowed_hosts.txt got created
-
-- ```cat /opt/fcrepo/config/allowed_hosts.txt```
-
-copy setenv.sh from /mnt/hgfs/shared/ to /opt/tomcat/bin/
-
-- ```cp /mnt/hgfs/shared/setenv.sh /opt/tomcat/bin/```
-
-- ```sudo nano /opt/tomcat/bin/setenv.sh```
-
-uncomment line 5, comment line 4 (CTL-c) shows line number
-
-- ```sudo chown tomcat:tomcat /opt/tomcat/bin/setenv.sh```
-
-
-save (CTL-o) exit (CTL+x)
-
-visit: https://github.com/fcrepo/fcrepo/releases choose the latest version and ajust the commands below if needed
-
-- ```sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.4.0/fcrepo-webapp-6.4.0.war```
-- ```sudo mv fcrepo.war /opt/tomcat/webapps```
-- ```sudo chown tomcat:tomcat /opt/tomcat/webapps/fcrepo.war```
-- ```sudo systemctl restart tomcat```
-
-
-check here for link: https://github.com/Islandora/Syn/releases/ copy the link (if changed from syn-1.1.1) and replace the link in the command below:
-
-- ```sudo wget -P /opt/tomcat/lib https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar```
-
-run the syn-confing.sh to ensure the library has the correct permissions:
-
-- ```sudo sh /mnt/hgfs/shared/syn-config.sh```
-
-syn-config.sh contents:
-
->```
->sudo chown -R tomcat:tomcat /opt/tomcat/lib
->sudo chmod -R 640 /opt/tomcat/lib
->sudo mkdir /opt/keys
->sudo openssl genrsa -out "/opt/keys/syn_private.key" 2048
->sudo openssl rsa -pubout -in "/opt/keys/syn_private.key" -out "/opt/keys/syn_public.key"
->sudo chown www-data:www-data /opt/keys/syn*
->sudo cp /mnt/hgfs/shared/syn-settings.xml /opt/fcrepo/config/
->sudo chown tomcat:tomcat /opt/fcrepo/config/syn-settings.xml
->sudo chmod 600 /opt/fcrepo/config/syn-settings.xml
->```
- 
-edit the context.xml file:
-
-- ```sudo nano /opt/tomcat/conf/context.xml```
-
-Add this line  before the closing </Context> tag:
->```
->    <Valve className="ca.islandora.syn.valve.SynValve" pathname="/opt/fcrepo/config/syn-settings.xml"/>
-></Context>
->```
-
-(note above for spelling errors: valve V A L V E not Value)
-
-- ```sudo systemctl restart tomcat```
-
 #### installing blazegraph
 
 - ```sudo mkdir -p /opt/blazegraph/data```
@@ -365,13 +272,9 @@ Add this line  before the closing </Context> tag:
 
 - ```sh /mnt/hgfs/shared/blazegraph_conf.sh```
 
-Typing out config files by hand is not worth the time. this script simplifies the process.
+this script simplifies the process of writing config files and logging.
 
-blazegraph_conf.sh 
-configure logging
-RWStore.properties
-blazegraph.config
-inference.nt
+blazegraph_conf.sh runs the following: 
 
 >```
 >sudo cp /mnt/hgfs/shared/log4j.properties /opt/blazegraph/conf/
@@ -386,7 +289,7 @@ inference.nt
 
 - ```sudo nano /opt/tomcat/bin/setenv.sh```
 
-comment out line 5 uncomment line 6
+comment out line 4 uncomment line 8
 
 save (CTL+o) quit (CTL+x)
 
@@ -426,14 +329,9 @@ create solr core
 - ```sudo chown -R solr:solr /var/solr```
 - ```sudo -u solr bin/solr create -c islandora8 -p 8983```
 
-#had to cd into /opt/solr/exmaple/files/conf 
-#ran
-#sudo cp -r . /var/solr/data/islandora8/conf
-
-
 A warning will print:
 
-warning using _default configset with data driven scheme functionality. NOT RECOMMENDED for production use. To turn off: bin/solr/ config -c islandora8 -p 8983 -action set-user-property -property update.autoCreateFields -value false
+warning using \_default configset with data driven scheme functionality. NOT RECOMMENDED for production use. To turn off: bin/solr/ config -c islandora8 -p 8983 -action set-user-property -property update.autoCreateFields -value false
 
 should also say:
 "Created new core 'islandora8'
@@ -450,7 +348,7 @@ should also say:
 - ```ip addr show```
 
 note the second ip
-in my case it was XXX.XXX.XXX.XXX (don't put your ip in github...)
+in my case it was XXX.XXX.XXX.XXX
 
 configure in GUI by visiting the ip above XXX.XXX.XXX.XXX:80 in browser (firefox)
 log in with islandora:islandora
@@ -458,7 +356,6 @@ log in with islandora:islandora
 you may need to restart apache:
 
 - ```sudo systemctl restart apache2```
-
 
 
 navigate to : XXX.XXX.XXX.XXX:80/user/login
@@ -502,7 +399,7 @@ apply solr configs
 adding an index
 - In gui navigate XXX.XXX.XXX.XXX or localhost:80/admin/config/search/search-api/add-index
  
- **configure index via gui***
+***configure index via gui***
 
 Index name: Islandora 8 Index
 
@@ -517,7 +414,7 @@ Enabled X
 click Save
 
 
-### crayfish microservices
+***crayfish microservices***
 
 click back into vm
 
@@ -542,8 +439,6 @@ let this execute: takes a while... maybe take a hydration break. It's running th
 >```
 
 moving config files over 
-
-## may be deprecated
 
 - ```sh /mnt/hgfs/shared/microservices-config.sh```
 
@@ -581,7 +476,7 @@ configure apache confs for microservices
 
 - ```sh /mnt/hgfs/shared/microservices-conf.sh```
 
-microservices-conf.sh will be copying a lot of config files from the shared folder
+microservices-conf.sh will copy config files from the shared folder
 
 >```
 >#!/bin/bash
@@ -602,20 +497,22 @@ microservices-conf.sh will be copying a lot of config files from the shared fold
 >sudo chmod 644 /etc/apache2/conf-available/Recast.conf 
 >```
 
-### Enable microservices
+Enable microservices
 
 - ```sudo a2enconf Homarus Houdini Hypercube Milliner Recast```
 - ```sudo systemctl restart apache2```
 
-### ActiveMQ 
+***ActiveMQ***
 
 - ```sudo apt install -y activemq```
 
-### Karaf and Alpaca 
+- if prompted to restart the machine do so.
+
+***Karaf and Alpaca***
 
 - not - required - section removed.  
 
-### configure drupal
+***configure drupal***
 
 edit the settings.php file
 
@@ -627,14 +524,6 @@ add the following to the end of the file:
 >$settings['trusted_host_patterns'] = [
 >  'localhost',
 >  'your-site-ip'
->];
->$settings['flysystem'] = [
-> 'fedora' => [
-> 'driver' => 'fedora',
-> 'config' => [
->  'root' => 'http://localhost:8080/fcrepo/rest/',
-> ],
->],
 >];
 >```
 
@@ -710,39 +599,37 @@ Script contains:
 >cd /opt/drupal
 >drush -y en rdf responsive_image syslog serialization basic_auth rest restui search_api_solr facets content_browser pdf admin_toolbar islandora_defaults controlled_access_terms_defaults islandora_breadcrumbs islandora_iiif islandora_oaipmh
 >drush -y theme:enable carapace
-> drush -y config-set system.theme default carapace
+>drush -y config-set system.theme default carapace
 >drush -y cr
 >```
 
 
-### Adding a JWT Configuration to Drupal
+***Adding a JWT Configuration to Drupal***
+
+Not sure if this is needed...
+
+- ```sudo sh /mnt/hgfs/shared/syn-config.sh```
+
+Once this key is created, navigate to /admin/config/system/jwt to select the key you just created from the list. Note that before the key shows up in the Private Key list, you need to select that key's type in the Algorithm section, namely RSASSA-PKCS1-v1_5 using SHA-256 (RS256).
 
 To allow our installation to talk to other services via Syn, we need to establish a Drupal-side JWT configuration using the keys we generated at that time.
 
 Log onto your site as an administrator at /user, then navigate to /admin/config/system/keys/add. Some of the settings here are unimportant, but pay close attention to the Key type, which should match the key we created earlier (an RSA key), and the File location, which should be the ultimate location of the key we created for Syn on the filesystem, /opt/keys/syn_private.key.
 
-Change Provider Settings
-
-Key Provider:  File
-
-#### Adding a JWT RSA Key
-
-Click Save to create the key.
-enter: /opt/keys/syn_private.key
-
-Once this key is created, navigate to /admin/config/system/jwt to select the key you just created from the list. Note that before the key shows up in the Private Key list, you need to select that key's type in the Algorithm section, namely RSASSA-PKCS1-v1_5 using SHA-256 (RS256).
-
-#### Configuring the JWT RSA Key for Use
-
 See instructions:
 - https://islandora.github.io/documentation/installation/manual/configuring_drupal/#adding-a-jwt-configuration-to-drupal
 
-visit http://[your-site-ip-address]/admin/config/system/jwt
+- Key Name: JWT RSA Key
+- Key Type: JWT RSA Key
 
-follow drupal config instructions:
-- https://islandora.github.io/documentation/installation/manual/configuring_drupal/#islandora
+Change Provider Settings:
 
-config canaloupe
+- Key Provider:  File
+- File Location: /opt/keys/syn_private.key
+- Click Save
+
+***config canaloupe***
+
 - https://islandora.github.io/documentation/installation/manual/configuring_drupal/#configuring-islandora-iiif
 
 cantaloupe endpoint was not 8080
@@ -758,57 +645,37 @@ add to IIIf Image server location: http://[your-site-ip-address]:8182/iiif/2
 select IIIF Manifest from dropdown
 save
 
-navigate to flysystem settings
-http://[your-site-ip-address]:8182/admin/config/media/file-system
-choose the flysystem button and save (scroll down)
 
-give the admin fedoraAdmin role
-
-- ```cd /opt/drupal```
-- ```sudo -u www-data drush -y urol "fedoraadmin" islandora```
-
-<!--
-this line isn't right
-- ```sudo -u www-data drush -y -l localhost --userid=1 mim --group=islandora```
--->
+***Migrate settings for islandora***
 
 - ```sudo -u www-data drush -y -l localhost --userid=1 mim --all```
 
 enable EVA views
 - ```drush -y views:enable display_media```
 
-uninstall 
-/admin/modules/uninstall 
-search_defaults
-
-
-
---skip this dependency isn't needed 
-resolve a dependency
-
-- ```sudo -u www-data composer require 'drupal/jquery_ui_accordion:^1.1'```
+<!-- ```sudo -u www-data composer require 'drupal/jquery_ui_accordion:^1.1'```
 - ```drush en -y jquery_ui_accordion```
 
-
-### Theme 
+***Theme***
 
 - ```sudo -u www-data composer require islandora/carapace```
 
 - visit "localhost/admin/appearance" and install a the carapace theme
+-->
 
-### Require islandora workbench
-dr
+***Require islandora workbench***
+
 https://github.com/mjordan/islandora_workbench_integration
 
 - ```cd /opt/drupal```
 - ```sudo -u www-data composer require mjordan/islandora_workbench_integration "dev-main"```
 - ```drush en -y islandora_workbench_integration```
 
-#### enable rest endpoints for workbench then rebuild the cache
+***enable rest endpoints for workbench then rebuild the cache***
 
 - ```drush cim -y --partial --source=modules/contrib/islandora_workbench_integration/config/optional```
 
-- ```drush cr -y```
+- ```drush -y cr```
 
 - outside of your virtual machine open a terminal to clone islandora workbench
 
@@ -831,7 +698,7 @@ https://github.com/mjordan/islandora_workbench_integration
 
 For more information see the [islandora_workbench_docs](https://mjordan.github.io/islandora_workbench_docs)
 
-### open default styles permissions to www-data:
+***open default styles permissions to www-data***
 
 - ```sudo chown -R www-data:www-data /opt/drupal/web/sites/default/files/styles```
 
@@ -847,10 +714,13 @@ For more information see the [islandora_workbench_docs](https://mjordan.github.i
 
 - ```sudo -u www-data composer require digitalutsc/islandora_group```
 - ```sudo -u www-data composer require drupal/gnode```
-- ```sudo -u www-data composer require drupal/flexible_permissions```
-
-- ```drush en -y islandora_group gnode flexible_permissions```
+- ```drush en -y islandora_group gnode```
 
 # follow instructions to configure groups
 [link](https://lsumail2.sharepoint.com/:w:/r/sites/Team-LIB-WebDev/Shared%20Documents/LDL/LDL-2/Islandora-Groups-Documentation/Islandora-Group-Config-Instructions.docx?d=w2a8f1bbb639640b28b318fd20386b9f5&csf=1&web=1&e=8peqxQ)
 
+There is a video guide to the installation steps above:
+[video](https://lsumail2.sharepoint.com/:v:/r/sites/Team-LIB-WebDev/Shared%20Documents/LDL/LDL-2/Islandora-Groups-Documentation/islandora_group_install_1.mp4?csf=1&web=1&e=6ihuUx)
+
+There is also a video guide to running an islandora_workbench ingest from csv.
+[ingest](https://lsumail2.sharepoint.com/:v:/r/sites/Team-LIB-WebDev/Shared%20Documents/LDL/LDL-2/Islandora-Groups-Documentation/islandora_group_install_2_workbench_boogaloo.mp4?csf=1&web=1&e=iSI3fe)
