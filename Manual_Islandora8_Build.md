@@ -137,16 +137,19 @@ scratch_4.sh runs:
 >#change 9.x-dev to 10.1.2
 >#sudo -u www-data composer create-project drupal-composer/drupal-project:9.x-dev /opt/drupal --no-interaction
 >sudo -u www-data composer create-project drupal/recommended-project:10.1.2 /opt/drupal --no-interaction
->sudo -u www-data composer require --dev drush/drush
->sudo ln -s /opt/drupal/vendor/bin/drush /usr/local/bin/drush
+>#sudo -u www-data composer require --dev drush/drush
+>#sudo ln -s /opt/drupal/vendor/bin/drush /usr/local/bin/drush
 >```
+
+- ```cd drupal-project```
+- ```composer require drush/drush```
+- ```sudo ln -s ~/drupal-project/vendor/bin/drush /usr/local/bin/drush```
 
 confirm link:
 
 - ```ls -lart /usr/local/bin/drush```
 
-Expected output will link to /opt/drupal/vendor/drush/drush/drush
-
+Expected output will link to /home/wwc/drupal-project/vendor/bin/drush
 
 -  ```sudo nano /etc/apache2/ports.conf```
 
