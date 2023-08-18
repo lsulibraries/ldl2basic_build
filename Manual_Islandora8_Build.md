@@ -640,9 +640,9 @@ check apache-activemq version (last was 5.18.1)
 - ```sudo mv apache-activemq-5.18.1 activemq```
 - ```sudo chown -R activemq:activemq /opt/activemq```
 
-- ```sudo nano /etc/systemd/system/activemq.service```
+- ```sudo cp /mnt/hgfs/shared/activemq.service /etc/systemd/system/activemq.service```
 
-Edit the file like so:
+The file should contain this:
 >```
 >[Unit]
 >Description=Apache ActiveMQ
