@@ -65,11 +65,29 @@ These commands should all be executed in sequence from within the vmware CLI:
 - ```mkdir /mnt/hgfs/``` 
 - ```sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000```
 
+
+- execute in the vmware cli after shared folders are connected:
+- ```sh /mnt/hgfs/shared/scratch_1.sh```
+the above command runs a script containing the following:
+>```
+>#!/bin/bash
+>sudo apt install -y lsb-release gnupg2 ca-certificates apt-transport-https software-properties-common
+>sudo add-apt-repository ppa:ondrej/php
+>sudo add-apt-repository ppa:ondrej/apache2
+>sudo apt update
+>``` 
+ 
 - execute in the vmware cli after shared folders are connected:
 - ```sh /mnt/hgfs/shared/scratch_2.sh```
-
-the above command runs the following script (which is tedious to type):
-- ```sudo apt -y install php8.1 php8.1-cli php8.1-common php8.1-curl php8.1-dev php8.1-gd php8.1-imap php8.1-mbstring php8.1-opcache php8.1-xml php8.1-yaml php8.1-zip libapache2-mod-php8.1 php-pgsql php-redis php-xdebug unzip postgresql```
+the above command runs the following script the :
+>```
+>#!/bin/bash
+>#sudo apt-get -y install php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-dev php7.4-gd php7.4-imap php7.4-json php7.4-mbstring >php7.4-opcache php7.4-xml php7.4-yaml php7.4-zip libapache2-mod-php7.4 php-pgsql php-redis php-xdebug unzip postgresql
+>#sudo apt-get -y install php8.1 php8.1-cli php8.1-common php8.1-curl php8.1-dev php8.1-gd php8.1-imap php8.1-mbstring php8.1-opcache >php8.1-xml php8.1-yaml php8.1-zip libapache2-mod-php8.1 php-pgsql php-redis php-xdebug unzip postgresql
+>sudo apt-get -y install php8.2 php8.2-cli php8.2-common php8.2-curl php8.2-dev php8.2-gd php8.2-imap php8.2-mbstring php8.2-opcache >php8.2-xml php8.2-yaml php8.2-zip libapache2-mod-php8.2 php-pgsql php-redis php-xdebug unzip postgresql
+>sudo a2enmod php8.2
+>sudo systemctl restart apache2
+>```
 
 Edit the postgresql.conf file starting at line 687
 
