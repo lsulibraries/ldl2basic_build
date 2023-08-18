@@ -777,7 +777,7 @@ JENA_OSGI_VERSION The latest version of the Apache Jena 3.x OSGi features 3.17.0
 
 (This shouldn't be strictly necessary, but appears to be a missing) upstream dependency for some fcrepo features
 
-- ```/opt/karaf/bin/client repo-add mvn:org.apache.jena/jena-osgi-features/3.17.0/xml/features```
+- ```sudo /opt/karaf/bin/client repo-add mvn:org.apache.jena/jena-osgi-features/3.17.0/xml/features```
 
 
 - ```sudo -u karaf nano /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg```
