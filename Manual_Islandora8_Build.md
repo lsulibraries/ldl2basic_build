@@ -478,6 +478,8 @@ should also say:
 ### Configure the drupal search api
 
 - ```cd /opt/drupal```
+- or
+- ```cd ~/drupal-project```
 - ```sudo -u www-data composer require drupal/search_api_solr:^4.2```
 - ```drush -y en search_api_solr```
 
