@@ -186,19 +186,30 @@ save (CTL+o) and exit (CTL+x)
 
 - ```sudo -u postgres psql```
 
-#from within the postgres cli:
+#from within the postgres cli change to drupal10:
 >```
->create database drupal9 encoding 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8' TEMPLATE template0;
+>create database drupal10 encoding 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8' TEMPLATE template0;
 >create user drupal with encrypted password 'drupal';
->grant all privileges on database drupal9 to drupal;
+>grant all privileges on database drupal10 to drupal;
 >```
 
 type ```\q``` to quit
 
+For DRUPAL 10:
+
+-```sudo -u postgres psql```
+#from within the postgres cli:
+>```
+>\c drupal10
+>CREATE EXTENSIOt pg_trgm;
+>\q
+>```
+
+
 ***install a drupal site***
 
 - ```cd /opt/drupal/web```
-- ```sudo drush -y site-install standard --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal9" --site-name="LDL 2.0" --account-name=islandora --account-pass=islandora```
+- ```sudo drush -y site-install standard --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal10" --site-name="LDL 2.0" --account-name=islandora --account-pass=islandora```
 
 
 ***install tomcat and cantaloupe***
