@@ -644,11 +644,7 @@ microservices-conf.sh will be copying a lot of config files from the shared fold
 - ```sudo a2enconf Homarus Houdini Hypercube Milliner Recast```
 - ```sudo systemctl restart apache2```
 
-### ActiveMQ 
-
-- ```sudo apt install -y activemq```
-
-### Installing Karaf and Alpaca
+### Installing ActiveMQ Karaf and Alpaca
 
 check apache-activemq version (last was 5.18.1)
 
