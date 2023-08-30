@@ -580,9 +580,7 @@ let this execute: takes a while... maybe take a hydration break. It's running th
 >sudo chown www-data:www-data /var/log/islandora
 >```
 
-moving config files over 
-
-## may be deprecated
+### moving config files over 
 
 - ```sh /mnt/hgfs/shared/microservices-config.sh```
 
