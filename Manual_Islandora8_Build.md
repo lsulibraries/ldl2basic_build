@@ -134,9 +134,9 @@ scratch_4.sh runs:
 >cd drupal-project
 ># Expect this to take a little while, as this is grabbing the entire
 ># requirements set for Drupal.
->#change 9.x-dev to 10.1.2
+>#change 9.x-dev to 10.1.0
 >#sudo -u www-data composer create-project drupal-composer/drupal-project:9.x-dev /opt/drupal --no-interaction
->sudo -u www-data composer create-project drupal/recommended-project:10.1.2 /opt/drupal --no-interaction
+>sudo -u www-data composer create-project drupal/recommended-project:10.1.0 /opt/drupal --no-interaction
 >#sudo -u www-data composer require --dev drush/drush
 >#sudo ln -s /opt/drupal/vendor/bin/drush /usr/local/bin/drush
 >```
