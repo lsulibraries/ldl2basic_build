@@ -141,9 +141,9 @@ scratch_4.sh runs:
 >#sudo ln -s /opt/drupal/vendor/bin/drush /usr/local/bin/drush
 >```
 
-- ```cd drupal-project```
+- ```cd /opt/drupal/drupal-project```
 - ```composer require drush/drush```
-- ```sudo ln -s ~/drupal-project/vendor/bin/drush /usr/local/bin/drush```
+- ```sudo ln -s /opt/drupal/drupal-project/vendor/bin/drush /usr/local/bin/drush```
 
 confirm link:
 
