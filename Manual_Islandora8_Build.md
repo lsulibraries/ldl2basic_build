@@ -201,7 +201,7 @@ For DRUPAL 10:
 #from within the postgres cli:
 >```
 >\c drupal10
->CREATE EXTENSIOt pg_trgm;
+>CREATE EXTENSION pg_trgm;
 >\q
 >```
 
