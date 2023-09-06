@@ -246,7 +246,7 @@ scratch_5.sh (if the tomcat tarball link is different you must change the path i
 >sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
 >sudo tar -zxvf tomcat.tar.gz
 >#don't miss the star*
->sudo mv /opt/apache-tomcat-9.0.74/* /opt/tomcat
+>sudo mv /opt/apache-tomcat-9.0.80/* /opt/tomcat
 >sudo chown -R tomcat:tomcat /opt/tomcat
 >```
 
