@@ -336,7 +336,7 @@ double check /opt/fcrepo/config/allowed_hosts.txt got created
 
 copy setenv.sh from /mnt/hgfs/shared/ to /opt/tomcat/bin/
 
-- ```cp /mnt/hgfs/shared/setenv.sh /opt/tomcat/bin/```
+- ```sudo cp /mnt/hgfs/shared/setenv.sh /opt/tomcat/bin/```
 
 - ```sudo nano /opt/tomcat/bin/setenv.sh```
 
