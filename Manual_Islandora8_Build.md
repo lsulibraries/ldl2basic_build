@@ -208,7 +208,7 @@ For DRUPAL 10:
 
 ***install a drupal site***
 
-- ```cd /opt/drupal/web```
+- ```cd /opt/drupal/drupal-project/web```
 - ```sudo drush -y site-install standard --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal10" --site-name="LDL 2.0" --account-name=islandora --account-pass=islandora```
 
 
