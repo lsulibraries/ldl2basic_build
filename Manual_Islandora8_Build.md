@@ -232,6 +232,8 @@ type y for yes
 
 find the tar.gz here: https://tomcat.apache.org/download-90.cgi
 copy the TOMCAT_TARBALL_LINK as of 04-19-23 it was: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz
+copy the TOMCAT_TARBALL_LINK as of 09-06-23 it was: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
+
 
 - ```sh /mnt/hgfs/shared/scratch_5.sh```
 
@@ -241,7 +243,7 @@ scratch_5.sh (if the tomcat tarball link is different you must change the path i
 >#!/bin/bash
 >cd /opt
 >#O not 0
->sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz
+>sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
 >sudo tar -zxvf tomcat.tar.gz
 >#don't miss the star*
 >sudo mv /opt/apache-tomcat-9.0.74/* /opt/tomcat
