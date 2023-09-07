@@ -124,7 +124,7 @@ scratch_3.sh runs:
 >```
 
 
--before scratch 4
+# before scratch 4
 
 - `cd /opt/drupal`
 - `composer create-project islandora/islandora-starter-site`
