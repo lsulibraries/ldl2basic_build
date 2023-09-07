@@ -178,8 +178,8 @@ edit file to contain only the following:
 >```
 ><VirtualHost *:80>
 >  ServerName localhost
->  DocumentRoot "/opt/drupal/web"
->  <Directory "/opt/drupal/web">
+>  DocumentRoot "/opt/drupal/islandora-starter-site/web"
+>  <Directory "/opt/drupal/islandora-starter-site/web">
 >    Options Indexes FollowSymLinks MultiViews
 >    AllowOverride all
 >    Require all granted
