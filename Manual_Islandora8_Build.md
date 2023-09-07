@@ -120,8 +120,14 @@ scratch_3.sh runs:
 >sudo chown www-data:www-data /opt/drupal
 >sudo chmod 775 /opt/drupal
 >sudo chown -R www-data:www-data /var/www/
->git clone https://github.com/drupal-composer/drupal-project.git
+>#git clone https://github.com/drupal-composer/drupal-project.git
 >```
+
+
+-before scratch 4
+
+- `cd /opt/drupal`
+- `composer create-project islandora/islandora-starter-site`
 
 
 - ```sh /mnt/hgfs/shared/scratch_4.sh```
