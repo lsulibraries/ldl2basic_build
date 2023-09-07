@@ -129,6 +129,7 @@ scratch_3.sh runs:
 - `cd /opt/drupal`
 - `composer create-project islandora/islandora-starter-site`
 
+# Skip all of scratch 4 for now
 
 - ```sh /mnt/hgfs/shared/scratch_4.sh```
 
@@ -147,7 +148,9 @@ scratch_4.sh runs:
 >#sudo ln -s /opt/drupal/vendor/bin/drush /usr/local/bin/drush
 >```
 
-- ```cd /opt/drupal/drupal-project```
+# Continue from here
+
+- ```cd /opt/drupal/islandora-starter-site```
 - ```composer require drush/drush```
 - ```sudo ln -s /opt/drupal/drupal-project/vendor/bin/drush /usr/local/bin/drush```
 
@@ -156,6 +159,8 @@ confirm link:
 - ```ls -lart /usr/local/bin/drush```
 
 Expected output will link to /home/wwc/drupal-project/vendor/bin/drush
+
+# editing apache files
 
 -  ```sudo nano /etc/apache2/ports.conf```
 
