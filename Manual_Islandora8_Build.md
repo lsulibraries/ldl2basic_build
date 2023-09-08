@@ -903,10 +903,11 @@ add the following to the end of the file:
 - ```cd /opt/drupal/islandora-starter-site```
 - ```sudo chown -R www-data:www-data .```
 - ```drush -y cr```
-- ```sudo sh /mnt/hgfs/shared/islandora_install_2.sh```
+- ```sudo sh /mnt/hgfs/shared/islandora_install_3.sh```
 
-older requirement script
+older requirement scripts
 ```sudo sh /mnt/hgfs/shared/islandora_install.sh```
+```sudo sh /mnt/hgfs/shared/islandora_install_2.sh```
 
 The script will execute:
 
@@ -956,7 +957,7 @@ The script will execute:
 >#add these before enable
 >composer require drupal/masonry
 >composer require drupal/libraries
->cd web
+>cd /opt/drupal/islandora-starter-site/web
 >mkdir libraries
 >cd libraries
 >mkdir masonry/dist
