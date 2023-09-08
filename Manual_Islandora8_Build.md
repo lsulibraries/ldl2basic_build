@@ -879,7 +879,7 @@ the script contains:
 
 edit the settings.php file
 
-- ```sudo nano /opt/drupal/web/sites/default/settings.php```
+- ```sudo nano /opt/drupal/islandora-starter-site/web/sites/default/settings.php```
 
 add the following to the end of the file:
 
