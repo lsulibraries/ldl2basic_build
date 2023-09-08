@@ -493,6 +493,7 @@ should also say:
 - ```cd /opt/drupal```
 - or whichever drupal folder you have 
 - ```cd /opt/drupal/islandora-starter-site```
+- ```sudo chown www-data:www-data *```
 - ```sudo -u www-data composer require drupal/search_api_solr:^4.2```
 - ```drush -y en search_api_solr```
 
