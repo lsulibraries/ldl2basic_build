@@ -697,8 +697,6 @@ check activemq version (5.16.1-1 as of writing):
 
 - ```sudo apt-cache policy activemq```
 
-##KARAF is removed
-
 - ```sudo addgroup karaf```
 - ```sudo adduser karaf --ingroup karaf --home /opt/karaf --shell /usr/bin```
 
