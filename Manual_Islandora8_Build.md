@@ -898,7 +898,10 @@ add the following to the end of the file:
 >];
 >```
 
-- ```cd /opt/drupal```
+## Note changes
+
+- ```cd /opt/drupal/islandora-starter-site```
+- ```sudo chown -R www-data:www-data .```
 - ```drush -y cr```
 - ```sudo sh /mnt/hgfs/shared/islandora_install_2.sh```
 
