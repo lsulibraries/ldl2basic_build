@@ -463,7 +463,7 @@ know it added the 2 entries from inference.nt to the namespace.
 increase filesize (optional?)
 
 - ```sudo su```
-- ```sudo echo "fs.file-max = 45535" >> /etc/sysctl.conf```
+- ```sudo echo "fs.file-max = 65535" >> /etc/sysctl.conf```
 - ```sudo sysctl -p```
 
 (CTL + D) to exit root.
