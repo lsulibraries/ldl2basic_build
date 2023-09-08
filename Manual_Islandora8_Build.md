@@ -738,7 +738,7 @@ will run the following:
 
 Ctl-D to log out of su
 
-- ```sudo export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"```
+- ```export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"```
 - ```sudo chown karaf:karaf /opt/karaf/bin/setenv```
 - ```sudo chmod 755 /opt/karaf/bin/setenv```
 - ```sudo nano /opt/karaf/etc/users.properties```
