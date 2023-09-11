@@ -1045,46 +1045,21 @@ Nav to openseadragon
 
 - choose the flysystem button and save (scroll down)
 
-from within the vm
+# this isn't right skip for now
 give the admin fedoraAdmin role
 
 - ```cd /opt/drupal/islandora-starter-site```
 - ```sudo -u www-data drush -y urol "fedoraadmin" islandora```
 
-<!--
-this line isn't right
-- ```sudo -u www-data drush -y -l localhost --userid=1 mim --group=islandora```
--->
-
+# run this
 - ```sudo -u www-data drush -y -l localhost --userid=1 mim --all```
 
-enable EVA views
-- ```drush -y views:enable display_media```
-
-uninstall 
-/admin/modules/uninstall 
-search_defaults
-
-
-
---skip this dependency isn't needed 
-resolve a dependency
-
-- ```sudo -u www-data composer require 'drupal/jquery_ui_accordion:^1.1'```
-- ```drush en -y jquery_ui_accordion```
-
-
-### Theme 
-
-- ```sudo -u www-data composer require islandora/carapace```
-
-- visit "localhost/admin/appearance" and install a the carapace theme
 
 ### Require islandora workbench
 
 https://github.com/mjordan/islandora_workbench_integration
 
-- ```cd /opt/drupal```
+- ```cd /opt/drupal/islandora-starter-site```
 - ```sudo -u www-data composer require mjordan/islandora_workbench_integration "dev-main"```
 - ```drush en -y islandora_workbench_integration```
 
