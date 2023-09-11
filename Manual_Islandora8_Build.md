@@ -1060,7 +1060,7 @@ give the admin fedoraAdmin role
 https://github.com/mjordan/islandora_workbench_integration
 
 - ```cd /opt/drupal/islandora-starter-site```
-- ```sudo -u www-data composer require mjordan/islandora_workbench_integration "dev-main"```
+- ```sudo -u www-data composer require "mjordan/islandora_workbench_integration:dev-main"```
 - ```drush en -y islandora_workbench_integration```
 
 #### enable rest endpoints for workbench then rebuild the cache
