@@ -1026,18 +1026,18 @@ visit http://[your-site-ip-address]/admin/config/system/jwt
 
 -  https://islandora.github.io/documentation/installation/manual/configuring_drupal/#configuring-islandora-iiif
 
-cantaloupe endpoint was not 8080
-this worked for cantaloupe config:
+navigate to ```/admin/config/islandora/iiif```
 
-had to unzip cantaloupe
-- http://[your-site-ip-address]:8182/iiif/2
+Set IIIF Image Server Location:
+- http://localhost:8182/iiif/2
 
 Nav to openseadragon
-- http://[your-site-ip-address]:8182/admin/config/media/openseadragon
+- http://[your-site-ip-address]/admin/config/media/openseadragon
 
-add to IIIf Image server location: http://[your-site-ip-address]:8182/iiif/2
-select IIIF Manifest from dropdown
-save
+- add to IIIf Image server location: 
+- http://localhost:8182/iiif/2
+- select IIIF Manifest from dropdown?
+- save
 
 navigate to flysystem settings
 http://[your-site-ip-address]:8182/admin/config/media/file-system
