@@ -968,7 +968,7 @@ The script will execute:
 
 - ```sh /mnt/hgfs/shared/islandora_en.sh```
 
-Script contains:
+# Script Has Changed:
 
 >```
 >cd /opt/drupal
@@ -978,6 +978,10 @@ Script contains:
 >drush -y cr
 >```
 
+## Require JWT
+
+- ```sudo -w www-data composer require "drupal/jwt:^2.0"```
+- ```drush en -y jwt```
 
 ### Adding a JWT Configuration to Drupal
 
