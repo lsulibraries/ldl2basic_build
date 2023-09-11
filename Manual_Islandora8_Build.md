@@ -1104,10 +1104,14 @@ For more information see the [islandora_workbench_docs](https://mjordan.github.i
 
 ### add and enable drupal 'group' module and 'groupmedia'
 
-- ```cd /opt/drupal```
+- ```cd /opt/drupal/islandora-starter-site```
 - ```sudo -u www-data composer require 'drupal/group:^3.0'```
 - ```sudo -u www-data composer require drupal/group_permissions```
 - ```sudo -u www-data composer require 'drupal/gnode'```
 - ```sudo -u www-data composer require 'drupal/groupmedia'```
 - ```drush en -y group groupmedia gnode group_permissions```
+
+- or
+- ```cd /opt/drupal/islandora-starter-site```
+- ```sh /mnt/hgfs/shared/group-install.sh```
 
