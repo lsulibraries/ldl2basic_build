@@ -1014,11 +1014,15 @@ visit http://[your-site-ip-address]/admin/config/system/jwt
 
 #### config canaloupe
 
--```sudo -u www-data composer require "islandora/openseadragon"```
+- ```sudo -u www-data composer require "islandora/openseadragon"```
 
--```drush en -y openseadragon```
+- ```drush en -y openseadragon```
 
--```drush en -y islandora_iiif```
+- ```drush en -y islandora_iiif```
+
+- ``` cd /opt```
+- ```unzip cantaloupe.zip```
+- ```sudo systemctl start cantaloupe```
 
 -  https://islandora.github.io/documentation/installation/manual/configuring_drupal/#configuring-islandora-iiif
 
