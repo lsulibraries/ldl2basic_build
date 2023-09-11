@@ -1039,13 +1039,16 @@ Nav to openseadragon
 - select IIIF Manifest from dropdown?
 - save
 
-navigate to flysystem settings
-http://[your-site-ip-address]:8182/admin/config/media/file-system
-choose the flysystem button and save (scroll down)
+# navigate to flysystem settings
 
+-Visit http://[your-site-ip-address]/admin/config/media/file-system
+
+- choose the flysystem button and save (scroll down)
+
+from within the vm
 give the admin fedoraAdmin role
 
-- ```cd /opt/drupal```
+- ```cd /opt/drupal/islandora-starter-site```
 - ```sudo -u www-data drush -y urol "fedoraadmin" islandora```
 
 <!--
