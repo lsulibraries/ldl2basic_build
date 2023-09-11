@@ -1013,8 +1013,11 @@ visit http://[your-site-ip-address]/admin/config/system/jwt
 - ```sudo systemctl restart tomcat```
 
 #### config canaloupe
+
 -```sudo -u www-data composer require "islandora/openseadragon"```
+
 -```drush en -y openseadragon```
+
 -```drush en -y islandora_iiif```
 
 -  https://islandora.github.io/documentation/installation/manual/configuring_drupal/#configuring-islandora-iiif
