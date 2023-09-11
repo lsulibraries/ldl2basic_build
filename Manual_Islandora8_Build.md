@@ -1013,7 +1013,7 @@ visit http://[your-site-ip-address]/admin/config/system/jwt
 - ```sudo systemctl restart tomcat```
 
 #### config canaloupe
--```sudo -u www-data composer require "islandora/openseadragon"
+-```sudo -u www-data composer require "islandora/openseadragon"```
 -```drush en -y openseadragon```
 -```drush en -y islandora_iiif```
 
