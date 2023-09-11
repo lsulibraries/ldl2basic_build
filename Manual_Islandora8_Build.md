@@ -1007,8 +1007,10 @@ See instructions:
 
 visit http://[your-site-ip-address]/admin/config/system/jwt
 
-follow drupal config instructions:
+#### follow drupal config instructions:
 - https://islandora.github.io/documentation/installation/manual/configuring_drupal/#islandora
+- We had to run this to get activemq starting broker tcp://localhost:61613 connection working
+- ```sudo systemctl restart tomcat```
 
 config canaloupe
 - https://islandora.github.io/documentation/installation/manual/configuring_drupal/#configuring-islandora-iiif
