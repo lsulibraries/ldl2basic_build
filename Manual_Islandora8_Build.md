@@ -980,7 +980,7 @@ The script will execute:
 
 ## Require JWT
 
-- ```sudo -w www-data composer require "drupal/jwt:^2.0"```
+- ```sudo -u www-data composer require "drupal/jwt:^2.0"```
 - ```drush en -y jwt```
 
 ### Adding a JWT Configuration to Drupal
