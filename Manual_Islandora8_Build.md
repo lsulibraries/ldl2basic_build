@@ -463,7 +463,8 @@ know it added the 2 entries from inference.nt to the namespace.
 - ``` sudo wget https://dlcdn.apache.org/lucene/solr/8.11.2/solr-8.11.2.tgz ```
 - ```sudo tar -xzvf solr-8.11.2.tgz```
 - ```sudo solr-8.11.2/bin/install_solr_service.sh solr-8.11.2.tgz```
-
+- or run
+- ```sh /mnt/hgfs/shared/solr-dl.sh```
 
 - type q to quit...
 
