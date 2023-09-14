@@ -683,7 +683,7 @@ run these or activemq-dl.sh
 - ```sh /mnt/hgfs/shared/activemq-dl.sh```
 
 check activemq.service file
--``` cat /etc/systemd/system/activemq.service```
+- ```cat /etc/systemd/system/activemq.service```
 
 The file should contain this text:
 >```
@@ -816,11 +816,10 @@ JENA_OSGI_VERSION The latest version of the Apache Jena 3.x OSGi features 3.17.0
 - ```sudo /opt/karaf/bin/client repo-add mvn:org.apache.activemq/activemq-karaf/5.16.1/xml/features```
 - ```sudo /opt/karaf/bin/client repo-add mvn:org.apache.camel.karaf/apache-camel/2.25.4/xml/features```
 - ```sudo /opt/karaf/bin/client repo-add mvn:ca.islandora.alpaca/islandora-karaf/1.0.5/xml/features```
-
-(This shouldn't be strictly necessary, but appears to be a missing) upstream dependency for some fcrepo features
-
+- (This shouldn't be strictly necessary, but appears to be a missing) upstream dependency for some fcrepo features
 - ```sudo /opt/karaf/bin/client repo-add mvn:org.apache.jena/jena-osgi-features/3.17.0/xml/features```
-
+- or run:
+- ```sh /mnt/hgfs/shared/karaf-repo-add.sh```
 
 - ```sudo -u karaf nano /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg```
 
