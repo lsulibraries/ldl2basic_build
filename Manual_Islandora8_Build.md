@@ -123,11 +123,10 @@ scratch_3.sh runs:
 >#git clone https://github.com/drupal-composer/drupal-project.git
 >```
 
-
 # before scratch 4
 
 - `cd /opt/drupal`
-- `composer create-project islandora/islandora-starter-site`
+- `sudo -u www-data composer create-project islandora/islandora-starter-site`
 
 # Skip all of scratch 4 for now
 
