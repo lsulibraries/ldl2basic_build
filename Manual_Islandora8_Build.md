@@ -821,6 +821,8 @@ JENA_OSGI_VERSION The latest version of the Apache Jena 3.x OSGi features 3.17.0
 - or run:
 - ```sh /mnt/hgfs/shared/karaf-repo-add.sh```
 
+#### continue
+
 - ```sudo -u karaf nano /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg```
 
 edit the file to contain this text:
