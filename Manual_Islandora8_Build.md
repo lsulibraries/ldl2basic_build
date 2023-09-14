@@ -150,7 +150,7 @@ scratch_4.sh runs:
 # Continue from here
 
 - ```cd /opt/drupal/islandora-starter-site```
-- ```composer require drush/drush```
+- ```sudo -u www-data composer require drush/drush```
 - ```sudo ln -s /opt/drupal/islandora-starter-site/vendor/bin/drush /usr/local/bin/drush```
 
 confirm link:
