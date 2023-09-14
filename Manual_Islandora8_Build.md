@@ -358,17 +358,21 @@ uncomment line 5, comment line 4 (CTL-c) shows line number
 
 save (CTL-o) exit (CTL+x)
 
+you may want to check
 visit: https://github.com/fcrepo/fcrepo/releases choose the latest version and ajust the commands below if needed
 
 - ```sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.4.0/fcrepo-webapp-6.4.0.war```
 - ```sudo mv fcrepo.war /opt/tomcat/webapps```
 - ```sudo chown tomcat:tomcat /opt/tomcat/webapps/fcrepo.war```
 - ```sudo systemctl restart tomcat```
-
+- or skip the typing and run:
+- ```sh /mnt/hgfs/shared/fedora-dl.sh```
 
 check here for link: https://github.com/Islandora/Syn/releases/ copy the link (if changed from syn-1.1.1) and replace the link in the command below:
 
 - ```sudo wget -P /opt/tomcat/lib https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar```
+- or skip the typing and run:
+- ```sh /mnt/hgfs/shared/syn-dl.sh```
 
 run the syn-confing.sh to ensure the library has the correct permissions:
 
@@ -407,11 +411,14 @@ Add this line  before the closing </Context> tag:
 - ```sudo mkdir -p /opt/blazegraph/data```
 - ```sudo mkdir /opt/blazegraph/conf```
 - ```sudo chown -R tomcat:tomcat /opt/blazegraph```
-
 - ```cd /opt```
 - ```sudo wget -O blazegraph.war https://repo1.maven.org/maven2/com/blazegraph/bigdata-war/2.1.5/bigdata-war-2.1.5.war```
 - ```sudo mv blazegraph.war /opt/tomcat/webapps```
 - ```sudo chown tomcat:tomcat /opt/tomcat/webapps/blazegraph.war```
+- or skip the typing and run:
+- ```sh /mnt/hgfs/shared/blazegraph-dl.sh```
+
+run blazegraph_conf.sh: 
 
 - ```sh /mnt/hgfs/shared/blazegraph_conf.sh```
 
