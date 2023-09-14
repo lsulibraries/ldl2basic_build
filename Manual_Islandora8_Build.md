@@ -725,16 +725,17 @@ Islandora Documentation recommends 4.2.x. Other versions are available, <u>but t
 best link for now: 
  https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz
 
+Instead of running
 
 - ```cd /opt```
 - ```sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz```
-
-double check for /mnt/hgfs/shared ```sudo vmhgfs-fuse.host/ /mnt/hgfs/ -o allow_other -o uid=1000```
-
 - ```sudo tar -xzvf karaf.tar.gz```
 - ```sudo chown -R karaf:karaf apache-karaf-4.2.16```
 - ```sudo mv apache-karaf-4.2.16/* /opt/karaf```
+- or run script:
+- ```sh /mnt/hgfs/shared/karaf-dl.sh```
 
+double check for /mnt/hgfs/shared ```sudo vmhgfs-fuse.host/ /mnt/hgfs/ -o allow_other -o uid=1000```
 - ```sudo sh /mnt/hgfs/shared/karaf-stuff.sh```
 
 will run the following:
