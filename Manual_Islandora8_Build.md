@@ -914,7 +914,7 @@ add the following to the end of the file:
 >];
 >```
 
-## Note changes Starter site may not need islandora_install_3.sh
+## Skip this section
 
 - ```cd /opt/drupal/islandora-starter-site```
 - ```sudo chown -R www-data:www-data .```
@@ -925,66 +925,9 @@ older requirement scripts
 ```sudo sh /mnt/hgfs/shared/islandora_install.sh```
 ```sudo sh /mnt/hgfs/shared/islandora_install_2.sh```
 
-The script will execute:
-
->```
->#!/bin/bash
->
->#This file is newer from the official documentation could replace islandora_install.sh
->
->cd /opt/drupal
-># Since islandora_defaults is near the bottom of the dependency chain, requiring
-># it will get most of the modules and libraries we need to deploy a standard
-># Islandora site.
->sudo -u www-data composer require "islandora/islandora_defaults"
->#sudo -u www-data composer require "islandora/islandora_install_profile_demo"
->sudo -u www-data composer require "drupal/flysystem:^2.0@alpha"
->sudo -u www-data composer require "islandora/islandora:^2.4"
->sudo -u www-data composer require "islandora/controlled_access_terms:^2"
->sudo -u www-data composer require "islandora/openseadragon:^2"
->
-># These can be considered important or required depending on your site's
-># requirements; some of them represent dependencies of Islandora submodules.
->sudo -u www-data composer require "drupal/pdf:1.1"
->sudo -u www-data composer require "drupal/rest_oai_pmh:^2.0@beta"
->sudo -u www-data composer require "drupal/search_api_solr:^4.2"
->sudo -u www-data composer require "drupal/facets:^2"
->sudo -u www-data composer require "drupal/content_browser:^1.0@alpha" ## TODO do we need this?
->sudo -u www-data composer require "drupal/field_permissions:^1"
->sudo -u www-data composer require "drupal/transliterate_filenames:^2.0"
->
-># These tend to be good to enable for a development environment, or just for a
-># higher quality of life when managing Islandora. That being said, devel should
-># NEVER be enabled on a production environment, as it intentionally gives the
-># user tools that compromise the security of a site.
->sudo -u www-data composer require drupal/restui:^1.21
->sudo -u www-data composer require drupal/console:~1.0
->sudo -u www-data composer require symfony/var-dumper
->sudo -u www-data composer require drupal/devel
->sudo -u www-data composer require drupal/admin_toolbar:^2.0
->```
-
 - ```sh /mnt/hgfs/shared/isla_lib.sh```
 
-The script will execute:
-
->```
->#!/bin/bash
->#add these before enable
->composer require drupal/masonry
->composer require drupal/libraries
->cd /opt/drupal/islandora-starter-site/web
->mkdir libraries
->cd libraries
->mkdir masonry/dist
->mkdir imagesloaded
->wget -O masonry/dist/masonry.pkgd.min.js https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js
->wget -O imagesloaded/imagesloaded.pkgd.min.js https://unpkg.com/imagesloaded@4.1.4/imagesloaded.pkgd.min.js
->```
-
 - ```sh /mnt/hgfs/shared/islandora_en.sh```
-
-# Script Has Changed:
 
 >```
 >cd /opt/drupal
@@ -1036,8 +979,6 @@ visit http://[your-site-ip-address]/admin/config/system/jwt
 
 - ```drush en -y islandora_iiif```
 
-- ``` cd /opt```
-- ```unzip cantaloupe.zip```
 - ```sudo systemctl start cantaloupe```
 
 -  https://islandora.github.io/documentation/installation/manual/configuring_drupal/#configuring-islandora-iiif
@@ -1061,17 +1002,16 @@ Nav to openseadragon
 
 - choose the flysystem button and save (scroll down)
 
-# this isn't right skip for now
-give the admin fedoraAdmin role
+#give the admin fedoraAdmin role
 
 - ```cd /opt/drupal/islandora-starter-site```
-- ```sudo -u www-data drush -y urol "fedoraadmin" islandora```
+- ```sudo -u www-data drush -y urol "fedoraadmin" admin```
 
-# run this
+# run this to get taxonomy populated
 - ```sudo -u www-data drush -y -l localhost --userid=1 mim --all```
 
 
-### Require islandora workbench
+### Require islandora workbench should be able to skip this
 
 https://github.com/mjordan/islandora_workbench_integration
 
@@ -1106,9 +1046,6 @@ https://github.com/mjordan/islandora_workbench_integration
 
 For more information see the [islandora_workbench_docs](https://mjordan.github.io/islandora_workbench_docs)
 
-### open default styles permissions to www-data:
-
-- ```sudo chown -R www-data:www-data /opt/drupal/islandora-starter-site/web/sites/default/files/styles```
 
 ### upload size and max post size
 
@@ -1130,4 +1067,96 @@ For more information see the [islandora_workbench_docs](https://mjordan.github.i
 - or
 - ```cd /opt/drupal/islandora-starter-site```
 - ```sh /mnt/hgfs/shared/group-install.sh```
+
+### Friady Documentation dump
+
+# after configuring settings.php we add jwt
+
+- ```sudo -u www-data composer require "drupal/jwt:^2.0"```
+
+- ```drush en -y jwt```
+
+# Follow instructions to setup jwt with our key: 
+
+https://islandora.github.io/documentation/installation/manual/configuring_drupal/#adding-a-jwt-configuration-to-drupal
+
+#Had to change JWT location (something changed our key location, likely drush site:install...)
+
+- /admin/config/system/keys/manage/islandora_rsa_key
+
+- path change back to:
+
+- ```/opt/keys/syn_private.key```
+
+# enable openseadragon and islandora
+
+- ```drush en -y openseadragon```
+
+- ```drush en -y islandora```
+
+
+# to get repository item and needed taxonomies:
+
+- ```drush site:install --existing-config```
+
+- ```sudo systemctl start cantaloupe```
+
+# navigate to admin/config/media/openseadragon
+
+add the location of the cantaloupe iiif endpoint:
+
+- http://localhost:8182/iiif/2
+
+- Save
+
+- ```cd /opt/drupal/islandora-starter-site```
+
+- ```sudo -u www-data drush -y urol "fedoraadmin" admin```
+
+- ```sudo -u www-data drush -y -l localhost --userid=1 mim --all```
+
+
+# enable views
+
+- ```drush -y views:enable display_media```
+
+
+-  ```drush cim -y --partial --source=modules/contrib/islandora_workbench_integration/config/optional```
+
+
+# edit php.ini to make file upload sizes work
+
+- ```sudo nano /etc/php/8.2/php.ini```
+
+- post_max_size = 200M
+ 
+- upload_max_filesize = 200M 
+
+- upload_max_filesize = 200M
+
+- change max_file_uploads = 2000
+
+- ```sudo systemctl restart apache2```
+
+
+workbench ingest:
+
+Edit CSV:
+
+taxonomy:			CSV Header:
+Resource Type  =>   field_resource_type
+
+taxonomy:			CSV Header:
+islandora models => field_model 
+
+
+from outside the vm:
+
+- ```cd islandora_workbench```
+- ```./workbench --config milad-and-will-config.yml```
+
+
+
+
+
 
