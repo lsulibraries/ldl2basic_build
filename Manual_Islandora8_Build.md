@@ -1126,7 +1126,7 @@ add the location of the cantaloupe iiif endpoint:
 
 # edit php.ini to make file upload sizes work
 
-- ```sudo nano /etc/php/8.2/php.ini```
+- ```sudo nano /etc/php/8.2/apache2/php.ini```
 
 - post_max_size = 200M
  
