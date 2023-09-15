@@ -914,7 +914,7 @@ add the following to the end of the file:
 >];
 >```
 
-## Note changes
+## Note changes Starter site may not need islandora_install_3.sh
 
 - ```cd /opt/drupal/islandora-starter-site```
 - ```sudo chown -R www-data:www-data .```
