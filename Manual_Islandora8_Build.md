@@ -1139,16 +1139,22 @@ add the location of the cantaloupe iiif endpoint:
 - ```sudo systemctl restart apache2```
 
 
-workbench ingest:
 
-Edit CSV:
+# workbench ingest:
+
+You'll need to have working csv with metadata and filepaths, a yml file that refrences the csv.
+
+You'll need to Edit the csv to contain taxonomy id terms for two different csv headers:
+
+Check the taxonomy terms 
+/admin/structure/taxonomy/manage/resource_types/overview
+/admin/structure/taxonomy/manage/islandora_models/overview
 
 taxonomy:			CSV Header:
 Resource Type  =>   field_resource_type
 
 taxonomy:			CSV Header:
 islandora models => field_model 
-
 
 from outside the vm:
 
