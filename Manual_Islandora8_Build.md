@@ -496,37 +496,25 @@ should also say:
 
 ### Configure the drupal search api
 
+
+#### skip the starter-site already has this
 - ```cd /opt/drupal```
 - or whichever drupal folder you have 
 - ```cd /opt/drupal/islandora-starter-site```
 - ```sudo chown www-data:www-data *```
 - ```sudo -u www-data composer require drupal/search_api_solr:^4.2```
 - ```drush -y en search_api_solr```
-
-#change vm network adapter to Host-Only (right click vm, settings, etc, save)
-#back in the vm 
-
 - ```ip addr show```
-
-note the second ip
-in my case it was XXX.XXX.XXX.XXX (don't put your ip in github...)
-
-configure in GUI by visiting the ip above XXX.XXX.XXX.XXX:80 in browser (firefox)
-log in with islandora:islandora
-
-you may need to restart apache:
-
+- configure in GUI by visiting the ip above XXX.XXX.XXX.XXX:80 in browser (firefox)
+- log in with islandora:islandora
+- you may need to restart apache:
 - ```sudo systemctl restart apache2```
 
+#### start here
 
-
-navigate to : XXX.XXX.XXX.XXX:80/user/login
-
-then: XXX.XXX.XXX.XXX:80/admin/config/search/search-api
-or localhost:80/admin/config/search/search-api
-
+- navigate to : XXX.XXX.XXX.XXX:80/user/login
+- then: XXX.XXX.XXX.XXX:80/admin/config/search/search-api
 - click add server
-
 
 these are the options: see documentation for help:
 - https://islandora.github.io/documentation/installation/manual/installing_solr/
@@ -547,22 +535,22 @@ solr path: /
 
 click Save
 
-NOTICE You can ignore the error about an incompatible Solr schema; we're going to set this up in the next step. 
+Note: You can ignore the error about an incompatible Solr schema; we're going to set this up in the next step. 
 
-apply solr configs
+#### apply solr configs
+
 - click back into the vm
-
-- ```cd /opt/drupal```
-- ```drush solr-gsc islandora8 /opt/drupal/solrconfig.zip```
+- ```cd /opt/drupal/islandora-starter-site```
+- ```sudo -u www-data drush solr-gsc islandora8 /opt/drupal/islandora-starter-site/solrconfig.zip```
 - ```unzip -d ~/solrconfig solrconfig.zip```
 - ```sudo cp ~/solrconfig/* /var/solr/data/islandora8/conf```
 - ```sudo systemctl restart solr```
 
+ **configure index via gui***
+
 adding an index
 - In gui navigate XXX.XXX.XXX.XXX or localhost:80/admin/config/search/search-api/add-index
  
- **configure index via gui***
-
 Index name: Islandora 8 Index
 
 Content: X
