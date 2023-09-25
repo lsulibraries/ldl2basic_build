@@ -159,37 +159,10 @@ confirm link:
 
 Expected output will link to /home/wwc/drupal-project/vendor/bin/drush
 
-# editing apache files
+# copy apache files
 
--  ```sudo nano /etc/apache2/ports.conf```
-
-Remove everything but "Listen 80" use (CTL+k) to remove lines from the file.
-
-> ```Listen 80```
-
-save the file (CTL+o) then (CTL+x)
-
-Edit the apache 000-default.conf file
-
-- ```sudo nano /etc/apache2/sites-enabled/000-default.conf```
-
-edit file to contain only the following:
->```
-><VirtualHost *:80>
->  ServerName localhost
->  DocumentRoot "/opt/drupal/islandora-starter-site/web"
->  <Directory "/opt/drupal/islandora-starter-site/web">
->    Options Indexes FollowSymLinks MultiViews
->    AllowOverride all
->    Require all granted
->  </Directory>
->  ErrorLog "/var/log/apache2/localhost_error.log"
->  CustomLog "/var/log/apache2/localhost_access.log" combined
-></VirtualHost>
->```
-
-save (CTL+o) and exit (CTL+x)
-
+- ```sudo cp /mnt/hgfs/shared/ports.conf /etc/apache2/ports.conf```
+- ```sudo cp  /mnt/hgfs/shared/000-default.conf /etc/apache2/sites-enabled/000-default.conf```
 - ```sudo systemctl restart apache2```
 
 ***create a database***
