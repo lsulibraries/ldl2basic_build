@@ -703,27 +703,29 @@ check activemq version (5.16.1-1 as of writing):
 
 - ```sudo apt-cache policy activemq```
 
+### karaf section
+
 - ```sudo addgroup karaf```
 - ```sudo adduser karaf --ingroup karaf --home /opt/karaf --shell /usr/bin```
-
-(made password karaf)
-enter on all prompts
+- make password karaf
+- enter on all prompts
 - type y and enter.
 
- 
-The latest karaf does not work with the version of activemq, apache-camel and islandora-karaf (https://karaf.apache.org/download.html)
-
+Note:  The latest karaf does not work with the version of activemq, apache-camel and islandora-karaf (https://karaf.apache.org/download.html)
 Islandora Documentation recommends 4.2.x. Other versions are available, <u>but they don't work with the other software below.</u>
-best link for now: 
- https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz
 
-Instead of running
+best link for now: 
+- https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz
+
+#### Old way:
 
 - ```cd /opt```
 - ```sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz```
 - ```sudo tar -xzvf karaf.tar.gz```
 - ```sudo chown -R karaf:karaf apache-karaf-4.2.16```
 - ```sudo mv apache-karaf-4.2.16/* /opt/karaf```
+
+### new/fast way:
 - or run script:
 - ```sh /mnt/hgfs/shared/karaf-dl.sh```
 
