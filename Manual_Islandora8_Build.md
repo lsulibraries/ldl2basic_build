@@ -334,19 +334,33 @@ uncomment line 5, comment line 4 (CTL-c) shows line number
 
 save (CTL-o) exit (CTL+x)
 
+### Downloading fedora
+
 you may want to check
 visit: https://github.com/fcrepo/fcrepo/releases choose the latest version and ajust the commands below if needed
+
+#### the old way
 
 - ```sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.4.0/fcrepo-webapp-6.4.0.war```
 - ```sudo mv fcrepo.war /opt/tomcat/webapps```
 - ```sudo chown tomcat:tomcat /opt/tomcat/webapps/fcrepo.war```
 - ```sudo systemctl restart tomcat```
-- or skip the typing and run:
+
+#### The fast/new way
+
+- skip the typing and run:
 - ```sh /mnt/hgfs/shared/fedora-dl.sh```
+
+### Downloading islandora syn
 
 check here for link: https://github.com/Islandora/Syn/releases/ copy the link (if changed from syn-1.1.1) and replace the link in the command below:
 
+#### the old way
+
 - ```sudo wget -P /opt/tomcat/lib https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar```
+
+#### the new/fast way
+
 - or skip the typing and run:
 - ```sh /mnt/hgfs/shared/syn-dl.sh```
 
@@ -382,8 +396,9 @@ Add this line  before the closing </Context> tag:
 
 - ```sudo systemctl restart tomcat```
 
-#### installing blazegraph
+### installing blazegraph
 
+#### the old way
 - ```sudo mkdir -p /opt/blazegraph/data```
 - ```sudo mkdir /opt/blazegraph/conf```
 - ```sudo chown -R tomcat:tomcat /opt/blazegraph```
@@ -391,7 +406,10 @@ Add this line  before the closing </Context> tag:
 - ```sudo wget -O blazegraph.war https://repo1.maven.org/maven2/com/blazegraph/bigdata-war/2.1.5/bigdata-war-2.1.5.war```
 - ```sudo mv blazegraph.war /opt/tomcat/webapps```
 - ```sudo chown tomcat:tomcat /opt/tomcat/webapps/blazegraph.war```
-- or skip the typing and run:
+
+#### the new/fast way
+
+- skip the typing and run:
 - ```sh /mnt/hgfs/shared/blazegraph-dl.sh```
 
 run blazegraph_conf.sh: 
@@ -436,10 +454,14 @@ know it added the 2 entries from inference.nt to the namespace.
 
 ### installing solr
 
+#### the old way
+
 - ``` sudo wget https://dlcdn.apache.org/lucene/solr/8.11.2/solr-8.11.2.tgz ```
 - ```sudo tar -xzvf solr-8.11.2.tgz```
 - ```sudo solr-8.11.2/bin/install_solr_service.sh solr-8.11.2.tgz```
-- or run
+
+#### the new/fast way
+- run:
 - ```sh /mnt/hgfs/shared/solr-dl.sh```
 
 - type q to quit...
