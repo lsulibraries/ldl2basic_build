@@ -190,10 +190,13 @@ For DRUPAL 10:
 
 
 ***install a drupal site***
-
+# old way
 - ```cd /opt/drupal/islandora-starter-site/web```
 - ```sudo drush -y site-install standard --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal10" --site-name="LDL 2.0" --account-name=islandora --account-pass=islandora```
 
+# new way
+
+- ```sudo -u www-data drush site-install --existing-config --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal10"
 
 ***install tomcat and cantaloupe***
 
