@@ -660,14 +660,19 @@ check apache-activemq version (last was 5.18.1)
 - ```cd /opt```
 
 
-run these or activemq-dl.sh
+##### the old way:
+
 - ```sudo wget  http://archive.apache.org/dist/activemq/5.18.1/apache-activemq-5.18.1-bin.tar.gz```
 - ```sudo tar -xvzf apache-activemq-5.18.1-bin.tar.gz```
 - ```sudo mv apache-activemq-5.18.1 activemq```
 - ```sudo chown -R activemq:activemq /opt/activemq```
 - ```sudo cp /mnt/hgfs/shared/activemq.service /etc/systemd/system/activemq.service```
+
+##### the new/fast way:
+
 - or run:
 - ```sh /mnt/hgfs/shared/activemq-dl.sh```
+
 
 check activemq.service file
 - ```cat /etc/systemd/system/activemq.service```
