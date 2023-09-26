@@ -1010,7 +1010,7 @@ https://github.com/mjordan/islandora_workbench_integration
 
 #### enable rest endpoints for workbench then rebuild the cache
 
-- ```drush cim -y --partial --source=modules/contrib/islandora_workbench_integration/config/optional```
+- ```drush cim -y --partial --source=/opt/drupa/islandora-starter-site/web/modules/contrib/islandora_workbench_integration/config/optional```
 
 - ```drush cr -y```
 
