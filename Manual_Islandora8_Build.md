@@ -4,7 +4,7 @@
 
 This build is adapted from [official islandora documentation](https://islandora.github.io/documentation/installation/manual/introduction/) reading it is encouraged.
 - check download links for new versions of software components.
-- in the shared folder many config files and scripts are included to automate repeated steps. 
+- in the shared folder many confFig files and scripts are included to automate repeated steps. 
 - enable shared folders in the virtual machine settings use the LSU Ondrive "shared folders"
 - formatted code in this document is intended to be executed in the command line of the virtual machine IE:
 - `whoami`
@@ -1051,7 +1051,8 @@ For more information see the [islandora_workbench_docs](https://mjordan.github.i
 - ```sudo -u www-data composer require drupal/group_permissions```
 - ```sudo -u www-data composer require 'drupal/gnode'```
 - ```sudo -u www-data composer require 'drupal/groupmedia'```
-- ```drush en -y group groupmedia gnode group_permissions```
+- ```sudo -u www-data composer require 'digitalutsc/islandora_group:^2.x-dev'
+- ```drush en -y group groupmedia gnode group_permissions islandora_group```
 
 - or
 - ```cd /opt/drupal/islandora-starter-site```
