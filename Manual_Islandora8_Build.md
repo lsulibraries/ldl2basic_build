@@ -1051,7 +1051,7 @@ For more information see the [islandora_workbench_docs](https://mjordan.github.i
 - ```sudo -u www-data composer require drupal/group_permissions```
 - ```sudo -u www-data composer require 'drupal/gnode'```
 - ```sudo -u www-data composer require 'drupal/groupmedia'```
-- ```sudo -u www-data composer require 'digitalutsc/islandora_group:^2.x-dev'
+- ```sudo -u www-data composer require 'digitalutsc/islandora_group:^2.x-dev'```
 - ```drush en -y group groupmedia gnode group_permissions islandora_group```
 
 - or
