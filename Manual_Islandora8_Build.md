@@ -197,13 +197,16 @@ For DRUPAL 10:
 
 ### new way
 - Needed to change
+
 -```ALTER DATABASE 'drupal10';```
+
 -```SET bytea_output = 'escape';```
 
 - then reset postgresql
+
 -```sudo systemctl restart postgresql```
 
-Then:
+- Then:
 
 - ```sudo -u www-data drush site-install --existing-config --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal10"```
 
