@@ -198,17 +198,19 @@ For DRUPAL 10:
 ### new way
 - Needed to change
 
--```ALTER DATABASE 'drupal10';```
+```sudo -u postgres psql```
 
--```SET bytea_output = 'escape';```
+```ALTER DATABASE 'drupal10';```
 
-- then reset postgresql
+```SET bytea_output = 'escape';```
 
--```sudo systemctl restart postgresql```
+- Then reset postgresql
+
+```sudo systemctl restart postgresql```
 
 - Then:
 
-- ```sudo -u www-data drush site-install --existing-config --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal10"```
+```sudo -u www-data drush site-install --existing-config --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal10"```
 
 
 ***install tomcat and cantaloupe***
