@@ -176,6 +176,14 @@ Expected output will link to /home/wwc/drupal-project/vendor/bin/drush
 
 edit the drupal.conf and 000-default.conf file and add the following to the end of the files:
 - ```sudo nano /etc/apache2/sites-avaialabe/000-default.conf```
+>```
+>Alias /drupal "/opt/drupal/islandora-starter-site/web"
+>DocumentRoot "/opt/drupal/islandora-starter-site/web"
+><Directory /opt/drupal/islandora-starter-site>
+>    AllowOverride All
+>    Require all granted
+></Directory>
+>```
 - ```sudo nano /etc/apache2/sites-avaialabe/drupal.conf```
 >```
 >Alias /drupal "/opt/drupal/islandora-starter-site/web"
