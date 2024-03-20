@@ -222,7 +222,7 @@ if it doesn't exixt, run the PDO-extensions.sh to install the extensions for pos
 
 ### Configure postgresql authentication:
 copy the file bellow to postgresql directory to add the User and Database authentication:
-- ```sh /mnt/hgfs/shared/pg_hba.conf```
+- ```cp /mnt/hgfs/shared/pg_hba.conf /etc/postgresql/14/main/```
 
 ### Make sure postgresql and apache2 are both active:
 - ```sudo systemctl restart postgresql apache2```
