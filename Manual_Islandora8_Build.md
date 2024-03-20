@@ -82,10 +82,19 @@ the above command runs a script containing the following:
 the above command runs the following script the :
 >```
 >#!/bin/bash
->#sudo apt-get -y install php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-dev php7.4-gd php7.4-imap php7.4-json php7.4-mbstring >php7.4-opcache php7.4-xml php7.4-yaml php7.4-zip libapache2-mod-php7.4 php-pgsql php-redis php-xdebug unzip postgresql
->#sudo apt-get -y install php8.1 php8.1-cli php8.1-common php8.1-curl php8.1-dev php8.1-gd php8.1-imap php8.1-mbstring php8.1-opcache >php8.1-xml php8.1-yaml php8.1-zip libapache2-mod-php8.1 php-pgsql php-redis php-xdebug unzip postgresql
->sudo apt-get -y install php8.2 php8.2-cli php8.2-common php8.2-curl php8.2-dev php8.2-gd php8.2-imap php8.2-mbstring php8.2-opcache >php8.2-xml php8.2-yaml php8.2-zip libapache2-mod-php8.2 php-pgsql php-redis php-xdebug unzip postgresql
->sudo a2enmod php8.2
+>sudo apt -y install php8.1 php8.1-cli php8.1-common php8.1-curl php8.1-dev php8.1-gd php8.1-imap php8.1-mbstring php8.1-opcache php8.1-xml php8.1-yaml php8.1-zip libapache2-mod-php8.1 php-pgsql php-redis php-xdebug unzip
+>sudo a2enmod php8.1
+>sudo systemctl restart apache2
+># set default php to the version we have insalled:
+>sudo update-alternatives --set php /usr/bin/php8.1
+># Create the file repository configuration for postgres:
+>sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+># Import the repository signing key for postgres:
+>wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+>sudo apt-get update
+>sudo apt-get install -y postgresql
+>sudo systemctl status postgresql
+>sudo systemctl restart postgresql
 >sudo systemctl restart apache2
 >```
 
@@ -159,11 +168,29 @@ confirm link:
 
 Expected output will link to /home/wwc/drupal-project/vendor/bin/drush
 
-# copy apache files
+# copy and configure apache conf files:
 
 - ```sudo cp /mnt/hgfs/shared/ports.conf /etc/apache2/ports.conf```
 - ```sudo cp  /mnt/hgfs/shared/000-default.conf /etc/apache2/sites-enabled/000-default.conf```
+- ```sudo cp  /mnt/hgfs/shared/000-default.conf /etc/apache2/sites-avaialabe/000-default.conf```
+
+edit the drupal.conf and 000-default.conf file and add the following to the end of the files:
+- ```sudo nano /etc/apache2/sites-avaialabe/000-default.conf```
+- ```sudo nano /etc/apache2/sites-avaialabe/drupal.conf```
+>```
+>Alias /drupal "/opt/drupal/islandora-starter-site/web"
+>DocumentRoot "/opt/drupal/islandora-starter-site/web"
+><Directory /opt/drupal/islandora-starter-site>
+>    AllowOverride All
+>    Require all granted
+></Directory>
+>```
+Then run:
+- ```sudo a2ensite drupal```
+- ```sudo a2enmod rewrite```
 - ```sudo systemctl restart apache2```
+- ```sudo chown -R www-data:www-data /opt/drupal/islandora-starter-site/web```
+- ```sudo chmod -R 755 /opt/drupal/islandora-starter-site/web```
 
 ***create a database***
 
@@ -187,7 +214,19 @@ For DRUPAL 10:
 >CREATE EXTENSION pg_trgm;
 >\q
 >```
+### Add PDO extentions for postgresql and mysql:
+look for pdo_mysql.ini file. 
+- ```cd /etc/php/8.1/apache2/conf.d```
+if it doesn't exixt, run the PDO-extensions.sh to install the extensions for postgresql and mysql:
+- ```sh /mnt/hgfs/shared/PDO-extensions.sh```
 
+### Configure postgresql authentication:
+copy the file bellow to postgresql directory to add the User and Database authentication:
+- ```cp /mnt/hgfs/shared/pg_hba.conf /etc/postgresql/14/main/```
+
+### Make sure postgresql and apache2 are both active:
+- ```sudo systemctl restart postgresql apache2```
+- ```sudo systemctl status postgresql apache2```
 
 # install a drupal site
 
