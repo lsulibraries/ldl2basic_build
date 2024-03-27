@@ -945,7 +945,7 @@ the script contains:
 
 copy the settings.php file from shared folders
 
-- ```cp /mnt/hgfs/shared/settings.php /opt/drupal/islandora-starter-site/web/sites/default/settings.php```
+- ```sudo cp /mnt/hgfs/shared/settings.php /opt/drupal/islandora-starter-site/web/sites/default/settings.php```
 - ```sudo chmod 555 /opt/drupal/islandora-starter-site/web/sites/default/settings.php```
 - ```drush cr -y```
 
