@@ -943,32 +943,14 @@ the script contains:
 
 ### configure drupal
 
-edit the settings.php file
+copy the settings.php file from shared folders
 
-- ```sudo nano /opt/drupal/islandora-starter-site/web/sites/default/settings.php```
+- ```cp /mnt/hgfs/shared/settings.php /opt/drupal/islandora-starter-site/web/sites/default/settings.php```
+- ```sudo chmod 555 /opt/drupal/islandora-starter-site/web/sites/default/settings.php```
+- ```drush cr -y```
 
-add the following to the end of the file:
-
->```
->$settings['trusted_host_patterns'] = [
->  'localhost',
->  'your-site-ip'
->];
->$settings['flysystem'] = [
-> 'fedora' => [
-> 'driver' => 'fedora',
-> 'config' => [
->  'root' => 'http://localhost:8080/fcrepo/rest/',
-> ],
->],
-> 'ldl-local-storage' => [
-> 'driver' => 'local',
-> 'config' => [
->  'root' => '/path/to/storage',
-> ],
->],
->];
->```
+- visit /admin/config/media/file-system to select the flysystem from the dropdown.
+- Click Save
 
 ## Skip this section
 
