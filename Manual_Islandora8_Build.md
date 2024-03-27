@@ -260,7 +260,7 @@ copy the file bellow to postgresql directory to add the User and Database authen
 ```sudo -u www-data drush site-install --existing-config --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal10"```
 
 
-***install tomcat and cantaloupe***
+### install tomcat and cantaloupe
 
 - ```sudo apt -y install openjdk-11-jdk openjdk-11-jre```
 
