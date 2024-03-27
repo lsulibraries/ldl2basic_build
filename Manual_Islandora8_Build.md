@@ -441,22 +441,9 @@ Add this line  before the closing </Context> tag:
 
 ### installing blazegraph
 
-#### the old way
-- ```sudo mkdir -p /opt/blazegraph/data```
-- ```sudo mkdir /opt/blazegraph/conf```
-- ```sudo chown -R tomcat:tomcat /opt/blazegraph```
-- ```cd /opt```
-- ```sudo wget -O blazegraph.war https://repo1.maven.org/maven2/com/blazegraph/bigdata-war/2.1.5/bigdata-war-2.1.5.war```
-- ```sudo mv blazegraph.war /opt/tomcat/webapps```
-- ```sudo chown tomcat:tomcat /opt/tomcat/webapps/blazegraph.war```
-
-#### the new/fast way
-
-- skip the typing and run:
+- run this script:
 - ```sh /mnt/hgfs/shared/blazegraph-dl.sh```
-
-run blazegraph_conf.sh: 
-
+- run blazegraph_conf.sh: 
 - ```sh /mnt/hgfs/shared/blazegraph_conf.sh```
 
 Typing out config files by hand is not worth the time. this script simplifies the process.
