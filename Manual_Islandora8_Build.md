@@ -116,9 +116,11 @@ change to
 
 - ```sudo systemctl restart postgresql```
 
+## Install Composer
+
 - ```sh /mnt/hgfs/shared/scratch_3.sh```
 
-scratch_3.sh runs:
+scratch_3.sh contents:
 >```
 >#!/bin/bash
 >curl "https://getcomposer.org/installer" > composer-install.php
@@ -129,7 +131,6 @@ scratch_3.sh runs:
 >sudo chown www-data:www-data /opt/drupal
 >sudo chmod 775 /opt/drupal
 >sudo chown -R www-data:www-data /var/www/
->#git clone https://github.com/drupal-composer/drupal-project.git
 >```
 
 ## Add the islandora-starter-site project
