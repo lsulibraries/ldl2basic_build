@@ -961,6 +961,12 @@ add the following to the end of the file:
 >  'root' => 'http://localhost:8080/fcrepo/rest/',
 > ],
 >],
+> 'ldl-local-storage' => [
+> 'driver' => 'local',
+> 'config' => [
+>  'root' => '/path/to/storage',
+> ],
+>],
 >];
 >```
 
