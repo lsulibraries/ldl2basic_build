@@ -132,33 +132,14 @@ scratch_3.sh runs:
 >#git clone https://github.com/drupal-composer/drupal-project.git
 >```
 
-# before scratch 4
+## Add the islandora-starter-site project
 
 - `cd /opt/drupal`
 - `sudo -u www-data composer create-project islandora/islandora-starter-site`
-
-# Skip all of scratch 4 for now
-
-- ```sh /mnt/hgfs/shared/scratch_4.sh```
-
-scratch_4.sh runs:
-
->```
->#!/bin/bash
->#scratch_4.sh
->cd drupal-project
-># Expect this to take a little while, as this is grabbing the entire
-># requirements set for Drupal.
->#change 9.x-dev to 10.1.0
->#sudo -u www-data composer create-project drupal-composer/drupal-project:9.x-dev /opt/drupal --no-interaction
->sudo -u www-data composer create-project drupal/recommended-project:10.1.0 /opt/drupal --no-interaction
->#sudo -u www-data composer require --dev drush/drush
->#sudo ln -s /opt/drupal/vendor/bin/drush /usr/local/bin/drush
->```
-
-# Continue from here
-
 - ```cd /opt/drupal/islandora-starter-site```
+
+## Install and symlink Drush
+  
 - ```sudo -u www-data composer require drush/drush```
 - ```sudo ln -s /opt/drupal/islandora-starter-site/vendor/bin/drush /usr/local/bin/drush```
 
