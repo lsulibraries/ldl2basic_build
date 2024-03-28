@@ -218,13 +218,8 @@ copy the file bellow to postgresql directory to add the User and Database authen
 - ```sudo systemctl restart postgresql apache2```
 - ```sudo systemctl status postgresql apache2```
 
-# install a drupal site
+### install a drupal site
 
-### old way
-- ```cd /opt/drupal/islandora-starter-site/web```
-- ```sudo drush -y site-install standard --db-url="pgsql://drupal:drupal@127.0.0.1:5432/drupal10" --site-name="LDL 2.0" --account-name=islandora --account-pass=islandora```
-
-### new way
 - Needed to change
 
 ```sudo -u postgres psql```
@@ -382,29 +377,14 @@ save (CTL-o) exit (CTL+x)
 you may want to check
 visit: https://github.com/fcrepo/fcrepo/releases choose the latest version and ajust the commands below if needed
 
-#### the old way
-
-- ```sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.4.0/fcrepo-webapp-6.4.0.war```
-- ```sudo mv fcrepo.war /opt/tomcat/webapps```
-- ```sudo chown tomcat:tomcat /opt/tomcat/webapps/fcrepo.war```
-- ```sudo systemctl restart tomcat```
-
-#### The fast/new way
-
-- skip the typing and run:
+- run this command:
 - ```sh /mnt/hgfs/shared/fedora-dl.sh```
 
 ### Downloading islandora syn
 
 check here for link: https://github.com/Islandora/Syn/releases/ copy the link (if changed from syn-1.1.1) and replace the link in the command below:
 
-#### the old way
-
-- ```sudo wget -P /opt/tomcat/lib https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar```
-
-#### the new/fast way
-
-- or skip the typing and run:
+- run the command:
 - ```sh /mnt/hgfs/shared/syn-dl.sh```
 
 run the syn-confing.sh to ensure the library has the correct permissions:
@@ -484,14 +464,7 @@ know it added the 2 entries from inference.nt to the namespace.
 
 ### installing solr
 
-#### the old way
-
-- ``` sudo wget https://dlcdn.apache.org/lucene/solr/8.11.2/solr-8.11.2.tgz ```
-- ```sudo tar -xzvf solr-8.11.2.tgz```
-- ```sudo solr-8.11.2/bin/install_solr_service.sh solr-8.11.2.tgz```
-
-#### the new/fast way
-- run:
+- run this command:
 - ```sh /mnt/hgfs/shared/solr-dl.sh```
 
 - type q to quit...
@@ -516,7 +489,6 @@ create solr core
 #ran
 #sudo cp -r . /var/solr/data/islandora8/conf
 
-
 A warning will print:
 
 warning using _default configset with data driven scheme functionality. NOT RECOMMENDED for production use. To turn off: bin/solr/ config -c islandora8 -p 8983 -action set-user-property -property update.autoCreateFields -value false
@@ -525,20 +497,6 @@ should also say:
 "Created new core 'islandora8'
 
 ### Configure the drupal search api
-
-
-#### skip the starter-site already has this
-- ```cd /opt/drupal```
-- or whichever drupal folder you have 
-- ```cd /opt/drupal/islandora-starter-site```
-- ```sudo chown www-data:www-data *```
-- ```sudo -u www-data composer require drupal/search_api_solr:^4.2```
-- ```drush -y en search_api_solr```
-- ```ip addr show```
-- configure in GUI by visiting the ip above XXX.XXX.XXX.XXX:80 in browser (firefox)
-- log in with islandora:islandora
-- you may need to restart apache:
-- ```sudo systemctl restart apache2```
 
 #### start here
 
@@ -689,18 +647,7 @@ check apache-activemq version (last was 5.18.1)
 - ```sudo apt install -y activemq```
 - ```cd /opt```
 
-
-##### the old way:
-
-- ```sudo wget  http://archive.apache.org/dist/activemq/5.18.1/apache-activemq-5.18.1-bin.tar.gz```
-- ```sudo tar -xvzf apache-activemq-5.18.1-bin.tar.gz```
-- ```sudo mv apache-activemq-5.18.1 activemq```
-- ```sudo chown -R activemq:activemq /opt/activemq```
-- ```sudo cp /mnt/hgfs/shared/activemq.service /etc/systemd/system/activemq.service```
-
-##### the new/fast way:
-
-- or run:
+- run this script:
 - ```sh /mnt/hgfs/shared/activemq-dl.sh```
 
 
@@ -747,19 +694,12 @@ Islandora Documentation recommends 4.2.x. Other versions are available, <u>but t
 best link for now: 
 - https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz
 
-#### Old way:
-
-- ```cd /opt```
-- ```sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz```
-- ```sudo tar -xzvf karaf.tar.gz```
-- ```sudo chown -R karaf:karaf apache-karaf-4.2.16```
-- ```sudo mv apache-karaf-4.2.16/* /opt/karaf```
-
-### new/fast way:
-- or run script:
+- run this script:
 - ```sh /mnt/hgfs/shared/karaf-dl.sh```
 
-double check for /mnt/hgfs/shared ```sudo vmhgfs-fuse.host/ /mnt/hgfs/ -o allow_other -o uid=1000```
+double check for /mnt/hgfs/shared -```sudo vmhgfs-fuse.host/ /mnt/hgfs/ -o allow_other -o uid=1000```
+
+- run this script:
 - ```sudo sh /mnt/hgfs/shared/karaf-stuff.sh```
 
 will run the following:
@@ -829,18 +769,8 @@ confirm that the ISLANDORA_KARAF_VERSION is still 1.0.5
 
 JENA_OSGI_VERSION The latest version of the Apache Jena 3.x OSGi features 3.17.0 (note /xml/ not .xml)
 
-#### Old way:
-
-- ```sudo /opt/karaf/bin/client repo-add mvn:org.apache.activemq/activemq-karaf/5.16.1/xml/features```
-- ```sudo /opt/karaf/bin/client repo-add mvn:org.apache.camel.karaf/apache-camel/2.25.4/xml/features```
-- ```sudo /opt/karaf/bin/client repo-add mvn:ca.islandora.alpaca/islandora-karaf/1.0.5/xml/features```
-- (This shouldn't be strictly necessary, but appears to be a missing) upstream dependency for some fcrepo features
-- ```sudo /opt/karaf/bin/client repo-add mvn:org.apache.jena/jena-osgi-features/3.17.0/xml/features```
-
-#### new/fast way:
+- run this script:
 - ```sh /mnt/hgfs/shared/karaf-repo-add.sh```
-
-#### continue
 
 - ```sudo -u karaf nano /opt/karaf/etc/ca.islandora.alpaca.http.client.cfg```
 
@@ -920,29 +850,6 @@ copy the settings.php file from shared folders
 
 - visit /admin/config/media/file-system to select the flysystem from the dropdown.
 - Click Save
-
-## Skip this section
-
-- ```cd /opt/drupal/islandora-starter-site```
-- ```sudo chown -R www-data:www-data .```
-- ```drush -y cr```
-- ```sudo sh /mnt/hgfs/shared/islandora_install_3.sh```
-
-older requirement scripts
-```sudo sh /mnt/hgfs/shared/islandora_install.sh```
-```sudo sh /mnt/hgfs/shared/islandora_install_2.sh```
-
-- ```sh /mnt/hgfs/shared/isla_lib.sh```
-
-- ```sh /mnt/hgfs/shared/islandora_en.sh```
-
->```
->cd /opt/drupal
->drush -y en rdf responsive_image syslog serialization basic_auth rest restui search_api_solr facets content_browser pdf admin_toolbar islandora_defaults controlled_access_terms_defaults islandora_breadcrumbs islandora_iiif islandora_oaipmh
->drush -y theme:enable carapace
-> drush -y config-set system.theme default carapace
->drush -y cr
->```
 
 ## Require JWT
 
@@ -1076,8 +983,6 @@ For more information see the [islandora_workbench_docs](https://mjordan.github.i
 - ```cd /opt/drupal/islandora-starter-site```
 - ```sh /mnt/hgfs/shared/group-install.sh```
 
-### Friady Documentation dump
-
 # after configuring settings.php we add jwt
 
 - ```sudo -u www-data composer require "drupal/jwt:^2.0"```
@@ -1145,7 +1050,6 @@ add the location of the cantaloupe iiif endpoint:
 - change max_file_uploads = 2000
 
 - ```sudo systemctl restart apache2```
-
 
 
 # workbench ingest:
