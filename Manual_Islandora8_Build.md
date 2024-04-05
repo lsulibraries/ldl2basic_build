@@ -224,12 +224,12 @@ copy the file bellow to postgresql directory to add the User and Database authen
 - Needed to change
 
 ```sudo -u postgres psql```
-
-```ALTER DATABASE drupal10;```
-
-```SET bytea_output = 'escape';```
-
-```\q``` 
+#from within the postgres cli:
+>```
+>ALTER DATABASE drupal10;
+>SET bytea_output = 'escape';
+>\q
+>```
 
 - Then reset postgresql
 
