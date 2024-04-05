@@ -6,7 +6,7 @@ This build is adapted from [official islandora documentation](https://islandora.
 - check download links for new versions of software components.
 - in the shared folder many confFig files and scripts are included to automate repeated steps. 
 - enable shared folders in the virtual machine settings use the LSU Ondrive "shared folders"
-- formatted code in this document is intended to be executed in the command line of the virtual machine IE:
+- formatted code in this document is intended to be executed in the command line of the viIsrtual machine IE:
 - `whoami`
 - document assumes familiarity with CLI, file edititing and permissions
 - Download vmware, and an [ubuntu server 22.04 image](https://ubuntu.com/download/server).
@@ -136,7 +136,7 @@ scratch_3.sh contents:
 ## Add the islandora-starter-site project
 
 - `cd /opt/drupal`
-- `sudo -u www-data composer create-project islandora/islandora-starter-site`
+- `sudo -u www-data composer create-project islandora/islandora-starter-site:1.5.0`
 - ```cd /opt/drupal/islandora-starter-site```
 
 ## Install and symlink Drush
