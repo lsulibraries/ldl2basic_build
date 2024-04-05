@@ -155,7 +155,8 @@ Expected output will link to /home/wwc/drupal-project/vendor/bin/drush
 - ```sudo cp /mnt/hgfs/shared/ports.conf /etc/apache2/ports.conf```
 - ```sudo cp /mnt/hgfs/shared/000-default.conf /etc/apache2/sites-enabled/000-default.conf```
 
-edit the drupal.conf and 000-default.conf in /etc/apache2/sites-available/ and add the following to them (delete everything else):
+put the following the drupal.conf and 000-default.conf in sites-available directory.
+You can comment out or delete everything in the file:
 - ```sudo nano /etc/apache2/sites-available/drupal.conf```
 >```
 >Alias /drupal "/opt/drupal/islandora-starter-site/web"
