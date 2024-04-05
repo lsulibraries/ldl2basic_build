@@ -199,7 +199,7 @@ type ```\q``` to quit
 For DRUPAL 10:
 
 - ```sudo -u postgres psql```
-#from within the postgres cli:
+from within the postgres cli:
 >```
 >\c drupal10
 >CREATE EXTENSION pg_trgm;
@@ -224,7 +224,7 @@ copy the file bellow to postgresql directory to add the User and Database authen
 - Needed to change
 
 - ```sudo -u postgres psql```
-#from within the postgres cli:
+from within the postgres cli:
 >```
 >ALTER DATABASE drupal10;
 >SET bytea_output = 'escape';
