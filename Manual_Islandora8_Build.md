@@ -223,7 +223,7 @@ copy the file bellow to postgresql directory to add the User and Database authen
 
 - Needed to change
 
-```sudo -u postgres psql```
+-```sudo -u postgres psql```
 #from within the postgres cli:
 >```
 >ALTER DATABASE drupal10;
