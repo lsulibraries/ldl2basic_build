@@ -176,6 +176,7 @@ You can comment out or delete everything in the file:
 ></Directory>
 >```
 Then run:
+- ```sudo systemctl restart apache2``` 
 - ```sudo a2ensite drupal```
 - ```sudo a2enmod rewrite```
 - ```sudo systemctl restart apache2```
