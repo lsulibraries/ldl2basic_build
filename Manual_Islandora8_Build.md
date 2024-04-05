@@ -224,7 +224,7 @@ copy the file bellow to postgresql directory to add the User and Database authen
 
 ```sudo -u postgres psql```
 
-```ALTER DATABASE 'drupal10';```
+```ALTER DATABASE drupal10;```
 
 ```SET bytea_output = 'escape';```
 
