@@ -227,6 +227,7 @@ copy the file bellow to postgresql directory to add the User and Database authen
 ```ALTER DATABASE drupal10;```
 
 ```SET bytea_output = 'escape';```
+```\q``` 
 
 - Then reset postgresql
 
