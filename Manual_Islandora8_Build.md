@@ -502,7 +502,7 @@ know it added the 2 entries from inference.nt to the namespace.
 
 - Install search_api
 - ```sudo -u www-data composer require drupal/search_api_solr:^4.2```
-
+- ```drush -y en search_api_solr```
 
 increase filesize (optional?)
 
