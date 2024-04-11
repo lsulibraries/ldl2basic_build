@@ -329,16 +329,6 @@ execute these commands within the psql database:
 >\q
 >```
 
-check that you mount point is still working:
-
-- ```ls /mnt/hgfs/shared```
-
-if no files are listed of the folder is not found run this:
-
-- ```sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000```
-
-otherwise continue with this step if the files exist.
-
 - ```sudo sh /mnt/hgfs/shared/fedora-config.sh```
 
 fedora-config.sh contains:
