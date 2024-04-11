@@ -376,6 +376,13 @@ visit: https://github.com/fcrepo/fcrepo/releases choose the latest version and a
 
 - run this command:
 - ```sh /mnt/hgfs/shared/fedora-dl.sh```
+>```
+>#!/bin/bash
+>sudo wget -O fcrepo.war https://github.com/fcrepo/fcrepo/releases/download/fcrepo-6.4.0/fcrepo-webapp-6.4.0.war
+>sudo mv fcrepo.war /opt/tomcat/webapps
+>sudo chown tomcat:tomcat /opt/tomcat/webapps/fcrepo.war
+>sudo systemctl restart tomcat
+>```
 
 ### Downloading islandora syn
 
@@ -383,6 +390,12 @@ check here for link: https://github.com/Islandora/Syn/releases/ copy the link (i
 
 - run the command:
 - ```sh /mnt/hgfs/shared/syn-dl.sh```
+>```
+>#!/bin/bash
+>sudo wget -P /opt/tomcat/lib https://github.com/Islandora/Syn/releases/download/v1.1.1/islandora-syn-1.1.1-all.jar
+>sudo chown -R tomcat:tomcat /opt/tomcat/lib
+>sudo chmod -R 640 /opt/tomcat/lib
+>```
 
 run the syn-confing.sh to ensure the library has the correct permissions:
 
@@ -391,6 +404,8 @@ run the syn-confing.sh to ensure the library has the correct permissions:
 syn-config.sh contents:
 
 >```
+>#!/bin/bash
+>
 >sudo chown -R tomcat:tomcat /opt/tomcat/lib
 >sudo chmod -R 640 /opt/tomcat/lib
 >sudo mkdir /opt/keys
@@ -398,7 +413,11 @@ syn-config.sh contents:
 >sudo openssl rsa -pubout -in "/opt/keys/syn_private.key" -out "/opt/keys/syn_public.key"
 >sudo chown www-data:www-data /opt/keys/syn*
 >sudo cp /mnt/hgfs/shared/syn-settings.xml /opt/fcrepo/config/
+>#sudo cp /mnt/hgfs/shared/syn-settings.xml /opt/syn
 >sudo chown tomcat:tomcat /opt/fcrepo/config/syn-settings.xml
+>sudo chmod 600 /opt/fcrepo/config/syn-settings.xml
+>#sudo chown tomcat:tomcat /opt/syn/syn-settings.xml
+>#sudo chmod 600 /opt/syn/syn-settings.xml
 >sudo chmod 600 /opt/fcrepo/config/syn-settings.xml
 >```
  
@@ -420,25 +439,29 @@ Add this line  before the closing </Context> tag:
 
 - run this script:
 - ```sh /mnt/hgfs/shared/blazegraph-dl.sh```
+>```
+>#!/bin/bash
+>
+>sudo mkdir -p /opt/blazegraph/data
+>sudo mkdir /opt/blazegraph/conf
+>sudo chown -R tomcat:tomcat /opt/blazegraph
+>cd /opt
+>sudo wget -O blazegraph.war https://repo1.maven.org/maven2/com/blazegraph/bigdata-war/2.1.5/bigdata-war-2.1.5.war
+>sudo mv blazegraph.war /opt/tomcat/webapps
+>sudo chown tomcat:tomcat /opt/tomcat/webapps/blazegraph.war
+>```
+
 - run blazegraph_conf.sh: 
 - ```sh /mnt/hgfs/shared/blazegraph_conf.sh```
-
-Typing out config files by hand is not worth the time. this script simplifies the process.
-
-blazegraph_conf.sh 
-configure logging
-RWStore.properties
-blazegraph.config
-inference.nt
-
 >```
+>#!/bin/bash
 >sudo cp /mnt/hgfs/shared/log4j.properties /opt/blazegraph/conf/
 >sudo chown tomcat:tomcat /opt/blazegraph/conf/log4j.properties
 >sudo chmod 644 /opt/blazegraph/conf/log4j.properties
 >sudo cp /mnt/hgfs/shared/RWStore.properties /opt/blazegraph/conf
 >sudo cp /mnt/hgfs/shared/blazegraph.properties /opt/blazegraph/conf
 >sudo cp /mnt/hgfs/shared/inference.nt /opt/blazegraph/conf
->sudo chown tomcat:tomcat -R /opt/blazegraph/conf
+>sudo chown -R tomcat:tomcat /opt/blazegraph/conf
 >sudo chmod -R 644 /opt/blazegraph/conf
 >```
 
@@ -463,8 +486,19 @@ know it added the 2 entries from inference.nt to the namespace.
 
 - run this command:
 - ```sh /mnt/hgfs/shared/solr-dl.sh```
+>```
+>#!/bin/bash
+>
+>cd /opt
+>
+>sudo wget https://dlcdn.apache.org/lucene/solr/8.11.3/solr-8.11.3.tgz
+>
+>sudo tar -xzvf solr-8.11.3.tgz
+>
+>sudo solr-8.11.3/bin/install_solr_service.sh solr-8.11.3.tgz
+>```
 
-- type q to quit...
+-  type q to quit...
 
 - Install search_api
 - ```sudo -u www-data composer require drupal/search_api_solr:^4.2```
