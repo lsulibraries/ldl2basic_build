@@ -501,6 +501,7 @@ know it added the 2 entries from inference.nt to the namespace.
 -  type q to quit...
 
 - Install search_api
+- ```cd /opt/drupal/islandora-starter-site/```
 - ```sudo -u www-data composer require drupal/search_api_solr:^4.2```
 - ```drush -y en search_api_solr```
 
