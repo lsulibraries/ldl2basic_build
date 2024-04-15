@@ -736,6 +736,9 @@ check activemq version (5.16.1-1 as of writing):
 
 - ```sudo addgroup karaf```
 - ```sudo adduser karaf --ingroup karaf --home /opt/karaf --shell /usr/bin```
+
+- (CTL-D twice to exit and apply groups)
+
 - make password karaf
 - enter on all prompts
 - type y and enter.
