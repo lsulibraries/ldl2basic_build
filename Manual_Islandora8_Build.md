@@ -685,9 +685,25 @@ check apache-activemq version (last was 5.18.1)
 
 - run this script:
 - ```sh /mnt/hgfs/shared/activemq-dl.sh```
+>```
+>#!/bin/bash
+>
+>cd /opt
+>
+>sudo wget  http://archive.apache.org/dist/activemq/5.18.1/apache-activemq-5.18.1-bin.tar.gz
+>
+>sudo tar -xvzf apache-activemq-5.18.1-bin.tar.gz
+>
+>sudo mv apache-activemq-5.18.1 activemq
+>
+>sudo chown -R activemq:activemq /opt/activemq
+>
+>sudo cp /mnt/hgfs/shared/activemq.service /etc/systemd/system/activemq.service
+>```
 
 
 check activemq.service file
+
 - ```cat /etc/systemd/system/activemq.service```
 
 The file should contain this text:
