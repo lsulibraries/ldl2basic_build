@@ -749,6 +749,19 @@ best link for now:
 - run this script:
 - ```sh /mnt/hgfs/shared/karaf-dl.sh```
 
+>```
+>#!/bin/bash
+>
+>cd /opt
+>#sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.2.16/apache-karaf-4.2.16.tar.gz
+>sudo wget -O karaf.tar.gz https://dlcdn.apache.org/karaf/4.4.6/apache-karaf-4.4.6.tar.gz
+>sudo tar -xzvf karaf.tar.gz
+>#sudo chown -R karaf:karaf apache-karaf-4.2.16
+>sudo chown -R karaf:karaf apache-karaf-4.4.6
+>#sudo mv apache-karaf-4.2.16/* /opt/karaf
+>sudo mv apache-karaf-4.4.6/* /opt/karaf
+>```
+
 double check for /mnt/hgfs/shared -```sudo vmhgfs-fuse.host/ /mnt/hgfs/ -o allow_other -o uid=1000```
 
 - run this script:
