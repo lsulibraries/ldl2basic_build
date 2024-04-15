@@ -775,7 +775,7 @@ will run the following:
 >```
 >sudo mkdir /var/log/karaf
 >sudo chown karaf:karaf /var/log/karaf
->sudo mkdir /opt/karaf/etc 
+>#sudo mkdir /opt/karaf/etc 
 >sudo cp /mnt/hgfs/shared/org.pos4j.pax.logging.cfg /opt/karaf/etc/org.pos4j.pax.logging.cfg
 >sudo chown karaf:karaf /opt/karaf/etc/org.pos4j.pax.logging.cfg
 >sudo chmod 644 /opt/karaf/etc/org.pos4j.pax.logging.cfg
