@@ -363,11 +363,11 @@ copy setenv.sh from /mnt/hgfs/shared/ to /opt/tomcat/bin/
 - ```sudo nano /opt/tomcat/bin/setenv.sh```
 
 uncomment line 5, comment line 4 (CTL-c) shows line number
+save (CTL-o) exit (CTL+x)
+
 
 - ```sudo chown tomcat:tomcat /opt/tomcat/bin/setenv.sh```
 
-
-save (CTL-o) exit (CTL+x)
 
 ### Downloading fedora
 
