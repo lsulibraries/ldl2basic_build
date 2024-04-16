@@ -154,6 +154,20 @@ Expected output will link to /home/wwc/drupal-project/vendor/bin/drush
 
 - ```sudo cp /mnt/hgfs/shared/ports.conf /etc/apache2/ports.conf```
 - ```sudo cp /mnt/hgfs/shared/000-default.conf /etc/apache2/sites-enabled/000-default.conf```
+>```
+><VirtualHost *:80>
+>  ServerName localhost
+>  DocumentRoot "/opt/drupal/islandora-starter-site/web"
+>  <Directory "/opt/drupal/islandora-starter-site/web">
+>    Options Indexes FollowSymLinks MultiViews
+>    AllowOverride all
+>    Require all granted
+>  </Directory>
+>  # Ensure some logging is in place.
+>  ErrorLog "/var/log/apache2/localhost_error.log"
+>  CustomLog "/var/log/apache2/localhost_access.log" combined
+></VirtualHost>
+>```
 
 put the following the drupal.conf and 000-default.conf in sites-available directory.
 You can comment out or delete everything in the file:
