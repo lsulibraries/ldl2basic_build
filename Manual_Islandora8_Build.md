@@ -967,6 +967,8 @@ visit http://[your-site-ip-address]/admin/config/system/jwt
 
 ### Install Islandora modules:
 
+You will need this step if you installed the drupal reccomendede project instead of the islandora-starter-site
+
 - ```sh /mnt/hgfs/shared/islandora_install_3.sh```
 
 >```
