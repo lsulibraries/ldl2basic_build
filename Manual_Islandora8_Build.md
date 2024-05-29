@@ -501,15 +501,9 @@ know it added the 2 entries from inference.nt to the namespace.
 - run this command:
 - ```sh /mnt/hgfs/shared/solr-dl.sh```
 >```
->#!/bin/bash
->
->cd /opt
->
->sudo wget https://dlcdn.apache.org/lucene/solr/8.11.3/solr-8.11.3.tgz
->
->sudo tar -xzvf solr-8.11.3.tgz
->
->sudo solr-8.11.3/bin/install_solr_service.sh solr-8.11.3.tgz
+>sudo wget https://downloads.apache.org/solr/solr/9.5.0/solr-9.5.0.tgz
+>sudo tar -xzvf solr-9.5.0.tgz
+>sudo solr-9.5.0/bin/install_solr_service.sh solr-9.5.0.tgz
 >```
 
 -  type q to quit...
