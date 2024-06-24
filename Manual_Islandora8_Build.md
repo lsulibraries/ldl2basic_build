@@ -1190,6 +1190,12 @@ from outside the vm:
 
 
 
+### Extra
+
+- ```cd /opt/drupal/islandora-starter-site/```
+- ```sudo -u www-data composer require 'discoverygarden/embargo'```
+- ```drush en -y embargo```
+
 
 
 
