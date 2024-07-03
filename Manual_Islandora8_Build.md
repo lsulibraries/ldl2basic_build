@@ -1195,6 +1195,7 @@ from outside the vm:
 - ```cd /opt/drupal/islandora-starter-site/```
 - ```sudo -u www-data composer require 'discoverygarden/embargo'```
 - ```drush en -y embargo```
+- ```sudo apt -y install libopenjp2-tools```
 
 
 
