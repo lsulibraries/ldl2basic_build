@@ -1197,6 +1197,10 @@ from outside the vm:
 - ```drush en -y embargo```
 - ```sudo apt -y install libopenjp2-tools```
 
-
+### more
+activemq was stuck.
+-```cd /usr/share/activemq/conf```
+-```sudo nano +130 jetty.xml```
+Change ip in this line from 127.0.0.1 to 0.0.0.0
 
 
