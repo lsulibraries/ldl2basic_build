@@ -1203,4 +1203,39 @@ activemq was stuck.
 -```sudo nano +130 jetty.xml```
 Change ip in this line from 127.0.0.1 to 0.0.0.0
 
+##fields-from-json
+
+- **Batch ingest fields with json configuration scrips:**
+  - **Install the field_create Module:** 
+
+    - ```sudo -u www-data composer require 'drupal/field_create:^1.0'```
+
+  - **Enable modules:** ```drush en field_create field_create_from_json```
+
+  - **Create a JSON configuration script to define fields with specific data types:**
+
+  - **Create fields:**
+     - Navigate to configurations>delvelopment>add fields programmatically> under Content dropdown> copy json configuration for creating fields> Click save Configuration
+     - Then under Action tab select node from dropdown > Click Create fields now
+       - if json configurations where correct it will show you message that says: **Processed fields for node.**
+
+
+     - Json format for creating fields with different data types:
+  - **Example JSON syntax for creating fields:**
+```json
+{
+ "field_name": { # Machine name of the field
+   "name": "field_name", #Machine name of the field
+   "label": "field name", #Enter name of the field without '_' as a field lable name
+   "type": "text", # type of the field can be assigned in "type"
+   "force": true,
+   "bundles": {
+     "islandora_object": { #islandora content type
+       "label": "islandora object" #description for islandora content type
+     }
+   }
+ }
+}
+```
+
 
