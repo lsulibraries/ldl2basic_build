@@ -1237,5 +1237,7 @@ Change ip in this line from 127.0.0.1 to 0.0.0.0
  }
 }
 ```
+#### libopenjp2-tools
+ - ```sudo apt install libopenjp2-tools```
 
 
